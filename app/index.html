@@ -10,26 +10,22 @@
   <link href="lib/bootstrap-2.3.2/docs/assets/css/bootstrap-responsive.css" rel="stylesheet">
   <link href="//mgcrea.github.com/angular-strap/css/prettify.css" rel="stylesheet">
     
-  <!-- required libraries -->  
-  <script src="lib/bootstrap-2.3.2/js/bootstrap.min.js"></script>
-  <script src="lib/angular-strap-master/dist/angular-strap.js"></script>
-
 </head>
 <body>
 
 
-  <div class="navbar navbar-fixed-top">
+  <div class="navbar navbar-fixed-top" bs-navbar>
     <div class="navbar-inner">
       <div class="container">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-th-list"></span>
           </a>
-          <a href="#" class="brand">Verix</a>
+          <a href="#" class="brand">&nbsp;</a>
 
           <div class="nav-collapse collapse">
             <ul class="nav pull-left">
-              <li><a href="#/view1">Charts</a></li>
-              <li ><a href="#/view2">Studio</a></li>              
+              <li data-match-route="/studio"><a href="#/studio">Studio</a></li>              
+              <li data-match-route="/charts"><a href="#/charts">Charts</a></li>
             </ul>
           </div>
 
@@ -42,15 +38,21 @@
     <li><a href="#/view1">view1</a></li>
     <li><a href="#/view2">view2</a></li>
   </ul> -->
-  <div id="editor"></div>
+  <div class="container">
 
-  <div ng-view></div>
+        <div id="editor" class="span12"></div>
+
+        
+        <div ng-view class="span12"></div>
+
+  </div>
 
   <div>Angular seed app: v<span app-version></span></div>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
   -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
   <script src="//www.google.com/jsapi"></script>
   <script type="text/javascript" src="lib/requirejs/require.js"></script>
   <script src="lib/angular/angular.js"></script>
@@ -61,6 +63,10 @@
   <script src="js/directives.js"></script>
   <script src="js/ng-google-chart.js"></script>
   <!-- // <script type="text/javascript" src="components/ace/ace.js"></script> -->
+
+  <!-- required libraries -->  
+  <script src="lib/bootstrap-2.3.2/docs/assets/js/bootstrap.js"></script>
+  <script src="lib/angular-strap-master/dist/angular-strap.js"></script>
   <script type="text/javascript">
     require.config({
       baseUrl: 'lib'

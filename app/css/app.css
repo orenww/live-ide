@@ -29,4 +29,12 @@
   padding: 0;
 }
 
+body {
+  padding-top: 41px;
+}
 
+.brand {
+  background: url(../img/logo.jpg) no-repeat top left;
+  padding-left: 50px;
+  background-size: contain;
+}
