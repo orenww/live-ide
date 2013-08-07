@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>My AngularJS App</title>
+  <link rel="stylesheet" href="css/app.css"/>
+</head>
+<body>
+  <ul class="menu">
+    <li><a href="#/view1">view1</a></li>
+    <li><a href="#/view2">view2</a></li>
+  </ul>
+  <div id="editor"></div>
+
+  <div ng-view></div>
+
+  <div>Angular seed app: v<span app-version></span></div>
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  -->
+  <script src="//www.google.com/jsapi"></script>
+  <script type="text/javascript" src="lib/requirejs/require.js"></script>
+  <script src="lib/angular/angular.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+  <script src="js/ng-google-chart.js"></script>
+  <!-- // <script type="text/javascript" src="components/ace/ace.js"></script> -->
+  <script type="text/javascript">
+    require.config({
+      baseUrl: 'lib'
+    })
+        require(['ace/ace', 'ace/ext/language_tools'], function aceEditor(ace) {
+        var editor = ace.edit('editor'); // editor is the id of div or pre
+        editor.setOptions({
+
+
+            enableBasicAutocompletion: true,
+
+
+            enableSnippets: true
+
+
+        })
+        editor.setTheme("ace/theme/monokai");
+        editor.session.setMode("ace/mode/sql");
+        window.editor = editor;
+        window.ace = ace;
+        });
+    </script>
+  <!-- // <script type="text/javascript" src="lib/ace/ext/language_tools.js"></script> -->
+  
+  
+  <!-- // <script type="text/javascript" src="components/ui-ace.js"></script> -->
+</body>
+</html>
