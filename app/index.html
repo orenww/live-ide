@@ -71,22 +71,19 @@
     require.config({
       baseUrl: 'lib'
     })
+            
         require(['ace/ace', 'ace/ext/language_tools'], function aceEditor(ace) {
-        var editor = ace.edit('editor'); // editor is the id of div or pre
-        editor.setOptions({
+          var editor = ace.edit('editor'); // editor is the id of div or pre
+          editor.setOptions({
 
+              enableBasicAutocompletion: true,
+              enableSnippets: true
 
-            enableBasicAutocompletion: true,
-
-
-            enableSnippets: true
-
-
-        })
-        editor.setTheme("ace/theme/monokai");
-        editor.session.setMode("ace/mode/sql");
-        window.editor = editor;
-        window.ace = ace;
+          })
+          editor.setTheme("ace/theme/monokai");
+          editor.session.setMode("ace/mode/sql");
+          window.editor = editor;
+          window.ace = ace;
         });
     </script>
   <!-- // <script type="text/javascript" src="lib/ace/ext/language_tools.js"></script> -->
