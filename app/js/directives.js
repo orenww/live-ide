@@ -4,7 +4,7 @@
 
 
 angular.module('myApp.directives', [])
-	.directive('fmRating', function() {
+	.directive('verixEditor', function() {
   return {
     restrict: 'E',
     // scope: {
@@ -28,7 +28,7 @@ angular.module('myApp.directives', [])
 
           })
           editor.setTheme("ace/theme/monokai");
-          editor.session.setMode("ace/mode/sql");
+          editor.session.setMode("ace/mode/vql");
           window.editor = editor;
           window.ace = ace;
         });	

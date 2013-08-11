@@ -28,32 +28,8 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-define('ace/mode/vql', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/mode/text', 'ace/tokenizer', 'ace/mode/vql_highlight_rules', 'ace/range'], function(require, exports, module) {
-
-
-var oop = require("../lib/oop");
-var TextMode = require("./text").Mode;
-var Tokenizer = require("../tokenizer").Tokenizer;
-var SqlHighlightRules = require("./vql_highlight_rules").SqlHighlightRules;
-var Range = require("../range").Range;
-
-var Mode = function() {
-    this.$tokenizer = new Tokenizer(new SqlHighlightRules().getRules());
-};
-oop.inherits(Mode, TextMode);
-
-(function() {
-
-    this.lineCommentStart = "--";
-
-}).call(Mode.prototype);
-
-exports.Mode = Mode;
-
-});
-
-define('ace/mode/vql_highlight_rules', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/mode/text_highlight_rules'], function(require, exports, module) {
-
+define(function(require, exports, module) {
+"use strict";
 
 var oop = require("../lib/oop");
 var TextHighlightRules = require("./text_highlight_rules").TextHighlightRules;
@@ -62,15 +38,15 @@ var SqlHighlightRules = function() {
 
     var keywords = (
         "select|insert|update|delete|from|where|and|or|group|by|order|limit|offset|having|as|case|" +
-        "when|else|end|type|left|right|join|on|outer|desc|asc|verixUnderComp"
+        "when|else|end|type|left|right|join|on|outer|desc|asc|verixKeyword"
     );
 
     var builtinConstants = (
-        "true|false|null"
+        "true|false|null|verixConstant"
     );
 
     var builtinFunctions = (
-        "count|min|max|avg|sum|rank|now|coalesce"
+        "count|min|max|avg|sum|rank|now|coalesce|verixFunction"
     );
 
     var keywordMapper = this.createKeywordMapper({
