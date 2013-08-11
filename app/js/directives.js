@@ -11,7 +11,7 @@ angular.module('myApp.directives', []).
   }])
   .directive('uiAce', function(){
   	return {
-  		restrict: 'A',
+  		restrict: 'EA',
   		template: '<div id="editor"></div>',
   		replace: true,
 
@@ -26,6 +26,9 @@ angular.module('myApp.directives', []).
   			    enableBasicAutocompletion: true,
   			    enableSnippets: true
   			});
+
+        var aaa = editor.session.doc.$lines;
+        aaa[0] = attrs.text;
   		}
   	}
   });
