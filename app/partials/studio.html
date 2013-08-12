@@ -1,15 +1,32 @@
 
 <div class="row-fluid">
 
-  <div class="span3">
+  <div class="span3" ng-controller="TreeCtrl">
+    <!--
+      [TREE attribute]
+      angular-treeview: the treeview directive
+      tree-model : the tree model on $scope.
+      node-id : each node's id
+      node-label : each node's label
+      node-children: each node's children
+    -->
+    <div
+      data-angular-treeview="true"
+      data-tree-model="roleList"
+      data-node-id="roleId"
+      data-node-label="roleName"
+      data-node-children="children"
+    >
+    </div>    
   </div>
+
 
 
   <div class="span9">      
     <h2>Editor</h2>
 
     <!-- <div ui-ace>select * from oren</div> -->
-      <div ng-controller="EditorCtrl">
+      <div>
         <p>ng model, content - {{content}}</p>
         <ui-ace 
           ng-model="content"
