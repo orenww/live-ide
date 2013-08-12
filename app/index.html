@@ -14,7 +14,16 @@
 
   <!-- <div ui-ace>select * from oren</div> -->
 
-  <ui-ace content="select * from table"></ui-ace>
+  <ui-ace 
+    content="select * from table" 
+    ui-ace-options="{
+      useWrapMode : true,
+      showGutter: true,
+      theme:'twilight',
+      mode: 'sql'
+    }"
+  >    
+  </ui-ace>
   
 
   <div ng-view></div>
