@@ -42,11 +42,13 @@ angular.module('myApp.directives', []).
           return function (e) {
             var newValue = session.getValue();
             if (newValue !== scope.$eval(attrs.value) && !scope.$$phase) {
-              if (angular.isDefined(ngModel)) {
-                scope.$apply(function () {
-                  ngModel.$setViewValue(newValue);
-                });
-              }
+
+              console.log("onChange, newValue - " + newValue);
+              // if (angular.isDefined(ngModel)) {
+              //   scope.$apply(function () {
+              //     ngModel.$setViewValue(newValue);
+              //   });
+              // }
 
               /**
                * Call the user onChange function.
@@ -84,11 +86,13 @@ angular.module('myApp.directives', []).
         //set content
         acee.setValue(attrs.content);
 
-
         // var lines = editor.session.doc.$lines;
         // lines[0] = "set attribute 'content into line 1 - " + attrs.content;
         // lines[1] = "hard code line 2";
         // lines[2] = "hard code line 3";
+
+        // EVENTS
+        session.on('change', onChange(opts.onChange));
   		}
   	}
   });
