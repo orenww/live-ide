@@ -27,8 +27,11 @@ angular.module('myApp.directives', []).
   			    enableSnippets: true
   			});
 
-        var aaa = editor.session.doc.$lines;
-        aaa[0] = attrs.text;
+        //set content
+        var lines = editor.session.doc.$lines;
+        lines[0] = "set attribute 'content into line 1 - " + attrs.content;
+        lines[1] = "hard code line 2";
+        lines[2] = "hard code line 3";
   		}
   	}
   });
