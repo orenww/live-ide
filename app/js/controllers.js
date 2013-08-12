@@ -8,4 +8,15 @@ angular.module('myApp.controllers', []).
   }])
   .controller('MyCtrl2', [function() {
 
-  }]);
+  }]).controller('EditorCtrl', function EditorCtrl($scope) {
+    // $scope.content = "";
+
+    // $scope.editorModel = {};
+    // $scope.editorModel.alertFunction = function(e,editor){
+    //   alert("call back function");
+    // }
+
+    $scope.$watch('content',function(){
+      console.log("from the controller - " + $scope.content);
+    });
+  });

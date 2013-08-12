@@ -11,20 +11,22 @@
     <li><a href="#/view2">view2</a></li>
   </ul>
   
-
+ 
   <!-- <div ui-ace>select * from oren</div> -->
-
-  <ui-ace 
-    content="select * from table" 
-    ui-ace-options="{
-      useWrapMode : true,
-      showGutter: true,
-      theme:'twilight',
-      mode: 'sql'
-    }"
-  >    
-  </ui-ace>
-  
+  <div ng-controller="EditorCtrl">
+    <p>ng model, content - {{content}}</p>
+    <ui-ace 
+      ng-model="content"
+      content="select * from table" 
+      ui-ace-options="{
+        useWrapMode : true,
+        showGutter: true,
+        theme:'twilight',
+        mode: 'sql'
+      }"
+    >    
+    </ui-ace>
+  </div>  
 
   <div ng-view></div>
 

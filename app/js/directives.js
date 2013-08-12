@@ -16,7 +16,7 @@ angular.module('myApp.directives', []).
   		template: '<div id="editor"></div>',
   		replace: true,
 
-  		link: function(scope, element, attrs) {
+  		link: function(scope, element, attrs,ngModel) {
 
         
 
@@ -44,11 +44,11 @@ angular.module('myApp.directives', []).
             if (newValue !== scope.$eval(attrs.value) && !scope.$$phase) {
 
               console.log("onChange, newValue - " + newValue);
-              // if (angular.isDefined(ngModel)) {
-              //   scope.$apply(function () {
-              //     ngModel.$setViewValue(newValue);
-              //   });
-              // }
+              if (angular.isDefined(ngModel)) {
+                scope.$apply(function () {
+                  ngModel.$setViewValue(newValue);
+                });
+              }
 
               /**
                * Call the user onChange function.
