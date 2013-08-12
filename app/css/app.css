@@ -33,3 +33,13 @@
     width: 500px;
     height: 400px;
 }
+
+body {
+  padding-top: 41px;
+}
+
+.brand {
+  background: url(../img/logo.jpg) no-repeat top left;
+  padding-left: 50px;
+  background-size: contain;
+}

@@ -1,46 +1,29 @@
-<!-- <p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }} 
 
-</p>
-<p>the 'editor': {{editor.mode}}</p>
+<div class="row-fluid">
 
-<div class="controls">
-    <select id="editorMode" ng-model="editor.mode">
-        <option  selected='selected' value="sql">SQL</option>
-        <option value="javascript">Java Script</option>
-        <option value="vql">VQL</option>
-    </select>
-</div>
-
-<p>{{editorMode}}</p>
-
-<p>Get Value : {{getContent()}}</p>
-
-<h2>Editor</h2> -->
-<style type="text/css">
-
-.ace_editor_wrapper { position : relative; height: 200px}
-.ace_editor { bottom: 0; right: 0; height: 400px; width: 100%;}
-</style>
-<verixEditor>
-  keyword - select * from table A - verixkeyword
-  function - count()  - verixfunction()
-  constant - verixconstant </verixEditor>
-<!-- <div ui-ace="{
-  useWrapMode : true,
-  showGutter: true,
-  theme:'twilight',
-  mode: 'html'
-}" scope-instance="foo">
-SELECT VERIX column_name,column_name
-FROM table_name;
-</div> -->
-<!-- <div ng-controller="AceCtrl"> -->
-  <!-- <div ui-ace scope-instance="foo" ng-model="aceModel" ></div> -->
-<!-- </div> -->
+  <div class="span3">
+  </div>
 
 
+  <div class="span9">      
+    <h2>Editor</h2>
 
-<button class="btn" ng-click="save()">Save</button>
+    <!-- <div ui-ace>select * from oren</div> -->
+      <div ng-controller="EditorCtrl">
+        <p>ng model, content - {{content}}</p>
+        <ui-ace 
+          ng-model="content"
+          content="select * from table" 
+          ui-ace-options="{
+            useWrapMode : true,
+            showGutter: true,
+            theme:'twilight',
+            mode: 'sql'
+          }"
+        >    
+        </ui-ace>
+      </div>  
+    </div>
+  </div>
+
+<!-- <button class="btn" ng-click="save()">Save</button> -->

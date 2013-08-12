@@ -9,8 +9,8 @@
   <link href="lib/bootstrap-2.3.2/docs/assets/css/bootstrap-responsive.css" rel="stylesheet">
   <link href="//mgcrea.github.com/angular-strap/css/prettify.css" rel="stylesheet">
 </head>
-<body>
 
+<body>
   <div class="navbar navbar-fixed-top" bs-navbar>
     <div class="navbar-inner">
       <div class="container">
@@ -30,31 +30,9 @@
     </div>
   </div>
 
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-  </ul>
-  
- 
-  <!-- <div ui-ace>select * from oren</div> -->
-  <div ng-controller="EditorCtrl">
-    <p>ng model, content - {{content}}</p>
-    <ui-ace 
-      ng-model="content"
-      content="select * from table" 
-      ui-ace-options="{
-        useWrapMode : true,
-        showGutter: true,
-        theme:'twilight',
-        mode: 'sql'
-      }"
-    >    
-    </ui-ace>
-  </div>  
-
   <div ng-view></div>
 
-  <div>Angular seed app: v<span app-version></span></div>
+
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
@@ -67,17 +45,6 @@
   <script src="js/directives.js"></script>
   <script src="lib/ace/ace.js"></script>
   <script src="lib/ace/ext-language_tools.js"></script>
-  <!-- script>
-    // trigger extension
-    ace.require("ace/ext/language_tools");
-    var editor = ace.edit("editor");
-    editor.session.setMode("ace/mode/html");
-    editor.setTheme("ace/theme/tomorrow");
-    // enable autocompletion and snippets
-    editor.setOptions({
-        enableBasicAutocompletion: true,
-        enableSnippets: true
-    });
-</script -->
+
 </body>
 </html>
