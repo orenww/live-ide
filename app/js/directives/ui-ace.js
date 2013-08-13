@@ -94,6 +94,8 @@ vStudio.directives
 
         // EVENTS
         session.on('change', onChange(opts.onChange));
+
+        editor.focus();
   		}
   	}
   });

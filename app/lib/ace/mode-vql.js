@@ -65,7 +65,7 @@ var VqlHighlightRules = function() {
 
     var keywords = (
         "select|insert|update|delete|from|where|and|or|group|by|order|limit|offset|having|as|case|" +
-        "when|else|end|type|left|right|join|on|outer|desc|asc|verixK"
+        "when|else|end|type|left|right|join|on|outer|desc|asc|verixK|param|{|}|${1:param}"
     );
 
     var builtinConstants = (

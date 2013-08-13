@@ -29,6 +29,12 @@ snippet s*\n\
 	select * from ${1:table}\n\
 snippet v*\n\
 	select * verix from ${1:table}\n\
+snippet verix1Param\n\
+	{ ${1:param} }\n\
+snippet verix2Param\n\
+	{ ${1:param1},${2:param2} }\n\
+snippet verixPrucedure\n\
+	^${1:function}^\n\
 ";
 exports.scope = "vql";
 
