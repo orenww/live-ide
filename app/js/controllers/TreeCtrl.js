@@ -1,31 +1,4 @@
-'use strict';
-
-/* Controllers */
-
-angular.module('myApp.controllers', ['angularTreeview']).
-  controller('MyCtrl1', [function($scope) {
-  	var editor = ace.edit("editor");
-  }])
-  .controller('MyCtrl2', [function() {
-
-  }]).controller('EditorCtrl', function EditorCtrl($scope) {
-    // $scope.content = "";
-
-    // $scope.editorModel = {};
-    // $scope.editorModel.alertFunction = function(e,editor){
-    //   alert("call back function");
-    // }
-
-    $scope.onEditorChange = function(e, editor){
-      console.log("e", e, "editor", editor);
-    }
-
-
-    $scope.$watch('content',function(){
-      console.log("from the controller - " + $scope.content);
-    }); 
-    
-  }).controller('TreeCtrl', function($scope){
+vStudio.controllers.controller('TreeCtrl', function($scope){
     $scope.treedata = 
     [
         { "label" : "User", "id" : "role1", "children" : [
@@ -93,4 +66,4 @@ angular.module('myApp.controllers', ['angularTreeview']).
     //roleList1 to treeview
     $scope.roleList = $scope.roleList1;
   
-  });
+  })
