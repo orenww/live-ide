@@ -7,12 +7,12 @@ vStudio.controllers.controller('EditorCtrl', function ($scope) {
     // }
 
     $scope.onEditorChange = function(e, editor){
-      console.log("e", e, "editor", editor);
+      //console.log("e", e, "editor", editor);
     }
 
 
     $scope.$watch('content',function(){
-      console.log("from the controller - " + $scope.content);
+      //console.log("from the controller - " + $scope.content);
     }); 
     
   })
