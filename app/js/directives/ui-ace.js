@@ -1,99 +1,76 @@
 'use strict';
 
 /* Directives */
-
-
 vStudio.directives
-  .directive('uiAce', function(){
-  	return {
-  		restrict: 'EA',
-      require: '?ngModel',
-  		template: '<div id="editor"></div>',
-  		replace: true,
-      scope: {
-        change: '='
-      },
+	.directive('uiAce', function(){
+		return {
+			restrict: 'EA',
+			// require: '?ngModel',
+			template: '<div id="editor"></div>',
+			replace: true,
+			scope: {
+				change: '=',
+				code: '=',
+				uiAceOptions: '='
+			},
 
-  		link: function(scope, element, attrs,ngModel) {
+			link: function(scope, element, attrs ) {
 
-        
+				// trigger extension
+				ace.require("ace/ext/language_tools");
+				var editor = ace.edit("editor");
+				//editor.session.setMode("ace/mode/sql");
+				//editor.setTheme("ace/theme/tomorrow");
 
-  			// trigger extension
-  			ace.require("ace/ext/language_tools");
-  			var editor = ace.edit("editor");
-  			//editor.session.setMode("ace/mode/sql");
-        //editor.setTheme("ace/theme/tomorrow");
+				// enable autocompletion and snippets
+				editor.setOptions({
+						enableBasicAutocompletion: true,
+						enableSnippets: true
+				});
 
-  			// enable autocompletion and snippets
-  			editor.setOptions({
-  			    enableBasicAutocompletion: true,
-  			    enableSnippets: true
-  			});
+				var options = angular.extend({}, scope.uiAceOptions());
 
-        var options, opts, acee, session, onChange;
-        opts = angular.extend({}, options, scope.$eval(attrs.uiAceOptions));
+				var acee = editor;
+				var session = acee.getSession();
 
-        acee = editor;
-        session = acee.getSession();
+				var onChange = function (e) {
+					var newValue = session.getValue();
+					console.log("onChange, newValue - " + newValue);
+					// Call the user onChange function.
+					if(angular.isDefined(scope.change)){
+						scope.change(e, acee);
+					}
+				};
 
-        onChange = function (callback) {
-          return function (e) {
-            var newValue = session.getValue();
-            if (newValue !== scope.$eval(attrs.value) && !scope.$$phase) {
+				// Boolean options
+				if (angular.isDefined(options.showGutter)) {
+					acee.renderer.setShowGutter(options.showGutter);
+				}
+				if (angular.isDefined(options.useWrapMode)) {
+					session.setUseWrapMode(options.useWrapMode);
+				}        
+				// Basic options
+				if (angular.isString(options.theme)) {
+					acee.setTheme("ace/theme/" + options.theme);
+				}
+				if (angular.isString(options.mode)) {
+					session.setMode("ace/mode/" + options.mode);
+				}
 
-              console.log("onChange, newValue - " + newValue);
-              if (angular.isDefined(ngModel)) {
-                scope.$apply(function () {
-                  ngModel.$setViewValue(newValue);
-                });
-              }
+				// SET CONTENT
+				scope.getEditor = function() {
+					return acee;
+				}
 
-              /**
-               * Call the user onChange function.
-               */
-               if(angular.isDefined(scope.change)){
-                scope.change(e, acee);
-               }
-              if (angular.isDefined(callback)) {
-                scope.$apply(function () {
-                  if (angular.isFunction(callback)) {
-                    callback(e, acee);
-                  }
-                  else {
-                    throw new Error('ui-ace use a function as callback.');
-                  }
-                });
-              }
-            }
-          };
-        };
+				// EVENTS
+				session.on('change', onChange);
+			},
 
-        // Boolean options
-        if (angular.isDefined(opts.showGutter)) {
-          acee.renderer.setShowGutter(opts.showGutter);
-        }
-        if (angular.isDefined(opts.useWrapMode)) {
-          session.setUseWrapMode(opts.useWrapMode);
-        }        
-        // Basic options
-        if (angular.isString(opts.theme)) {
-          acee.setTheme("ace/theme/" + opts.theme);
-        }
-        if (angular.isString(opts.mode)) {
-          session.setMode("ace/mode/" + opts.mode);
-        }
-
-
-        //set content
-        acee.setValue(attrs.content);
-
-        // var lines = editor.session.doc.$lines;
-        // lines[0] = "set attribute 'content into line 1 - " + attrs.content;
-        // lines[1] = "hard code line 2";
-        // lines[2] = "hard code line 3";
-
-        // EVENTS
-        session.on('change', onChange(opts.onChange));
-  		}
-  	}
-  });
+			controller: function ($scope) {
+				// $scope.$watch('code', function (newCode, oldCode) {
+				// 		console.log('newCode', newCode)
+				// 		$scope.getEditor().setValue(newCode());
+				// }, false);
+			}
+		}
+	});

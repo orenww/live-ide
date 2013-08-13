@@ -1,7 +1,7 @@
 
 <div class="row-fluid">
 
-  <div class="span3" ng-controller="TreeCtrl">
+  <div class="span3">
     <!--
       [TREE attribute]
       angular-treeview: the treeview directive
@@ -10,31 +10,26 @@
       node-label : each node's label
       node-children: each node's children
     -->
-<!--     <div
-      data-angular-treeview="true"
-      data-tree-model="roleList"
-      data-node-id="roleId"
-      data-node-label="roleName"
-      data-node-children="children"
-    >
-    </div>     -->
+     <div
+        data-angular-treeview="true"
+        data-tree-model="treedata"
+        data-node-id="id"
+        data-node-label="label"
+        data-node-children="children" >
+    </div>  
   </div>
 
   <div class="span9">      
     <h2>Editor</h2>
-
+    <div>{{getContent()}}</div>
     <!-- <div ui-ace>select * from oren</div> -->
       <div>
         <p>ng model, content - {{content}}</p>
         <ui-ace 
-          ng-model="content"
-          content="select * from table" 
-          ui-ace-options="{
-            useWrapMode : true,
-            showGutter: true,
-            theme:'twilight',
-            mode: 'sql'
-          }"
+          
+          
+          code="getContent"
+          ui-ace-options="getEditorOptions"
           change="onEditorChange"
         >    
         </ui-ace>
