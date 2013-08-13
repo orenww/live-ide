@@ -16,6 +16,11 @@ angular.module('myApp.controllers', ['angularTreeview']).
     //   alert("call back function");
     // }
 
+    $scope.onEditorChange = function(e, editor){
+      console.log("e", e, "editor", editor);
+    }
+
+
     $scope.$watch('content',function(){
       console.log("from the controller - " + $scope.content);
     });

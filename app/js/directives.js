@@ -15,6 +15,9 @@ angular.module('myApp.directives', []).
       require: '?ngModel',
   		template: '<div id="editor"></div>',
   		replace: true,
+      scope: {
+        change: '='
+      },
 
   		link: function(scope, element, attrs,ngModel) {
 
@@ -53,6 +56,9 @@ angular.module('myApp.directives', []).
               /**
                * Call the user onChange function.
                */
+               if(angular.isDefined(scope.change)){
+                scope.change(e, acee);
+               }
               if (angular.isDefined(callback)) {
                 scope.$apply(function () {
                   if (angular.isFunction(callback)) {
