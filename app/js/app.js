@@ -27,11 +27,6 @@ vStudio.config(['$routeProvider', function($routeProvider) {
 		templateUrl: 'partials/studio.html',
 		controller: 'EditorCtrl'
 	});
-
-	$routeProvider.when('/tree', {
-		templateUrl: 'partials/tree.html',
-		controller: 'TreeCtrl'
-	});
 	
 	$routeProvider.otherwise({
 		redirectTo: '/studio'
