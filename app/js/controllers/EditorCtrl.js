@@ -9,7 +9,7 @@ vStudio.controllers.controller('EditorCtrl', function ($scope, $routeParams, Vql
       // debugger;
       // var vqlId = $scope.currentNode ? $scope.currentNode.label : $routeParams.vqlId;
       var vqlCode = $scope.currentNode.label;
-      return vqlCode;
+      return $scope.currentNode;
     }
 
     $scope.getEditorOptions = function () {

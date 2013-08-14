@@ -1,28 +1,35 @@
 vStudio.services.service('VqlService', [function() {
 	
 	var data = [{
-		"label": "User",
+		"label": "CVS Caremark",
 		"id": "role1",
+		"vql": "select * from medicines where {p3}",
+
 		"children": [{
-				"label": "subUser1",
+				"label": "MMD MEDICAID",
 				"id": "role11",
+
+				"vql": "select * from medicines where {p2}",
 				"children": []
 			},
 
 			{
-				"label": "subUser2",
+				"label": "FDS MediSleep",
 				"id": "role12",
 
 				"children": [{
-					"label": "subUser2-1",
+					"label": "Day Care",
 					"id": "role121",
 					"children": [{
-						"label": "subUser2-1-1",
+						"label": "PLACEBO",
 						"id": "role1211",
+						"vql": "select * from medicines where [p2]",
+
 						"children": []
 					}, {
-						"label": "subUser2-1-2",
+						"label": "500 mg",
 						"id": "role1212",
+						"vql": "select * from medicines where {p1}",
 						"children": []
 					}]
 				}]
@@ -32,11 +39,13 @@ vStudio.services.service('VqlService', [function() {
 		{
 			"label": "Admin",
 			"id": "role2",
+			"vql": "select * from medicines where {p5}",
 			"children": []
 		}, 
 		{
 			"label": "Guest",
 			"id": "role3",
+			"vql": "select * from medicines where [p3]",
 			"children": []
 		}];
 

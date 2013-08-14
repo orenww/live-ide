@@ -6,7 +6,7 @@ vStudio.directives
 		return {
 			restrict: 'EA',
 			// require: '?ngModel',
-			template: '<div id="editor" data-dummy-action="{{doAction()}}"></div>',
+			template: '<div id="editor" data-dummy-action=""></div>',
 			replace: true,
 			scope: {
 				change: '=',
@@ -66,13 +66,12 @@ vStudio.directives
 			},
 
 			controller: function ($scope) {
-				// $scope.$watch('code', function (newCode, oldCode) {
-				// 		console.log('newCode', newCode)
-				// 		$scope.getEditor().setValue(newCode());
-				// }, false);
-				$scope.doAction = function () {
-					$scope.getEditor().setValue($scope.code())
-				}
+				$scope.$watch('code', function (newCode, oldCode) {
+						// console.log('newCode', newCode)
+						if (newCode.vql) {
+							$scope.getEditor().setValue(newCode.vql);
+						}
+				}, true);
 			}
 		}
 	});
