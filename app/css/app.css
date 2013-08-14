@@ -43,3 +43,12 @@ body {
   padding-left: 50px;
   background-size: contain;
 }
+
+#vql-tree {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  padding-top: 41px;
+  background-color: #EEEEEE;
+  width: 280px;
+}
