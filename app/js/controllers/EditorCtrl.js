@@ -1,18 +1,39 @@
-vStudio.controllers.controller('EditorCtrl', function ($scope) {
-    // $scope.content = "";
+vStudio.controllers.controller('EditorCtrl', function ($scope, $routeParams, VqlService) {
+    $scope.treedata = VqlService.getData();
+    // TODO: default text - change it!
+    $scope.currentNode = {
+      label: "default text...."
+    };
 
-    // $scope.editorModel = {};
-    // $scope.editorModel.alertFunction = function(e,editor){
-    //   alert("call back function");
-    // }
+    $scope.getContent = function() {
+      // debugger;
+      // var vqlId = $scope.currentNode ? $scope.currentNode.label : $routeParams.vqlId;
+      var vqlCode = $scope.currentNode.label;
+      return $scope.currentNode;
+    }
+
+    $scope.getEditorOptions = function () {
+      return {
+        useWrapMode : true,
+        showGutter: true,
+        theme:'twilight',
+        mode: 'vql'
+      };
+    }
 
     $scope.onEditorChange = function(e, editor){
       //console.log("e", e, "editor", editor);
     }
 
 
-    $scope.$watch('content',function(){
-      //console.log("from the controller - " + $scope.content);
-    }); 
+
+    $scope.$watch( 'currentNode', function( newObj, oldObj ) {
+        if( $scope.currentNode && angular.isObject($scope.currentNode) ) {
+            console.log( 'Node Selected!!' );
+            console.log( $scope.currentNode );
+          $scope.selectedNode = newObj;
+
+        }
+    }, false);
     
   })
