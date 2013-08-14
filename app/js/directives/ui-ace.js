@@ -6,7 +6,7 @@ vStudio.directives
 		return {
 			restrict: 'EA',
 			// require: '?ngModel',
-			template: '<div id="editor"></div>',
+			template: '<div id="editor" data-dummy-action="{{doAction()}}"></div>',
 			replace: true,
 			scope: {
 				change: '=',
@@ -35,7 +35,6 @@ vStudio.directives
 
 				var onChange = function (e) {
 					var newValue = session.getValue();
-					console.log("onChange, newValue - " + newValue);
 					// Call the user onChange function.
 					if(angular.isDefined(scope.change)){
 						scope.change(e, acee);
@@ -71,6 +70,9 @@ vStudio.directives
 				// 		console.log('newCode', newCode)
 				// 		$scope.getEditor().setValue(newCode());
 				// }, false);
+				$scope.doAction = function () {
+					$scope.getEditor().setValue($scope.code())
+				}
 			}
 		}
 	});
