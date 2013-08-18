@@ -1,7 +1,7 @@
 
 <div class="row-fluid">
 
-  <div class="span3">
+  <div class="span2">
     <!--
       [TREE attribute]
       angular-treeview: the treeview directive
@@ -11,6 +11,7 @@
       node-children: each node's children
     -->
      <div
+        class="span2"
         id="vql-tree"
         data-angular-treeview="true"
         data-tree-model="treedata"
@@ -20,20 +21,13 @@
     </div>  
   </div>
 
-  <div class="span9">      
-    <h2>Editor</h2>
-    <div>{{getContent()}}</div>
-    <!-- <div ui-ace>select * from oren</div> -->
-      <div>
-        <p>ng model, content - {{content}}</p>
-        <ui-ace 
-          code="getContent()"
-          ui-ace-options="getEditorOptions"
-          change="onEditorChange"
-        >    
-        </ui-ace>
-      </div>  
-    </div>
+  <div class="span10 ui-editor">
+      <ui-ace 
+        code="getContent()"
+        ui-ace-options="getEditorOptions"
+        change="onEditorChange"
+      >    
+      </ui-ace>
   </div>
 
-<!-- <button class="btn" ng-click="save()">Save</button> -->
+</div>
