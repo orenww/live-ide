@@ -1,0 +1,30 @@
+.box (@type) {
+	display: -webkit-flex;
+	display: flex;
+
+	-webkit-flex-flow: @type nowrap;
+	-webkit-justify-content: center;
+	-webkit-align-content: stretch;
+	-webkit-align-items: stretch;
+
+	-webkit-transition: all 0.1s ease-out 0s;
+	transition: all 0.1s ease-out 0s;
+}
+
+.box-item (@flex: 0) {
+	-webkit-order: 1;
+	-webkit-flex: @flex 1 auto;
+	-webkit-align-self: auto;
+	min-width: 0px;
+}
+
+.grow-1 {
+-webkit-flex: 1 1 auto;
+}
+
+.grow-2 {
+-webkit-flex: 2 1 auto;
+}
+.grow-3 {
+-webkit-flex: 3 1 auto;
+}

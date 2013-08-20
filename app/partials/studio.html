@@ -1,7 +1,7 @@
 
-<div class="row-fluid">
+<article class="row-fluid fluid-height">
 
-  <div class="span2">
+  <section class="fluid-height span2">
     <!--
       [TREE attribute]
       angular-treeview: the treeview directive
@@ -11,7 +11,6 @@
       node-children: each node's children
     -->
      <div
-        class="span2"
         id="vql-tree"
         data-angular-treeview="true"
         data-tree-model="treedata"
@@ -19,15 +18,15 @@
         data-node-label="label"
         data-node-children="children" >
     </div>  
-  </div>
+  </section>
 
-  <div class="span10 ui-editor">
+  <section class="fluid-height span10 ui-editor">
       <ui-ace 
         code="getContent()"
         ui-ace-options="getEditorOptions"
         change="onEditorChange"
       >    
       </ui-ace>
-  </div>
+  </section>
 
-</div>
+</article>

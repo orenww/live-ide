@@ -4,18 +4,13 @@
   <meta charset="utf-8">
   <title>My AngularJS App</title>
   <link rel="stylesheet" href="css/app.css"/>
-  <link rel="stylesheet" href="css/angular.treeview.css">
-
-  <link href="lib/bootstrap-2.3.2/docs/assets/css/bootstrap.css" rel="stylesheet">
-  <link href="lib/bootstrap-2.3.2/docs/assets/css/bootstrap-responsive.css" rel="stylesheet">
-  <link href="//mgcrea.github.com/angular-strap/css/prettify.css" rel="stylesheet">
 </head>
 
 <body>
   
   <div ng-include="'partials/navbar.html'"></div>
 
-  <div ng-view></div>
+  <section ng-view class="fluid-height"></section>
   
   <!-- 3rd PARTY Before Angular -->
   <script src="lib/jquery-1.10.2.js"></script>

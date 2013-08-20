@@ -1,52 +1,11 @@
+// global styles and 3rd party styles
+@import url(helpers/helpers.less);
+@import url(helpers/flexbox.less);
+@import url(../lib/bootstrap-2.3.2/less/bootstrap.less);
+@import url(../lib/bootstrap-2.3.2/less/responsive.less);
+@import url(layout.less);
+
+// ui & modules styles
 @import url(editor.less);
-
-/* app css stylesheet */
-
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
-}
-
-.menu:before {
-  content: "[";
-}
-
-.menu:after {
-  content: "]";
-}
-
-.menu > li {
-  display: inline;
-}
-
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
-}
-
-.menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
-}
-
-
-body {
-  padding-top: 41px;
-}
-
-.brand {
-  background: url(../img/logo.jpg) no-repeat top left;
-  padding-left: 50px;
-  background-size: contain;
-}
-
-#vql-tree {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  padding-top: 41px;
-  background-color: #EEEEEE;
-  width: 280px;
-}
+@import url(navbar.less);
+@import url(treeview.less);
