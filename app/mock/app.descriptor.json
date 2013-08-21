@@ -1,0 +1,134 @@
+{
+   "id":"app-1",
+   "refreshTriggers":[
+      "p1"
+   ],
+   "exportExcel":{
+
+   },
+   "defaultParams":{
+      "p3":"v3",
+      "p2":"v2",
+      "p1":"v1"
+   },
+   "children":[
+      {
+         "id":"container-1",
+         "refreshTriggers":[
+            "p2"
+         ],
+         "exportExcel":{
+
+         },
+         "children":[
+            {
+               "id":"grid-1",
+               "refreshTriggers":[
+                  "p3"
+               ],
+               "exportExcel":{
+
+               },
+               "outParams":[
+
+               ],
+               "type":"VqlGrid",
+               "exportImage":{
+
+               },
+               "vqls":{
+                  "title":"",
+                  "columnsDataFormat":"",
+                  "globalDataFormat":"",
+                  "actions":{
+                     "onClick":"",
+                     "onFocus":""
+                  },
+                  "dataSelection":""
+               },
+               "inParams":[
+
+               ]
+            }
+         ],
+         "outParams":[
+
+         ],
+         "type":"VqlContainer",
+         "exportImage":{
+
+         },
+         "vqls":{
+            "title":"",
+            "layout":"",
+            "columnsDataFormat":"",
+            "globalDataFormat":"",
+            "actions":{
+               "onClick":"",
+               "onFocus":""
+            },
+            "dataSelection":""
+         },
+         "inParams":[
+
+         ]
+      },
+      {
+         "id":"container-2",
+         "refreshTriggers":[
+
+         ],
+         "exportExcel":{
+
+         },
+         "outParams":[
+
+         ],
+         "type":"VqlContainer",
+         "exportImage":{
+
+         },
+         "vqls":{
+            "title":"",
+            "layout":"",
+            "columnsDataFormat":"",
+            "globalDataFormat":"",
+            "actions":{
+               "onClick":"",
+               "onFocus":""
+            },
+            "dataSelection":""
+         },
+         "inParams":[
+
+         ]
+      }
+   ],
+   "outParams":[
+
+   ],
+   "type":"VqlApplication",
+   "database":{
+      "port":"",
+      "host":"",
+      "service":"",
+      "password":"",
+      "user":""
+   },
+   "exportImage":{
+
+   },
+   "vqls":{
+      "title":"",
+      "layout":"",
+      "columnsDataFormat":"",
+      "globalDataFormat":"",
+      "actions":{
+
+      },
+      "dataSelection":""
+   },
+   "inParams":[
+
+   ]
+}
