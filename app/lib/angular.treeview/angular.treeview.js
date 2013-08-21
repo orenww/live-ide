@@ -18,6 +18,12 @@
 		data-node-label="roleName"
 		data-node-children="children" >
 	</div>
+
+	API:
+	====
+	to select a node, set the "currentNode" property of the "attrs.treeModel" to
+	reference the node, i.e (in a controller):
+	$scope.currentNode = myTreeModel.getById("node-uniq-123124");
 */
 
 (function ( angular ) {
@@ -26,6 +32,22 @@
 	angular.module( 'angularTreeview', [] ).directive( 'treeModel', function( $compile ) {
 		return {
 			restrict: 'A',
+
+			controller: function ($scope, $attrs) {
+				// watch for changes of selectedNode from outside this directive
+				if ($attrs.angularTreeview) {
+					$scope.$watch( "currentNode", function(newObj, oldObj){
+						// reset last node
+						if ($scope[$attrs.treeModel].selectedNode && $scope[$attrs.treeModel].selectedNode.selected) {
+						  $scope[$attrs.treeModel].selectedNode.selected = undefined;
+						}
+
+						$scope.currentNode.selected = 'selected';
+						$scope[$attrs.treeModel].selectedNode = $scope.currentNode;
+					});
+				}
+			},
+
 			link: function ( scope, element, attrs ) {
 				//tree model
 				var treeModel = attrs.treeModel;
@@ -54,16 +76,15 @@
 var template = 
 '<ul class="unstyled">' + 
 	'<li data-ng-repeat="node in ' + treeModel + '">' + 
-		'<div class="tree-node" data-ng-class="node.selected" data-ng-click="selectNodeLabel(node)">' +
+		'<div class="tree-node" data-ng-class="node.selected" XXX-data-ng-click="selectNodeLabel(node)">' +
 			'<i class="collapsed" data-ng-show="node.' + nodeChildren + '.length && node.collapsed" data-ng-click="selectNodeHead(node)"></i>' + 
 			'<i class="expanded" data-ng-show="node.' + nodeChildren + '.length && !node.collapsed" data-ng-click="selectNodeHead(node)"></i>' + 
 			'<i class="normal" data-ng-hide="node.' + nodeChildren + '.length"></i> ' + 
-			'{{node.' + nodeLabel + '}}' +
+			'<a href="#/studio/node/{{node.' + nodeId + '}}">{{node.' + nodeLabel + '}}</a>' +
 		'</div>' + 
 		'<div data-ng-hide="node.collapsed" data-tree-model="node.' + nodeChildren + '" data-node-id=' + nodeId + ' data-node-label=' + nodeLabel + ' data-node-children=' + nodeChildren + '></div>' + 
 	'</li>' + 
 '</ul>'; 
-
 				//check tree model
 				if( treeModel && treeModel.length ) {
 
@@ -92,7 +113,6 @@ var template =
 							scope.currentNode = selectedNode;
 						};
 					}
-
 					//Rendering template created.
 					element.html(null).append( $compile( template )( scope ) );
 				}

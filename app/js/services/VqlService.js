@@ -1,4 +1,4 @@
-vStudio.services.service('VqlService', [function() {
+vStudio.services.service('VqlService', [function($http) {
 	
 	var data = [{
 		"label": "CVS Caremark",
@@ -54,7 +54,24 @@ vStudio.services.service('VqlService', [function() {
 	};
 
 	var getById = function(id) {
-		return "returned by id";
+		var findNode = function(data, nodeId) {
+			var result = null;
+			for (var i = 0; i < data.length; i++) {
+				if (data[i].id === nodeId) {
+					return data[i];
+				}
+				if (data[i].children && data[i].children.length) {
+					var childResult = findNode(data[i].children, nodeId);
+					if (childResult) {
+						return childResult;
+					}
+				}
+			};
+			return result;
+
+		}
+		var finalResult = findNode(data, id);
+		return finalResult;
 	};
 
 	// expose the service

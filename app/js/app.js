@@ -23,7 +23,7 @@ vStudio.config(['$routeProvider', function($routeProvider) {
 		controller: 'EditorCtrl'
 	});
 
-	$routeProvider.when('/studio/:vqlid', {
+	$routeProvider.when('/studio/node/:vqlid', {
 		templateUrl: 'partials/studio.html',
 		controller: 'EditorCtrl'
 	});

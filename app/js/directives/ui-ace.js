@@ -55,7 +55,9 @@ vStudio.directives
 				if (angular.isString(options.mode)) {
 					session.setMode("ace/mode/" + options.mode);
 				}
-
+				if (angular.isString(options.fontSize)){
+					acee.setFontSize(options.fontSize);
+				}
 				// SET CONTENT
 				scope.getEditor = function() {
 					return acee;

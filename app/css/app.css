@@ -6442,6 +6442,9 @@ div[data-tree-model] li .selected {
   border-width: 1px;
   border-style: solid;
 }
+div[data-tree-model] li .selected a {
+  color: white;
+}
 div[data-tree-model] li i,
 div[data-tree-model] li div {
   cursor: pointer;
