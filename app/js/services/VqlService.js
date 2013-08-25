@@ -1,14 +1,12 @@
-vStudio.services.service('VqlService', [function($http) {
+vStudio.services.service('VqlService', [function() {
 	
 	var data = [{
 		"label": "CVS Caremark",
 		"id": "role1",
-		"vql": "select * from medicines where {p3}",
-
 		"children": [{
 				"label": "MMD MEDICAID",
 				"id": "role11",
-
+				"vqlId": "vqlId555",
 				"vql": "select * from medicines where {p2}",
 				"children": []
 			},
@@ -23,12 +21,14 @@ vStudio.services.service('VqlService', [function($http) {
 					"children": [{
 						"label": "PLACEBO",
 						"id": "role1211",
+						"vqlId": "vqlId111",
 						"vql": "select * from medicines where [p2]",
 
 						"children": []
 					}, {
 						"label": "500 mg",
 						"id": "role1212",
+						"vqlId": "vqlId222",
 						"vql": "select * from medicines where {p1}",
 						"children": []
 					}]
@@ -39,44 +39,56 @@ vStudio.services.service('VqlService', [function($http) {
 		{
 			"label": "Admin",
 			"id": "role2",
+			"vqlId": "vqlId333",
 			"vql": "select * from medicines where {p5}",
 			"children": []
 		}, 
 		{
 			"label": "Guest",
 			"id": "role3",
+			"vqlId": "vqlId444",
 			"vql": "select * from medicines where [p3]",
 			"children": []
 		}];
 
-	var getData = function() {
+	var map = {};
+
+	function createMap(item){
+
+		if(item.children.length == 0){
+			map[item.id] = item;
+			return map;
+		}
+
+		for(var i = 0; i < item.children.length; i++){
+			createMap(item.children[i]);
+		}		
+	};
+
+
+	var getData = function() {		
 		return data;
 	};
 
-	var getById = function(id) {
-		var findNode = function(data, nodeId) {
-			var result = null;
-			for (var i = 0; i < data.length; i++) {
-				if (data[i].id === nodeId) {
-					return data[i];
-				}
-				if (data[i].children && data[i].children.length) {
-					var childResult = findNode(data[i].children, nodeId);
-					if (childResult) {
-						return childResult;
-					}
-				}
-			};
-			return result;
-
+	var getMap = function() {
+		for(var i = 0; i < data.length; i++){
+			createMap(data[i]);
 		}
-		var finalResult = findNode(data, id);
-		return finalResult;
+		return map;
+	};
+
+	var getById = function(id) {
+		var _map = getMap();
+		if (!id) {
+			return {};
+		}
+		return _map[id] || {};
 	};
 
 	// expose the service
 	return {
 		getData: getData,
-		getById: getById
+		getById: getById,
+		getMap:getMap
 	}
 }]);

@@ -23,7 +23,10 @@ vStudio.controllers.controller('EditorCtrl', function ($scope, $routeParams, Vql
 		}
 
 		$scope.selectNodeById = function(id) {
-			$scope.currentNode = VqlService.getById(id || "");
+			if(!id) {
+				return;
+			}
+			$scope.currentNode = VqlService.getById(id);
 		}
 
 		$scope.selectNodeById($routeParams.vqlid);
