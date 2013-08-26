@@ -1,6 +1,43 @@
-vStudio.services.service('VqlService', [function() {
+// /* Services */
+// vStudio.services.factory('VqlFactory', function($http, $q) {
+
+// 	var service = {
+// 		getData: function() {
+// 			var deffered = $q.defer();
+// 			// note the JSON_CALLBACK at the end: angular's $http populates it. Mind the uppercase.
+// 			var url = '/mock/app.descriptor.json';
+
+// 			$http.get(url).success(function(data) {
+
+// 				var results = [];
+// 				var feed = data.feed;
+// 				var entries = feed.entry || [];
+// 				for (var i = 0; i < entries.length; i++) {
+// 					var entry = entries[i];
+// 					results.push( {
+// 						title:entry.title.$t,
+// 						thumb:	entry.media$group.media$thumbnail[0].url,
+// 						url: entry.media$group.media$player[0].url,
+
+// 					});
+// 				}
+
+
+// 				console.log("----results: " + data);
+// 				deffered.resolve(results);
+// 			});
+
+// 			return deffered.promise;
+// 		}
+// 	};
+// 	return service;
+// });
+
+
+vStudio.services.factory('VqlService', function($http, $q) {
 	
-	var data = [{
+		var data={};	
+		var data111 = [{
 		"label": "CVS Caremark",
 		"id": "role1",
 		"children": [{
@@ -51,11 +88,62 @@ vStudio.services.service('VqlService', [function() {
 			"children": []
 		}];
 
+
+	var getDataHttp = function() {
+		// $http returns a promise, which has a then function, which also returns a promise
+		var promise = $http.get('mock/app.descriptor.json').then(function (response) {
+			// The then function here is an opportunity to modify the response
+			console.log(response);
+			// The return value gets picked up by the then in the controller.
+			var arr = jQuery.map(response.data, function (value, key) {
+				if(key == "children"){
+					return value;
+				}				
+			});
+
+
+			//data = data111;
+			data = arr;
+			return data;
+
+		});
+		// Return the promise to the controller
+		return promise;
+	};
+
+	// var getDataHttp111 = function() {
+	// 	var deffered = $q.defer();
+	
+	// 	var _data;
+	//     var _status;
+
+	//     if($http){	    	
+
+	// 		$http({method: 'GET', url: 'mock/app.descriptor.json'}).
+	// 	      success(function(data, status) {        
+	// 	        _data = data;
+	// 	        _status = status;
+
+	// 	        _data = data111;
+	// 	      }).
+	// 	      error(function(data, status) {
+	// 	        _data = data || "Request failed";
+	// 	        _status = status;
+	// 	    }); 
+
+	// 	    deffered.resolve(_data);   	
+	// 	 }
+
+	// 	 return deffered.promise;
+	//  };
+
+
+
 	var map = {};
 
 	function createMap(item){
 
-		if(item.children.length == 0){
+		if(!item.hasOwnProperty("children") || item.children.length == 0){
 			map[item.id] = item;
 			return map;
 		}
@@ -89,6 +177,7 @@ vStudio.services.service('VqlService', [function() {
 	return {
 		getData: getData,
 		getById: getById,
-		getMap:getMap
+		getMap:getMap,
+		getDataHttp:getDataHttp
 	}
-}]);
+});

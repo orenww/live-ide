@@ -42,8 +42,10 @@
 						  $scope[$attrs.treeModel].selectedNode.selected = undefined;
 						}
 
-						$scope.currentNode.selected = 'selected';
-						$scope[$attrs.treeModel].selectedNode = $scope.currentNode;
+						if($scope.currentNode){
+							$scope.currentNode.selected = 'selected';
+							$scope[$attrs.treeModel].selectedNode = $scope.currentNode;							
+						}
 					});
 				}
 			},

@@ -1,5 +1,6 @@
 {
-   "id":"app-1",
+   "id":"aaa",
+   "label":"111",
    "refreshTriggers":[
       "p1"
    ],
@@ -11,9 +12,9 @@
       "p2":"v2",
       "p1":"v1"
    },
-   "children":[
-      {
+   "children":[{
          "id":"container-1",
+         "label":"222",         
          "refreshTriggers":[
             "p2"
          ],
@@ -23,6 +24,8 @@
          "children":[
             {
                "id":"grid-1",
+               "label":"333",
+               "vql": "select * from medicines where [p2]",
                "refreshTriggers":[
                   "p3"
                ],
@@ -75,6 +78,7 @@
       },
       {
          "id":"container-2",
+         "label":"444",
          "refreshTriggers":[
 
          ],

@@ -16,6 +16,11 @@ vStudio.directives
 
 			link: function(scope, element, attrs ) {
 
+				if(scope.contentAttr == null){
+					scope.contentAttr = attrs.contentAttr || 'vql';	
+				}
+				
+
 				// trigger extension
 				ace.require("ace/ext/language_tools");
 				var editor = ace.edit("editor");
@@ -70,9 +75,12 @@ vStudio.directives
 			controller: function ($scope) {
 				$scope.$watch('code', function (newCode, oldCode) {
 						// console.log('newCode', newCode)
-						if (newCode.vql) {
-							$scope.getEditor().setValue(newCode.vql);
+						if (newCode && newCode.hasOwnProperty($scope.contentAttr)) {
+							$scope.getEditor().setValue(newCode[$scope.contentAttr]);
 						}
+						// if (newCode.vql) {
+						// 	$scope.getEditor().setValue(newCode.vql);
+						// }
 				}, true);
 			}
 		}
