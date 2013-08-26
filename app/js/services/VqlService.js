@@ -1,39 +1,3 @@
-// /* Services */
-// vStudio.services.factory('VqlFactory', function($http, $q) {
-
-// 	var service = {
-// 		getData: function() {
-// 			var deffered = $q.defer();
-// 			// note the JSON_CALLBACK at the end: angular's $http populates it. Mind the uppercase.
-// 			var url = '/mock/app.descriptor.json';
-
-// 			$http.get(url).success(function(data) {
-
-// 				var results = [];
-// 				var feed = data.feed;
-// 				var entries = feed.entry || [];
-// 				for (var i = 0; i < entries.length; i++) {
-// 					var entry = entries[i];
-// 					results.push( {
-// 						title:entry.title.$t,
-// 						thumb:	entry.media$group.media$thumbnail[0].url,
-// 						url: entry.media$group.media$player[0].url,
-
-// 					});
-// 				}
-
-
-// 				console.log("----results: " + data);
-// 				deffered.resolve(results);
-// 			});
-
-// 			return deffered.promise;
-// 		}
-// 	};
-// 	return service;
-// });
-
-
 vStudio.services.factory('VqlService', function($http, $q) {
 	
 		var data={};	
@@ -88,8 +52,9 @@ vStudio.services.factory('VqlService', function($http, $q) {
 			"children": []
 		}];
 
+	var param;
 
-	var getDataHttp = function() {
+	var getData = function() {
 		// $http returns a promise, which has a then function, which also returns a promise
 		var promise = $http.get('mock/app.descriptor.json').then(function (response) {
 			// The then function here is an opportunity to modify the response
@@ -98,6 +63,9 @@ vStudio.services.factory('VqlService', function($http, $q) {
 			var arr = jQuery.map(response.data, function (value, key) {
 				if(key == "children"){
 					return value;
+				}
+				if(key == "defaultParams"){
+					param = value;		
 				}				
 			});
 
@@ -110,33 +78,6 @@ vStudio.services.factory('VqlService', function($http, $q) {
 		// Return the promise to the controller
 		return promise;
 	};
-
-	// var getDataHttp111 = function() {
-	// 	var deffered = $q.defer();
-	
-	// 	var _data;
-	//     var _status;
-
-	//     if($http){	    	
-
-	// 		$http({method: 'GET', url: 'mock/app.descriptor.json'}).
-	// 	      success(function(data, status) {        
-	// 	        _data = data;
-	// 	        _status = status;
-
-	// 	        _data = data111;
-	// 	      }).
-	// 	      error(function(data, status) {
-	// 	        _data = data || "Request failed";
-	// 	        _status = status;
-	// 	    }); 
-
-	// 	    deffered.resolve(_data);   	
-	// 	 }
-
-	// 	 return deffered.promise;
-	//  };
-
 
 
 	var map = {};
@@ -154,14 +95,13 @@ vStudio.services.factory('VqlService', function($http, $q) {
 	};
 
 
-	var getData = function() {		
-		return data;
-	};
-
 	var getMap = function() {
-		for(var i = 0; i < data.length; i++){
-			createMap(data[i]);
+		if(jQuery.isEmptyObject(map)){
+			for(var i = 0; i < data.length; i++){
+				createMap(data[i]);
+			}			
 		}
+
 		return map;
 	};
 
@@ -173,11 +113,15 @@ vStudio.services.factory('VqlService', function($http, $q) {
 		return _map[id] || {};
 	};
 
+	var getParam = function(){
+		return param;
+	}
+
 	// expose the service
 	return {
-		getData: getData,
-		getById: getById,
-		getMap:getMap,
-		getDataHttp:getDataHttp
+		getData: getData
+		,getById: getById
+		,getMap:getMap
+		,getParam:getParam
 	}
 });

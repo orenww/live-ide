@@ -1,22 +1,16 @@
 vStudio.controllers.controller('EditorCtrl', function ($scope, $routeParams, VqlService) {
-		$scope.treedata = VqlService.getData();
+		// $scope.treedata = VqlService.getData();
 
-    VqlService.getDataHttp().then(function(d) {
-      $scope.treedata = d;
-      $scope.selectNodeById($routeParams.vqlid);
-    });
+   if(jQuery.isEmptyObject($scope.treedata)){
+      VqlService.getData().then(function(d) {
+        $scope.treedata = d;
 
-    // var resultsPromise = VqlService.getDataHttp();
-    // $scope.treedata = resultsPromise; // for real-time display update....
+        $scope.param = VqlService.getParam();        
 
-    // resultsPromise.then( function( results) {
-    //   // ...for getting it as a simple Array
-    //   $scope.treedata = results;
-
-    //   $scope.getContent();
-    // });
-
-    //$scope.treedata = VqlService.fetch();
+        $scope.selectNodeById($routeParams.vqlid);
+      });
+   }
+    
     
 		$scope.getContent = function() {
 			// debugger;
