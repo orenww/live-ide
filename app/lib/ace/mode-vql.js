@@ -76,10 +76,15 @@ var VqlHighlightRules = function() {
         "count|min|max|avg|sum|rank|now|coalesce"
     );
 
+    var verixTableList = (
+        "tbl1|tbl2|tbl3|tbl11|tbl12|tbl13|"
+    );
+
     var keywordMapper = this.createKeywordMapper({
         "support.function": builtinFunctions,
         "keyword": keywords,
-        "constant.language": builtinConstants
+        "constant.language": builtinConstants,
+        "verix": verixTableList
     }, "identifier", true);
 
     this.$rules = {

@@ -36,6 +36,24 @@ var Autocomplete = require("../autocomplete").Autocomplete;
 var config = require("../config");
 
 var textCompleter = require("../autocomplete/text_completer");
+
+var verixKeyWordCompleter = {
+    getCompletions: function(editor, session, pos, prefix, callback) {
+        var keywords = session.$mode.$keywordList || [];
+        keywords = keywords.filter(function(w) {
+            return w.lastIndexOf(prefix, 0) == 0;
+        });
+        callback(null, keywords.map(function(word) {
+            return {
+                name: word,
+                value: word,
+                score: 0,
+                meta: "keyword"
+            };
+        }));
+    }
+};
+
 var keyWordCompleter = {
     getCompletions: function(editor, session, pos, prefix, callback) {
         var keywords = session.$mode.$keywordList || [];
@@ -112,6 +130,7 @@ require("../config").defineOptions(Editor.prototype, "editor", {
             if (val) {
                 this.completers = completers
                 this.commands.addCommand(Autocomplete.startCommand);
+                this.commands.addCommand(Autocomplete.startCommand111);
             } else {
                 this.commands.removeCommand(Autocomplete.startCommand);
             }
@@ -1060,7 +1079,7 @@ var Autocomplete = function() {
         return true;
     };
 
-    this.showPopup = function(editor) {
+    this.showPopup = function(editor,isVerix) {
         if (this.editor)
             this.detach();
         
@@ -1077,12 +1096,45 @@ var Autocomplete = function() {
         editor.on("changeSelection", this.changeListener);
         editor.on("blur", this.blurListener);
         editor.on("mousedown", this.mousedownListener);
-        this.updateCompletions();
+        this.updateCompletions(undefined,isVerix);
     }
     
-    this.updateCompletions = function(keepPopupPosition) {
+    this.updateCompletions = function(keepPopupPosition, isVerix) {
         this.gatherCompletions(this.editor, function(err, results) {
-            var matches = results && results.matches;
+
+            var matches;
+            if(isVerix){
+                results = [
+                            {
+                                meta: "keyword",
+                                name: "table1",
+                                score: 0,
+                                value: "table1"
+                            },
+                            {
+                                meta: "keyword",
+                                name: "table2",
+                                score: 0,
+                                value: "table2"
+                            },
+                            {
+                                meta: "keyword",
+                                name: "table3",
+                                score: 0,
+                                value: "table3"
+                            },
+                            {
+                                meta: "keyword",
+                                name: "table4",
+                                score: 0,
+                                value: "table4"
+                            }
+                        ];
+                matches = results;
+            }else{
+                matches = results && results.matches;    
+            }
+            
             if (!matches || !matches.length)
                 return this.detach();
 
@@ -1113,7 +1165,18 @@ Autocomplete.startCommand = {
         editor.completer.showPopup(editor);
         editor.completer.cancelContextMenu();
     },
-    bindKey: "Ctrl-Space|Ctrl-Shift-Space|Alt-Space"
+    bindKey: "Ctrl-Space"
+};
+
+Autocomplete.startCommand111 = {
+    name: "startAutocomplete111",
+    exec: function(editor) {
+        if (!editor.completer)
+            editor.completer = new Autocomplete();
+        editor.completer.showPopup(editor,true);
+        editor.completer.cancelContextMenu();
+    },
+    bindKey: "Ctrl-Shift-Space|Alt-Space"
 };
 
 var FilteredList = function(array, mutateData) {

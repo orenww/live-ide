@@ -44,6 +44,8 @@ vStudio.directives
 					if(angular.isDefined(scope.change)){
 						scope.change(e, acee);
 					}
+
+					var aaa = editor.selection.getCursor();
 				};
 
 				// Boolean options
@@ -68,8 +70,37 @@ vStudio.directives
 					return acee;
 				}
 
+				editor.commands.addCommand({
+				    name: 'myCommand',
+				    bindKey: {win: 'Ctrl-M',  mac: 'Command-M'},
+				    exec: function(editor) {
+				        //...
+				        console.log("addCommand");
+				    },
+				    readOnly: true // false if this command should not apply in readOnly mode
+				});
+
 				// EVENTS
 				session.on('change', onChange);
+
+				editor.onCursorChange()
+
+				editor.getSession().selection.on('changeCursor', function(e) {
+					console.log("bbb");
+					var bbb;
+				});
+
+				editor.getSession().selection.on('changeSelection', function(e) {
+					console.log("ccc");
+					var ccc;
+				});
+				// session.selection.on('changeCursor', function(e) {
+				// 	debugger;
+				// });
+
+				session.on('changeCursor', function(e) {
+					debugger;
+				});
 			},
 
 			controller: function ($scope) {
