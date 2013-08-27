@@ -1,66 +1,25 @@
 vStudio.services.factory('VqlService', function($http, $q) {
 	
-		var data={};	
-		var data111 = [{
-		"label": "CVS Caremark",
-		"id": "role1",
-		"children": [{
-				"label": "MMD MEDICAID",
-				"id": "role11",
-				"vqlId": "vqlId555",
-				"vql": "select * from medicines where {p2}",
-				"children": []
-			},
-
-			{
-				"label": "FDS MediSleep",
-				"id": "role12",
-
-				"children": [{
-					"label": "Day Care",
-					"id": "role121",
-					"children": [{
-						"label": "PLACEBO",
-						"id": "role1211",
-						"vqlId": "vqlId111",
-						"vql": "select * from medicines where [p2]",
-
-						"children": []
-					}, {
-						"label": "500 mg",
-						"id": "role1212",
-						"vqlId": "vqlId222",
-						"vql": "select * from medicines where {p1}",
-						"children": []
-					}]
-				}]
-			}
-		]}, 
-
-		{
-			"label": "Admin",
-			"id": "role2",
-			"vqlId": "vqlId333",
-			"vql": "select * from medicines where {p5}",
-			"children": []
-		}, 
-		{
-			"label": "Guest",
-			"id": "role3",
-			"vqlId": "vqlId444",
-			"vql": "select * from medicines where [p3]",
-			"children": []
-		}];
+	// the app descriptor json fetched from the server
+	var data = {};
+	// reference to nodes presented in tree view
+	var treeData = {};
+	// tree map of the (vql) leaf nodes
+	var map = {};
 
 	var param;
+	var promise;
 
 	var getData = function() {
+		if (!jQuery.isEmptyObject(promise)){
+			return promise;
+		}
 		// $http returns a promise, which has a then function, which also returns a promise
-		var promise = $http.get('mock/app.descriptor.json').then(function (response) {
+		promise = $http.get('mock/app.descriptor.json').then(function (response) {
 			// The then function here is an opportunity to modify the response
-			console.log(response);
+			data = response.data;
 			// The return value gets picked up by the then in the controller.
-			var arr = jQuery.map(response.data, function (value, key) {
+			treeData = jQuery.map(data, function (value, key) {
 				if(key == "children"){
 					return value;
 				}
@@ -69,19 +28,17 @@ vStudio.services.factory('VqlService', function($http, $q) {
 				}				
 			});
 
-
-			//data = data111;
-			data = arr;
-			return data;
-
+			return treeData;
 		});
 		// Return the promise to the controller
 		return promise;
 	};
 
+	var getTreeData = function () {
+		return treeData;
+	}
 
-	var map = {};
-
+	// creates map of the treeData array for vql's leaf nodes only
 	function createMap(item){
 
 		if(!item.hasOwnProperty("children") || item.children.length == 0){
@@ -97,8 +54,8 @@ vStudio.services.factory('VqlService', function($http, $q) {
 
 	var getMap = function() {
 		if(jQuery.isEmptyObject(map)){
-			for(var i = 0; i < data.length; i++){
-				createMap(data[i]);
+			for(var i = 0; i < treeData.length; i++){
+				createMap(treeData[i]);
 			}			
 		}
 
@@ -106,22 +63,34 @@ vStudio.services.factory('VqlService', function($http, $q) {
 	};
 
 	var getById = function(id) {
-		var _map = getMap();
-		if (!id) {
-			return {};
+		if(jQuery.isEmptyObject(map)){
+			map = getMap();
 		}
-		return _map[id] || {};
+
+		return id ? map[id] : {};
 	};
 
 	var getParam = function(){
 		return param;
 	}
 
+	// post the data object to the server
+	var saveCode = function () {
+		console.log('data saved!!!!!', data);
+		return;
+
+		$http.post('/someUrl', data).then(function(result){
+			console.log('handle the result', result);
+		});
+	}
+
 	// expose the service
 	return {
-		getData: getData
-		,getById: getById
-		,getMap:getMap
-		,getParam:getParam
+		getTreeData: getTreeData
+		, getData: getData
+		, getById: getById
+		, getMap:getMap
+		, getParam:getParam
+		, save: saveCode
 	}
 });

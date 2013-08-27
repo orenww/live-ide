@@ -2,13 +2,13 @@
 <html lang="en" ng-app="vStudio">
 <head>
   <meta charset="utf-8">
-  <title>My AngularJS App</title>
+  <title>Verix Studio</title>
   <link rel="stylesheet" href="css/app.css"/>
 </head>
 
 <body>
   
-  <div ng-include="'partials/navbar.html'"></div>
+  <div ng-include="'partials/navbar.html'" ng-controller='NavbarCtrl'></div>
 
   <section ng-view class="fluid-height"></section>
   
@@ -25,6 +25,7 @@
 
   <!-- CONTROLLERS -->
   <script src="js/controllers/EditorCtrl.js"></script>
+  <script src="js/controllers/NavbarCtrl.js"></script>
   <script src="js/controllers/StudioCtrl.js"></script>
   <script src="js/controllers/TreeCtrl.js"></script>
   

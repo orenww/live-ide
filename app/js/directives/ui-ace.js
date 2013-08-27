@@ -69,6 +69,9 @@ vStudio.directives
 				scope.getEditor = function() {
 					return acee;
 				}
+				scope.hasChanged = function(code) {
+					return scope.getEditor().getValue() !== code;
+				}
 
 				editor.commands.addCommand({
 				    name: 'myCommand',
@@ -81,17 +84,17 @@ vStudio.directives
 				});
 
 				// EVENTS
-				session.on('change', onChange);
+				editor.on('change', onChange);
 
 				editor.onCursorChange()
 
 				editor.getSession().selection.on('changeCursor', function(e) {
-					console.log("bbb");
+					// console.log("bbb");
 					var bbb;
 				});
 
 				editor.getSession().selection.on('changeSelection', function(e) {
-					console.log("ccc");
+					// console.log("ccc");
 					var ccc;
 				});
 				// session.selection.on('changeCursor', function(e) {
@@ -106,8 +109,11 @@ vStudio.directives
 			controller: function ($scope) {
 				$scope.$watch('code', function (newCode, oldCode) {
 						// console.log('newCode', newCode)
-						if (newCode && newCode.hasOwnProperty($scope.contentAttr)) {
-							$scope.getEditor().setValue(newCode[$scope.contentAttr]);
+						debugger;
+						if (newCode && newCode.vqls.dataSelection) {
+							if ($scope.hasChanged(newCode.vqls.dataSelection)) {
+								$scope.getEditor().setValue(newCode.vqls.dataSelection);
+							}
 						}
 						// if (newCode.vql) {
 						// 	$scope.getEditor().setValue(newCode.vql);

@@ -33,22 +33,23 @@
 		return {
 			restrict: 'A',
 
-			controller: function ($scope, $attrs) {
-				// watch for changes of selectedNode from outside this directive
-				if ($attrs.angularTreeview) {
-					$scope.$watch( "currentNode", function(newObj, oldObj){
-						// reset last node
-						if ($scope[$attrs.treeModel].selectedNode && $scope[$attrs.treeModel].selectedNode.selected) {
-						  $scope[$attrs.treeModel].selectedNode.selected = undefined;
-						}
+			// controller: function ($scope, $attrs) {
+			// 	// watch for changes of selectedNode from outside this directive
+			// 	if ($attrs.angularTreeview) {
+			// 			$scope.$watch( "currentNode", function(newObj, oldObj){
+			// 				// reset last node
+			// 				if ($scope[$attrs.treeModel] && $scope[$attrs.treeModel].selectedNode && $scope[$attrs.treeModel].selectedNode.selected) {
+			// 				  $scope[$attrs.treeModel].selectedNode.selected = undefined;
+			// 				}
 
-						if($scope.currentNode){
-							$scope.currentNode.selected = 'selected';
-							$scope[$attrs.treeModel].selectedNode = $scope.currentNode;							
-						}
-					});
-				}
-			},
+			// 				if($scope.currentNode && newObj){
+			// 					newObj.selected = 'selected';
+			// 					// $scope[$attrs.treeModel].selectedNode = $scope.currentNode;
+			// 				}
+			// 			});
+						
+			// 		}
+			// },
 
 			link: function ( scope, element, attrs ) {
 				//tree model
@@ -83,6 +84,11 @@ var template =
 			'<i class="expanded" data-ng-show="node.' + nodeChildren + '.length && !node.collapsed" data-ng-click="selectNodeHead(node)"></i>' + 
 			'<i class="normal" data-ng-hide="node.' + nodeChildren + '.length"></i> ' + 
 			'<a href="#/studio/node/{{node.' + nodeId + '}}">{{node.' + nodeLabel + '}}</a>' +
+			'<ul>' +
+				'<li ng-repeat="(key, val) in node.vqls">' +
+					'{{ key }}' +
+				'</li>' +
+			'</ul>' +
 		'</div>' + 
 		'<div data-ng-hide="node.collapsed" data-tree-model="node.' + nodeChildren + '" data-node-id=' + nodeId + ' data-node-label=' + nodeLabel + ' data-node-children=' + nodeChildren + '></div>' + 
 	'</li>' + 
@@ -101,7 +107,7 @@ var template =
 						};
 
 						//if node label clicks,
-						scope.selectNodeLabel = scope.selectNodeLabel || function( selectedNode ){
+						/*scope.selectNodeLabel = scope.selectNodeLabel || function( selectedNode ){
 
 							//remove highlight from previous node
 							if( scope.currentNode && scope.currentNode.selected ) {
@@ -113,7 +119,7 @@ var template =
 
 							//set currentNode
 							scope.currentNode = selectedNode;
-						};
+						};*/
 					}
 					//Rendering template created.
 					element.html(null).append( $compile( template )( scope ) );
