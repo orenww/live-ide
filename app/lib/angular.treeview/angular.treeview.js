@@ -64,6 +64,9 @@
 				//children
 				var nodeChildren = attrs.nodeChildren || 'children';
 
+				var nodeAttrs = attrs.nodeAttrs || 'vqls';
+
+				var treeFilter = attrs.nodeFilter || 'treeFilter';
 				//tree template
 				// var template = 
 				// 	'<ul>' + 
@@ -78,18 +81,22 @@
 
 var template = 
 '<ul class="unstyled">' + 
-	'<li data-ng-repeat="node in ' + treeModel + '">' + 
-		'<div class="tree-node" data-ng-class="node.selected" XXX-data-ng-click="selectNodeLabel(node)">' +
-			'<i class="collapsed" data-ng-show="node.' + nodeChildren + '.length && node.collapsed" data-ng-click="selectNodeHead(node)"></i>' + 
-			'<i class="expanded" data-ng-show="node.' + nodeChildren + '.length && !node.collapsed" data-ng-click="selectNodeHead(node)"></i>' + 
+	'<li data-ng-repeat="node in ' + treeModel + ' | filter:' + treeFilter + '" class="tree-node">' + 
+		'<div class="tree-node-label" data-ng-class="node.selected" XXX-data-ng-click="selectNodeLabel(node)">' +
+			'<i title="expand component" class="collapsed" data-ng-show="node.' + nodeChildren + '.length && node.collapsed" data-ng-click="selectNodeHead(node)"></i>' + 
+			'<i title="collapse component" class="expanded" data-ng-show="node.' + nodeChildren + '.length && !node.collapsed" data-ng-click="selectNodeHead(node)"></i>' + 
 			'<i class="normal" data-ng-hide="node.' + nodeChildren + '.length"></i> ' + 
 			'<a href="#/studio/node/{{node.' + nodeId + '}}">{{node.' + nodeLabel + '}}</a>' +
-			'<ul>' +
-				'<li ng-repeat="(key, val) in node.vqls">' +
-					'{{ key }}' +
+		'</div>' + 
+		'<div>' +
+			'<button class="btn btn-mini prop-toggle" ng-click="showNodeProperties(node)"><i class="icon-list"></i> properties</button>' + 
+			'<ul class="vqls-list" ng-show="node.showAttrs || node.attrSelected">' +
+				'<li class="tree-node-attr" ng-repeat="(key, val) in node.' + nodeAttrs + '" ng-class="{ selected: node.attrSelected == key }">' +
+					'<i class="attr"></i> ' + 
+					'<a href="#/studio/node/{{ node.' + nodeId + '}}/vql/{{ key }}">{{ key }}</a>' +
 				'</li>' +
 			'</ul>' +
-		'</div>' + 
+		'</div>' +
 		'<div data-ng-hide="node.collapsed" data-tree-model="node.' + nodeChildren + '" data-node-id=' + nodeId + ' data-node-label=' + nodeLabel + ' data-node-children=' + nodeChildren + '></div>' + 
 	'</li>' + 
 '</ul>'; 
@@ -106,6 +113,9 @@ var template =
 							selectedNode.collapsed = !selectedNode.collapsed;
 						};
 
+						scope.showNodeProperties = function( _node ) {
+							_node.showAttrs = !_node.showAttrs;
+						}
 						//if node label clicks,
 						/*scope.selectNodeLabel = scope.selectNodeLabel || function( selectedNode ){
 

@@ -27,6 +27,11 @@ vStudio.config(['$routeProvider', function($routeProvider) {
 		templateUrl: 'partials/studio.html',
 		controller: 'EditorCtrl'
 	});
+
+	$routeProvider.when('/studio/node/:vqlid/vql/:vqlprop', {
+		templateUrl: 'partials/studio.html',
+		controller: 'EditorCtrl'
+	});
 	
 	$routeProvider.otherwise({
 		redirectTo: '/studio'

@@ -23,8 +23,7 @@
          "columnsDataFormat": "",
          "actions": {
             "onClick": "",
-            "onFocus": "",
-            "$$hashKey": "00B"
+            "onFocus": ""
          },
          "title": "",
          "layout": ""
@@ -42,8 +41,7 @@
             "columnsDataFormat": "",
             "actions": {
                "onClick": "",
-               "onFocus": "",
-               "$$hashKey": "00K"
+               "onFocus": ""
             },
             "title": ""
          },
@@ -51,12 +49,9 @@
          "outParams": [],
          "refreshTriggers": ["p3"],
          "exportExcel": {},
-         "exportImage": {},
-         "$$hashKey": "00I",
-         "selected": "selected"
+         "exportImage": {}
       }],
-      "exportImage": {},
-      "$$hashKey": "007"
+      "exportImage": {}
    }, {
       "type": "VqlContainer",
       "id": "container-2",
@@ -66,8 +61,7 @@
          "columnsDataFormat": "",
          "actions": {
             "onClick": "",
-            "onFocus": "",
-            "$$hashKey": "00Q"
+            "onFocus": ""
          },
          "title": "",
          "layout": ""
@@ -76,8 +70,7 @@
       "outParams": [],
       "refreshTriggers": [],
       "exportExcel": {},
-      "exportImage": {},
-      "$$hashKey": "009"
+      "exportImage": {}
    }],
    "defaultParams": {
       "p1": "v1",

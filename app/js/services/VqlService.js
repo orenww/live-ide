@@ -3,7 +3,7 @@ vStudio.services.factory('VqlService', function($http, $q) {
 	// the app descriptor json fetched from the server
 	var data = {};
 	// reference to nodes presented in tree view
-	var treeData = {};
+	var treeData = [];
 	// tree map of the (vql) leaf nodes
 	var map = {};
 
@@ -18,16 +18,21 @@ vStudio.services.factory('VqlService', function($http, $q) {
 		promise = $http.get('mock/app.descriptor.json').then(function (response) {
 			// The then function here is an opportunity to modify the response
 			data = response.data;
-			// The return value gets picked up by the then in the controller.
-			treeData = jQuery.map(data, function (value, key) {
-				if(key == "children"){
-					return value;
-				}
-				if(key == "defaultParams"){
-					param = value;		
-				}				
-			});
 
+			// save the first object
+			if (data.id) {
+				treeData.push(data);
+			}
+			// The return value gets picked up by the then in the controller.
+			// treeData = treeData.concat(jQuery.map(data, function (value, key) {
+				
+			// 	if(key == "children"){
+			// 		return value;
+			// 	}
+			// 	if(key == "defaultParams"){
+			// 		param = value;		
+			// 	}				
+			// }));
 			return treeData;
 		});
 		// Return the promise to the controller
@@ -46,6 +51,10 @@ vStudio.services.factory('VqlService', function($http, $q) {
 			return map;
 		}
 
+		if (item.hasOwnProperty('id')) {
+			map[item.id] = item;
+		}
+		
 		for(var i = 0; i < item.children.length; i++){
 			createMap(item.children[i]);
 		}		

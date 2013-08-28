@@ -7,7 +7,8 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlS
 
 			$scope.param = VqlService.getParam();
 
-			$scope.selectNodeById($routeParams.vqlid);
+			// handle display vql prop or node
+			$scope.selectNodeById($routeParams.vqlid, $routeParams.vqlprop);
 		});
 	}
 
@@ -32,22 +33,38 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlS
 	}
 
 	$scope.onEditorChange = function(e, editor) {
-		console.log("e", e, "editor", editor);
-		$scope.currentNode.vqls.dataSelection = editor.getValue();
+		var newValue = editor.getValue();
+		// console.log("e", e, "editor", editor);
+		if ($scope.currentNode.attrSelected) {
+			$scope.currentNode.vqls[$scope.currentNode.attrSelected] = newValue;
+		}
+		$scope.currentNode.vqls.dataSelection = newValue;
 	}
 
-	$scope.selectNodeById = function(id) {
+	$scope.selectNodeById = function(id, prop) {
 		if (!id) {
+			return;
+		}
+		// handle property leaf selection
+		if (angular.isDefined(prop)) {
+			$scope.currentNode = VqlService.getById(id);
+			$scope.currentNode.attrSelected = prop;
+			$scope.unselectNode();
 			return;
 		}
 		// for the editor to change
 		$scope.currentNode = VqlService.getById(id);
 		$scope.currentNode.selected = 'selected';
+		$scope.currentNode.attrSelected = undefined;
 		// for the tree view
+		$scope.unselectNode();
+		$scope.treedata.selectedNode = $scope.currentNode;
+	}
+
+	$scope.unselectNode = function () {
 		if ($scope.treedata.selectedNode) {
 			$scope.treedata.selectedNode.selected = undefined;
 		}
-		$scope.treedata.selectedNode = $scope.currentNode;
 	}
 
 	// $scope.selectNodeById($routeParams.vqlid);

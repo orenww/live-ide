@@ -102,22 +102,23 @@ vStudio.directives
 				// });
 
 				session.on('changeCursor', function(e) {
-					debugger;
+					
 				});
 			},
 
 			controller: function ($scope) {
 				$scope.$watch('code', function (newCode, oldCode) {
 						// console.log('newCode', newCode)
-						debugger;
 						if (newCode && newCode.vqls.dataSelection) {
+
 							if ($scope.hasChanged(newCode.vqls.dataSelection)) {
-								$scope.getEditor().setValue(newCode.vqls.dataSelection);
+								var newCodeToInsert = newCode.attrSelected && angular.isDefined(newCode.attrSelected) ? 
+									newCode.vqls[newCode.attrSelected] :
+									newCode.vqls.dataSelection;
+
+								$scope.getEditor().setValue(newCodeToInsert);
 							}
 						}
-						// if (newCode.vql) {
-						// 	$scope.getEditor().setValue(newCode.vql);
-						// }
 				}, true);
 			}
 		}

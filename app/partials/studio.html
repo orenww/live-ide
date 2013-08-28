@@ -1,7 +1,7 @@
 
 <article class="row-fluid fluid-height">
 
-  <section class="fluid-height span2">
+  <section class="fluid-height span2 sidebar">
     <!--
       [TREE attribute]
       angular-treeview: the treeview directive
@@ -10,13 +10,20 @@
       node-label : each node's label
       node-children: each node's children
     -->
+
+      <div class="tree-filter container">
+        <input type="text" ng-model="treeFilter" placeholder="find vqls">
+      </div>
+     
      <div
         id="vql-tree"
         data-angular-treeview="true"
         data-tree-model="treedata"
         data-node-id="id"
         data-node-label="type"
-        data-node-children="children" >
+        data-node-children="children"
+        data-node-attrs="vqls" 
+        data-node-filter="treeFilter">
     </div>  
   </section>
 

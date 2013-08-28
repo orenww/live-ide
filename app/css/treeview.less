@@ -1,6 +1,11 @@
+.sidebar {
+	width: 254px;
+}
 #vql-tree {
 	height: -webkit-calc(~"100% - 41px");
 	background-color: #EEEEEE;
+	overflow: auto;
+	box-shadow: inset 0px 3px 8px #aaa;
 }
 // from angular.treeview.css
 div[data-angular-treeview] {
@@ -18,6 +23,11 @@ div[data-angular-treeview] {
   text-decoration: none;
 }
 
+.tree-filter {
+	background-color: #EEEEEE;
+	padding: 10px 10px 0 10px;
+	border-bottom: 1px solid #ddd;
+}
 div[data-tree-model] {
 	ul {
 	  margin: 0;
@@ -27,7 +37,21 @@ div[data-tree-model] {
 	  overflow: hidden;
 	}
 
-	li {
+	.prop-toggle {
+		margin-left: 7px;
+	}
+
+	.vqls-list {
+		padding-left: 8px;
+		font-size: 11px;
+		font-style: italic;
+	}
+
+	.tree-node-attr {
+		padding: 2px 5px;
+	}
+
+	.tree-node {
 		position: relative;
 		padding: 0 0 0 20px;
 		line-height: 25px;
@@ -38,17 +62,26 @@ div[data-tree-model] {
 			padding: 1px 10px;
 			background-image: url("../img/folder.png");
 			background-repeat: no-repeat;
+			background-size: cover;
 		}
 
 		.collapsed {
 			padding: 1px 10px;
 			background-image: url("../img/folder-closed.png");
 			background-repeat: no-repeat;
+			background-size: cover;
 		}
 
 		.normal {
 			padding: 0px 10px;
 			background-image: url("../img/file.png");
+			background-repeat: no-repeat;
+			cursor: default;
+		}
+
+		.attr {
+			padding: 1px 10px;
+			background-image: url("../img/brick.png");
 			background-repeat: no-repeat;
 		}
 
@@ -70,7 +103,7 @@ div[data-tree-model] {
 		  cursor: pointer;
 		}
 	}
-	.tree-node {
+	.tree-node-label {
 		padding: 3px 3px 3px 5px;
 	
 		&:hover {
