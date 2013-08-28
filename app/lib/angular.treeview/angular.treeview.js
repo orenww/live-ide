@@ -29,27 +29,39 @@
 (function ( angular ) {
 	'use strict';
 
-	angular.module( 'angularTreeview', [] ).directive( 'treeModel', function( $compile ) {
+	var app = angular.module( 'angularTreeview', [] );
+
+	app.directive( 'treeNode', function(){
+
 		return {
 			restrict: 'A',
+			replace: true,
+			scope: {
+				node: '=',
+				iconClick: '&'
+			},
+			templateUrl: 'lib/angular.treeview/tree-node.html'
+		};
 
-			// controller: function ($scope, $attrs) {
-			// 	// watch for changes of selectedNode from outside this directive
-			// 	if ($attrs.angularTreeview) {
-			// 			$scope.$watch( "currentNode", function(newObj, oldObj){
-			// 				// reset last node
-			// 				if ($scope[$attrs.treeModel] && $scope[$attrs.treeModel].selectedNode && $scope[$attrs.treeModel].selectedNode.selected) {
-			// 				  $scope[$attrs.treeModel].selectedNode.selected = undefined;
-			// 				}
+	});
 
-			// 				if($scope.currentNode && newObj){
-			// 					newObj.selected = 'selected';
-			// 					// $scope[$attrs.treeModel].selectedNode = $scope.currentNode;
-			// 				}
-			// 			});
-						
-			// 		}
-			// },
+	app.directive( 'treeNodeProps', function(){
+
+		return {
+			restrict: 'A',
+			replace: true,
+			scope: {
+				node: '=',
+				toggle: '&'
+			},
+			templateUrl: 'lib/angular.treeview/tree-node-props.html'
+		};
+
+	})
+
+	app.directive( 'treeModel', function( $compile ) {
+		return {
+			restrict: 'A',
 
 			link: function ( scope, element, attrs ) {
 				//tree model
@@ -67,39 +79,16 @@
 				var nodeAttrs = attrs.nodeAttrs || 'vqls';
 
 				var treeFilter = attrs.nodeFilter || 'treeFilter';
-				//tree template
-				// var template = 
-				// 	'<ul>' + 
-				// 		'<li data-ng-repeat="node in ' + treeModel + '">' + 
-				// 			'<i class="collapsed" data-ng-show="node.' + nodeChildren + '.length && node.collapsed" data-ng-click="selectNodeHead(node)"></i>' + 
-				// 			'<i class="expanded" data-ng-show="node.' + nodeChildren + '.length && !node.collapsed" data-ng-click="selectNodeHead(node)"></i>' + 
-				// 			'<i class="normal" data-ng-hide="node.' + nodeChildren + '.length"></i> ' + 
-				// 			'<span data-ng-class="node.selected" data-ng-click="selectNodeLabel(node)">{{node.' + nodeLabel + '}}</span>' + 
-				// 			'<div data-ng-hide="node.collapsed" data-tree-model="node.' + nodeChildren + '" data-node-id=' + nodeId + ' data-node-label=' + nodeLabel + ' data-node-children=' + nodeChildren + '></div>' + 
-				// 		'</li>' + 
-				// 	'</ul>'; 
 
-var template = 
-'<ul class="unstyled">' + 
-	'<li data-ng-repeat="node in ' + treeModel + ' | filter:' + treeFilter + '" class="tree-node">' + 
-		'<div class="tree-node-label" data-ng-class="node.selected" XXX-data-ng-click="selectNodeLabel(node)">' +
-			'<i title="expand component" class="collapsed" data-ng-show="node.' + nodeChildren + '.length && node.collapsed" data-ng-click="selectNodeHead(node)"></i>' + 
-			'<i title="collapse component" class="expanded" data-ng-show="node.' + nodeChildren + '.length && !node.collapsed" data-ng-click="selectNodeHead(node)"></i>' + 
-			'<i class="normal" data-ng-hide="node.' + nodeChildren + '.length"></i> ' + 
-			'<a href="#/studio/node/{{node.' + nodeId + '}}">{{node.' + nodeLabel + '}}</a>' +
-		'</div>' + 
-		'<div>' +
-			'<button class="btn btn-mini prop-toggle" ng-click="showNodeProperties(node)"><i class="icon-list"></i> properties</button>' + 
-			'<ul class="vqls-list" ng-show="node.showAttrs || node.attrSelected">' +
-				'<li class="tree-node-attr" ng-repeat="(key, val) in node.' + nodeAttrs + '" ng-class="{ selected: node.attrSelected == key }">' +
-					'<i class="attr"></i> ' + 
-					'<a href="#/studio/node/{{ node.' + nodeId + '}}/vql/{{ key }}">{{ key }}</a>' +
-				'</li>' +
-			'</ul>' +
-		'</div>' +
-		'<div data-ng-hide="node.collapsed" data-tree-model="node.' + nodeChildren + '" data-node-id=' + nodeId + ' data-node-label=' + nodeLabel + ' data-node-children=' + nodeChildren + '></div>' + 
-	'</li>' + 
-'</ul>'; 
+				var template = 
+				'<ul class="unstyled">' + 
+					'<li data-ng-repeat="node in ' + treeModel + ' | filter:' + treeFilter + '" class="tree-node">' + 
+						'<div tree-node node="node" icon-click="selectNodeHead(node)"></div>'+
+						'<div tree-node-props node="node" toggle="showNodeProperties(node)" tree-node-props></div>' +
+						'<div data-ng-hide="node.collapsed" data-tree-model="node.' + nodeChildren + '" data-node-id=' + nodeId + ' data-node-label=' + nodeLabel + ' data-node-children=' + nodeChildren + '></div>' + 
+					'</li>' + 
+				'</ul>';
+				
 				//check tree model
 				if( treeModel && treeModel.length ) {
 
@@ -107,7 +96,7 @@ var template =
 					if( attrs.angularTreeview ) {
 
 						//if node head clicks,
-						scope.selectNodeHead = scope.selectNodeHead || function( selectedNode ){
+						scope.selectNodeHead = function( selectedNode ){
 
 							//Collapse or Expand
 							selectedNode.collapsed = !selectedNode.collapsed;
@@ -116,20 +105,6 @@ var template =
 						scope.showNodeProperties = function( _node ) {
 							_node.showAttrs = !_node.showAttrs;
 						}
-						//if node label clicks,
-						/*scope.selectNodeLabel = scope.selectNodeLabel || function( selectedNode ){
-
-							//remove highlight from previous node
-							if( scope.currentNode && scope.currentNode.selected ) {
-								scope.currentNode.selected = undefined;
-							}
-
-							//set highlight to selected node
-							selectedNode.selected = 'selected'
-
-							//set currentNode
-							scope.currentNode = selectedNode;
-						};*/
 					}
 					//Rendering template created.
 					element.html(null).append( $compile( template )( scope ) );

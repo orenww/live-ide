@@ -1,0 +1,6 @@
+<div class="tree-node-label" ng-class="node.selected">
+	<i title="expand component" class="collapsed" ng-show="node.children.length && node.collapsed" ng-click="iconClick(node)"></i> 
+	<i title="collapse component" class="expanded" ng-show="node.children.length && !node.collapsed" ng-click="iconClick(node)"></i> 
+	<i class="normal" ng-hide="node.children.length"></i>
+	<a href="#/studio/node/{{ node.id }}">{{ node.type }}</a>
+</div>

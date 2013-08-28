@@ -1,0 +1,14 @@
+<div class="node-props">
+	
+	<button class="btn btn-mini prop-toggle" ng-click="toggle(node)">
+		<i class="icon-list"></i> properties
+	</button> 
+
+	<ul class="vqls-list" ng-show="node.showAttrs || node.attrSelected">
+		<li class="tree-node-attr" ng-repeat="(key, val) in node.vqls" ng-class="{ selected: node.attrSelected == key }">
+			<i class="attr"></i>  
+			<a href="#/studio/node/{{ node.id }}/vql/{{ key }}">{{ key }}</a>
+		</li>
+	</ul>
+
+</div>

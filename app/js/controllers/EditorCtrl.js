@@ -4,15 +4,14 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlS
 	if (jQuery.isEmptyObject($scope.treedata)) {
 		VqlService.getData().then(function(d) {
 			$scope.treedata = VqlService.getTreeData();
-
+			
 			$scope.param = VqlService.getParam();
 
 			// handle display vql prop or node
 			$scope.selectNodeById($routeParams.vqlid, $routeParams.vqlprop);
 		});
 	}
-
-
+ 
 	$scope.getContent = function() {
 		// debugger;
 		// var vqlId = $scope.currentNode ? $scope.currentNode.label : $routeParams.vqlId;
