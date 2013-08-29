@@ -87,7 +87,7 @@ var verixKeyWordCompleter = {
                 });
 
             }else{
-                return false;
+                keywords = [];
             }
         }
 
