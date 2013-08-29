@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="css/app.css"/>
 </head>
 
-<body>
+<body ng-controller="AppCtrl">
   
   <div ng-include="'partials/navbar.html'" ng-controller='NavbarCtrl'></div>
 
@@ -22,8 +22,10 @@
   <!-- SERVICES -->
   <!-- // <script src="js/services/SomeService.js"></script> -->
   <script src="js/services/VqlService.js"></script>
+  <script src="js/services/IntellisenseService.js"></script>
 
   <!-- CONTROLLERS -->
+  <script src="js/controllers/AppCtrl.js"></script>
   <script src="js/controllers/EditorCtrl.js"></script>
   <script src="js/controllers/NavbarCtrl.js"></script>
   <script src="js/controllers/StudioCtrl.js"></script>

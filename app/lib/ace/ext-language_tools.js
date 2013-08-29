@@ -57,6 +57,31 @@ var verixKeyWordCompleter = {
 var keyWordCompleter = {
     getCompletions: function(editor, session, pos, prefix, callback) {
         var keywords = session.$mode.$keywordList || [];
+
+        var new_keywords = [];
+        var new_table = [];
+
+        var new_keywords_obj = {};
+        var new_table_obj = {};
+        if(typeof(Storage)!=="undefined"){
+            new_keywords.push(sessionStorage.keywords);
+            new_table.push(sessionStorage.tables);
+
+            new_keywords_obj = sessionStorage.getObject('kewords');
+            new_table_obj = sessionStorage.getObject('tables');
+
+            new_keywords = jQuery.map( new_keywords_obj, function(value){
+                return value;  
+            } );
+
+            new_table = jQuery.map( new_table_obj, function(value){
+                return value;  
+            } );
+        }
+        
+        keywords = keywords.concat(new_keywords);
+        jQuery.unique(keywords);
+
         keywords = keywords.filter(function(w) {
             return w.lastIndexOf(prefix, 0) == 0;
         });
