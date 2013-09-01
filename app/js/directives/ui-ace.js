@@ -11,7 +11,8 @@ vStudio.directives
 			scope: {
 				change: '=',
 				code: '=',
-				uiAceOptions: '='
+				uiAceOptions: '=',
+				extension: '='
 			},
 
 			link: function(scope, element, attrs ) {
@@ -20,9 +21,8 @@ vStudio.directives
 					scope.contentAttr = attrs.contentAttr || 'vql';	
 				}
 				
-
 				// trigger extension
-				ace.require("ace/ext/language_tools");
+				var eee = ace.require("ace/ext/language_tools");
 				var editor = ace.edit("editor");
 				//editor.session.setMode("ace/mode/sql");
 				//editor.setTheme("ace/theme/tomorrow");
@@ -65,6 +65,11 @@ vStudio.directives
 				if (angular.isString(options.fontSize)){
 					acee.setFontSize(options.fontSize);
 				}
+				// plugins
+				if (angular.isDefined(attrs.extension)) {
+					scope.extension().setEditor(editor);
+				}
+
 				// SET CONTENT
 				scope.getEditor = function() {
 					return acee;

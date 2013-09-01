@@ -25,6 +25,8 @@ vStudio.services.factory('IntellisenseService', function($http, $q) {
 				
 			  	sessionStorage.setObject('kewords',data.keywords);
 			  	sessionStorage.setObject('tables',data.tables);
+			  	sessionStorage.setObject('snippets',data.snippets);
+			  	
 			  	
 			  	// sessionStorage.setObject = data.keywords.keyword1;
 			  	// sessionStorage.tables = data.tables.table1;
