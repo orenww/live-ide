@@ -1,4 +1,4 @@
-vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlService) {
+vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlService, AceExtention) {
 	// $scope.treedata = VqlService.getData();
 
 	if (jQuery.isEmptyObject($scope.treedata)) {
@@ -20,6 +20,10 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlS
 			return $scope.currentNode;
 		}
 	}
+
+	$scope.setEditorExtension = function() {
+		return AceExtention;
+	};
 
 	$scope.getEditorOptions = function() {
 		return {

@@ -43,11 +43,10 @@ var verixKeyWordCompleter = {
         var colsArray = [];
         var tableArray = [];        
 
-        var new_keywords_obj = {};
+        
         var new_table_obj = {};
         if(typeof(Storage)!=="undefined"){         
-
-            new_keywords_obj = sessionStorage.getObject('kewords');
+            
             tableColsMap = sessionStorage.getObject('tables');
 
             var tmpObj = {};
@@ -166,7 +165,24 @@ var onChangeMode = function(e, editor) {
         config.loadModule(snippetFilePath, function(m) {
             if (m) {
                 snippetManager.files[id] = m;
-                m.snippets = snippetManager.parseSnippetFile(m.snippetText);
+
+                // var snippetText;
+                // var newSnippetText = "";
+
+                // if(typeof(Storage)!=="undefined"){         
+            
+                //     var snippets = sessionStorage.getObject('snippets');
+                    
+                //     $.each( snippets, function( key, value ) {
+                //         newSnippetText += value;
+                //     });
+                // }
+
+                // var snippetText111 = m.snippetText;
+                // snippetText = newSnippetText + m.snippetText;
+
+                m.snippets = snippetManager.parseSnippetFile(snippetText);
+                //m.snippets = snippetManager.parseSnippetFile(snippetText);
                 snippetManager.register(m.snippets, m.scope);
             }
         });
@@ -178,7 +194,7 @@ require("../config").defineOptions(Editor.prototype, "editor", {
     enableBasicAutocompletion: {
         set: function(val) {
             if (val) {
-                this.completers = completers
+                this.completers = completers;
                 this.commands.addCommand(Autocomplete.startCommand);
                 this.commands.addCommand(Autocomplete.startCommand111);
             } else {

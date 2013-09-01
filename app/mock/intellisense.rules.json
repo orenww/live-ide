@@ -23,6 +23,10 @@
    "keywords": {
       "keyword1":"keywords1",
       "keyword2":"keywords2"      
+   },
+
+   "snippets":{
+      "snippet1":"snippet oren\n \tselect mn from nnn\n"
    }
 }
 
