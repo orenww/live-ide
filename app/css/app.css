@@ -6406,6 +6406,8 @@ body {
   position: absolute;
   width: 80%;
   height: -webkit-calc(100% - 41px);
+  height: -ms-calc(100% - 41px);
+  height: calc(100% - 41px);
 }
 .row-fluid .span10.ui-editor {
   height: 100%;
@@ -6485,7 +6487,7 @@ div[data-tree-model] .tree-node .normal {
   padding: 0px 10px;
   background-image: url("../img/file.png");
   background-repeat: no-repeat;
-  cursor: normal;
+  cursor: default;
 }
 div[data-tree-model] .tree-node .attr {
   padding: 1px 10px;
