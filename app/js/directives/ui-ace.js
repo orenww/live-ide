@@ -22,7 +22,7 @@ vStudio.directives
 				}
 				
 				// trigger extension
-				var eee = ace.require("ace/ext/language_tools");
+				var langToolExt = ace.require("ace/ext/language_tools");
 				var editor = ace.edit("editor");
 				//editor.session.setMode("ace/mode/sql");
 				//editor.setTheme("ace/theme/tomorrow");
@@ -44,8 +44,6 @@ vStudio.directives
 					if(angular.isDefined(scope.change)){
 						scope.change(e, acee);
 					}
-
-					var aaa = editor.selection.getCursor();
 				};
 
 				// Boolean options
@@ -68,6 +66,8 @@ vStudio.directives
 				// plugins
 				if (angular.isDefined(attrs.extension)) {
 					scope.extension().setEditor(editor);
+
+					scope.extension().setLangToolExt(langToolExt);
 				}
 
 				// SET CONTENT

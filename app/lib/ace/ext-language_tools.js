@@ -37,69 +37,69 @@ var config = require("../config");
 
 var textCompleter = require("../autocomplete/text_completer");
 
-var verixKeyWordCompleter = {
-    getCompletions: function(editor, session, pos, prefix, line, callback) {
-        var tableColsMap = {};
-        var colsArray = [];
-        var tableArray = [];        
+// var verixKeyWordCompleter = {
+//     getCompletions: function(editor, session, pos, prefix, line, callback) {
+//         var tableColsMap = {};
+//         var colsArray = [];
+//         var tableArray = [];        
 
         
-        var new_table_obj = {};
-        if(typeof(Storage)!=="undefined"){         
+//         var new_table_obj = {};
+//         if(typeof(Storage)!=="undefined"){         
             
-            tableColsMap = sessionStorage.getObject('tables');
+//             tableColsMap = sessionStorage.getObject('tables');
 
-            var tmpObj = {};
+//             var tmpObj = {};
             
-            $.each( tableColsMap, function( key, value ) {
+//             $.each( tableColsMap, function( key, value ) {
                 
-                tableArray.push(key);
+//                 tableArray.push(key);
 
-                tmpObj = value;
+//                 tmpObj = value;
 
-                $.each( tmpObj.cols, function( key, value ) {
-                    colsArray.push(value);
-                });
+//                 $.each( tmpObj.cols, function( key, value ) {
+//                     colsArray.push(value);
+//                 });
 
-            });
-        }
+//             });
+//         }
         
-        var lineArray = line.split(" ");
+//         var lineArray = line.split(" ");
 
-        var lineArrayLength = lineArray.length;
-        if (lineArrayLength > 0){
-            // return w.lastIndexOf(prefix, 0) == 0;
+//         var lineArrayLength = lineArray.length;
+//         if (lineArrayLength > 0){
+//             // return w.lastIndexOf(prefix, 0) == 0;
             
-            if(lineArrayLength > 1){
+//             if(lineArrayLength > 1){
                 
-                var lastWord = lineArray[lineArrayLength - 2].toLowerCase();
+//                 var lastWord = lineArray[lineArrayLength - 2].toLowerCase();
 
-                if( lastWord == "from"){
-                    keywords = tableArray;    
-                }else if(lastWord == "select"){
-                    keywords = colsArray;                    
-                }               
+//                 if( lastWord == "from"){
+//                     keywords = tableArray;    
+//                 }else if(lastWord == "select"){
+//                     keywords = colsArray;                    
+//                 }               
                 
 
-                keywords = keywords.filter(function(w) {
-                    return w.lastIndexOf(prefix, 0) == 0;
-                });
+//                 keywords = keywords.filter(function(w) {
+//                     return w.lastIndexOf(prefix, 0) == 0;
+//                 });
 
-            }else{
-                keywords = [];
-            }
-        }
+//             }else{
+//                 keywords = [];
+//             }
+//         }
 
-        callback(null, keywords.map(function(word) {
-            return {
-                name: word,
-                value: word,
-                score: 0,
-                meta: "verix"
-            };
-        }));
-    }
-};
+//         callback(null, keywords.map(function(word) {
+//             return {
+//                 name: word,
+//                 value: word,
+//                 score: 0,
+//                 meta: "verix"
+//             };
+//         }));
+//     }
+// };
 
 var keyWordCompleter = {
     getCompletions: function(editor, session, pos, prefix,line, callback) {
@@ -140,8 +140,8 @@ var snippetCompleter = {
     }
 };
 
-//var completers = [verixKeyWordCompleter];
-var completers = [snippetCompleter, textCompleter, keyWordCompleter,verixKeyWordCompleter];
+//var completers = [];
+var completers = [snippetCompleter, textCompleter, keyWordCompleter];
 exports.addCompleter = function(completer) {
     completers.push(completer);
 };
@@ -181,7 +181,7 @@ var onChangeMode = function(e, editor) {
                 // var snippetText111 = m.snippetText;
                 // snippetText = newSnippetText + m.snippetText;
 
-                m.snippets = snippetManager.parseSnippetFile(snippetText);
+                m.snippets = snippetManager.parseSnippetFile(m.snippetText);
                 //m.snippets = snippetManager.parseSnippetFile(snippetText);
                 snippetManager.register(m.snippets, m.scope);
             }
@@ -1168,48 +1168,70 @@ var Autocomplete = function() {
     this.updateCompletions = function(keepPopupPosition, isVerix) {
         this.gatherCompletions(this.editor, function(err, results) {
 
-            var matches;
-            if(isVerix){
-                results = [
-                            {
-                                meta: "keyword",
-                                name: "table1",
-                                score: 0,
-                                value: "table1"
-                            },
-                            {
-                                meta: "keyword",
-                                name: "table2",
-                                score: 0,
-                                value: "table2"
-                            },
-                            {
-                                meta: "keyword",
-                                name: "table3",
-                                score: 0,
-                                value: "table3"
-                            },
-                            {
-                                meta: "keyword",
-                                name: "table4",
-                                score: 0,
-                                value: "table4"
-                            }
-                        ];
-                matches = results;
-            }else{
+            // var matches;
+            // if(isVerix){
+            //     results = [
+            //                 {
+            //                     meta: "keyword",
+            //                     name: "table1",
+            //                     score: 0,
+            //                     value: "table1"
+            //                 },
+            //                 {
+            //                     meta: "keyword",
+            //                     name: "table2",
+            //                     score: 0,
+            //                     value: "table2"
+            //                 },
+            //                 {
+            //                     meta: "keyword",
+            //                     name: "table3",
+            //                     score: 0,
+            //                     value: "table3"
+            //                 },
+            //                 {
+            //                     meta: "keyword",
+            //                     name: "table4",
+            //                     score: 0,
+            //                     value: "table4"
+            //                 }
+            //             ];
+            //     matches = results;
+            // }else{
                 matches = results && results.matches;    
-            }
+            // }
             
             if (!matches || !matches.length)
                 return this.detach();
 
             this.completions = new FilteredList(matches);
             this.completions.setFilter(results.prefix);
+
+
+            //array.sort(SortByName);
+            var array = this.completions.filtered;
+            array.sort(SortByName);
+
+
             this.openPopup(this.editor, keepPopupPosition);
             this.popup.setHighlight(results.prefix);
         }.bind(this));
     };
+
+    //This will sort your array
+    SortByName = function(a, b){
+      var aMeta = a.meta.toLowerCase();
+      var bMeta = b.meta.toLowerCase(); 
+
+      if(aMeta == "verix"){
+        return -1;
+      }
+      if(bMeta == "verix"){
+        return 1;
+      }
+      
+      return ((aMeta < bMeta) ? -1 : ((aMeta > bMeta) ? 1 : 0));
+    }
 
     this.cancelContextMenu = function() {
         var stop = function(e) {

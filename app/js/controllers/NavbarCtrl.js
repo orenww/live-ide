@@ -9,6 +9,8 @@ vStudio.controllers.controller('NavbarCtrl', function($scope, $routeParams, VqlS
 
 	$scope.saveSnippet = function() {
 		AceExtention.loadSnippets();
+
+		AceExtention.loadKeywords();
 	}
 
 });
