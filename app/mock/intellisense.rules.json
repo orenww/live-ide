@@ -25,8 +25,9 @@
       "keyword2":"keywords2"      
    },
 
-   "snippets":{
-      "snippet1":"snippet oren\n \tselect mn from nnn\n"
+   "snippets":{      
+      "snippet1":"snippet verixSnippetSelect*\n\tselect * from ${1:table}\n",
+      "snippet2":"snippet verixSnippetCol\n\t${1:name}   ${2:type}   ${3:default ''}   ${4:not null}\n"
    }
 }
 

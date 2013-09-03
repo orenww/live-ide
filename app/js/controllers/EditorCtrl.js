@@ -1,16 +1,16 @@
-vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlService, AceExtention) {
+vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlService, AceExtentionService) {
 	// $scope.treedata = VqlService.getData();
 
-	if (jQuery.isEmptyObject($scope.treedata)) {
-		VqlService.getData().then(function(d) {
-			$scope.treedata = VqlService.getTreeData();
+	// if (jQuery.isEmptyObject($scope.treedata)) {
+	// 	VqlService.getData().then(function(d) {
+	// 		$scope.treedata = VqlService.getTreeData();
 			
-			$scope.param = VqlService.getParam();
+	// 		$scope.param = VqlService.getParam();
 
-			// handle display vql prop or node
-			$scope.selectNodeById($routeParams.vqlid, $routeParams.vqlprop);
-		});
-	}
+	// 		// handle display vql prop or node
+	// 		$scope.selectNodeById($routeParams.vqlid, $routeParams.vqlprop);
+	// 	});
+	// }
  
 	$scope.getContent = function() {
 		// debugger;
@@ -22,7 +22,7 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlS
 	}
 
 	$scope.setEditorExtension = function() {
-		return AceExtention;
+		return AceExtentionService;
 	};
 
 	$scope.getEditorOptions = function() {
@@ -74,4 +74,13 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlS
 		$scope.treedata.selectedNode = node;
 	}
 
+	$scope.treedata = VqlService.getTreeData();
+			
+	$scope.param = VqlService.getParam();
+
+	// handle display vql prop or node
+
+	VqlService.getData().then(function(){
+		$scope.selectNodeById($routeParams.vqlid, $routeParams.vqlprop);
+	});
 });

@@ -8,8 +8,7 @@ vStudio.services.factory('VqlService', function($http, $q) {
 	var map = {};
 
 	var param;
-	var promise;
-
+	var promise = {};
 	var getData = function() {
 		if (!jQuery.isEmptyObject(promise)){
 			return promise;
@@ -93,6 +92,7 @@ vStudio.services.factory('VqlService', function($http, $q) {
 		});
 	}
 
+	getData();
 	// expose the service
 	return {
 		getTreeData: getTreeData

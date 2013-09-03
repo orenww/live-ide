@@ -1,7 +1,14 @@
-vStudio.services.service('AceExtention', function() {
+vStudio.services.service('AceExtentionService', function($http,$q, AutoCompleteService) {
+
+		var data = {};			
+		var promise;
+
 		// Add object properties like this
 		this.editor = null;
 		this.langToolExt = null;
+
+		var colsArray =	[];
+	    var tableArray = [];
 
 		//editor
 		this.setEditor = function (editor) {
@@ -24,8 +31,7 @@ vStudio.services.service('AceExtention', function() {
 		this.getLangToolExt = function () {
 			return this.langToolExt;
 		}
-
-		// Add methods like this.  All Person objects will be able to invoke this
+		
 		this.loadSnippets = function() {
 			var snippetManager = ace.require("ace/snippets").snippetManager;
 
@@ -33,64 +39,64 @@ vStudio.services.service('AceExtention', function() {
 			var id = mode.$id
 			if (id) {
 				var m = snippetManager.files[id];
+				var newSnippetText = "";
+				var currentSnippetText = m.snippetText;
 
-				var current = m.snippetText;
-				m.snippetText = this.editor.getValue() + current;
-				snippetManager.unregister(m.snippets);
-				m.snippets = snippetManager.parseSnippetFile(m.snippetText);
-				snippetManager.register(m.snippets);
-			}
+				getAutoCompleteData()
+					.then(function(){
+						var snippets = AutoCompleteService.getInteliData().snippets;
+						$.each( snippets, function( key, value ) {
+			                newSnippetText += value;
+			            });
+			        })
+			        .then(function(){
 
+						newSnippetText = currentSnippetText + newSnippetText;
 
-
-			// var snippetText;
-            // var newSnippetText = "";
-
-            // if(typeof(Storage)!=="undefined"){         
-        
-            //     var snippets = sessionStorage.getObject('snippets');
-                
-            //     $.each( snippets, function( key, value ) {
-            //         newSnippetText += value;
-            //     });
-            // }
-
-            // var snippetText111 = m.snippetText;
-            // snippetText = newSnippetText + m.snippetText;
-            //m.snippets = snippetManager.parseSnippetFile(snippetText);
-
-
+						m.snippetText = newSnippetText;
+						snippetManager.unregister(m.snippets);
+						m.snippets = snippetManager.parseSnippetFile(m.snippetText);
+						snippetManager.register(m.snippets);
+					});
+			}			
 		}
 
-		var verixKeyWordCompleter = {
-			getCompletions: function(editor, session, pos, prefix, callback) {
-				var line = editor.getSession().getLine(pos.row);
-		        var tableColsMap = {};
-		        var colsArray = [];
-		        var tableArray = [];        
+		var getAutoCompleteData = function(){
+            return AutoCompleteService.getData();            
+		}
 
-		        
-		        var new_table_obj = {};
-		        if(typeof(Storage)!=="undefined"){         
-		            
-		            tableColsMap = sessionStorage.getObject('tables');
+		var getIntellisnseData = function(){
+		
+			getAutoCompleteData()
+				.then(function(){
+					tableColsMap = AutoCompleteService.getInteliData().tables;
+						var tmpObj = {};
 
-		            var tmpObj = {};
-		            
-		            $.each( tableColsMap, function( key, value ) {
-		                
-		                tableArray.push(key);
+						$.each( tableColsMap, function( key, value ) {
+			                
+			            tableArray.push(key);
 
-		                tmpObj = value;
+		               tmpObj = value;
 
 		                $.each( tmpObj.cols, function( key, value ) {
 		                    colsArray.push(value);
 		                });
+	            	});
+		        });
+			}
 
-		            });
-		        }
+		var verixKeyWordCompleter = {			
+
+			getCompletions: function(editor, session, pos, prefix, callback) {
+				var line = editor.getSession().getLine(pos.row);
+		        //var tableColsMap = {};
+		        //var colsArray = [];
+		        //var tableArray = [];        
+		        var keywords = [];
 		        
-		        var lineArray = line.split(" ");
+		        var new_table_obj = {};
+			        
+				var lineArray = line.split(" ");
 
 		        var lineArrayLength = lineArray.length;
 		        if (lineArrayLength > 0){
@@ -115,6 +121,8 @@ vStudio.services.service('AceExtention', function() {
 		                keywords = [];
 		            }
 		        }
+				        	        
+		       
 
 		        callback(null, keywords.map(function(word) {
 		            return {
@@ -128,7 +136,9 @@ vStudio.services.service('AceExtention', function() {
 		};
 
 		this.loadKeywords = function(){
-			this.langToolExt.addCompleter(verixKeyWordCompleter);
+			getIntellisnseData();
+
+			this.langToolExt.addCompleter(verixKeyWordCompleter);			
 		}
 	}
 );
