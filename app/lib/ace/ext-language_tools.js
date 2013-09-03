@@ -37,72 +37,9 @@ var config = require("../config");
 
 var textCompleter = require("../autocomplete/text_completer");
 
-// var verixKeyWordCompleter = {
-//     getCompletions: function(editor, session, pos, prefix, line, callback) {
-//         var tableColsMap = {};
-//         var colsArray = [];
-//         var tableArray = [];        
-
-        
-//         var new_table_obj = {};
-//         if(typeof(Storage)!=="undefined"){         
-            
-//             tableColsMap = sessionStorage.getObject('tables');
-
-//             var tmpObj = {};
-            
-//             $.each( tableColsMap, function( key, value ) {
-                
-//                 tableArray.push(key);
-
-//                 tmpObj = value;
-
-//                 $.each( tmpObj.cols, function( key, value ) {
-//                     colsArray.push(value);
-//                 });
-
-//             });
-//         }
-        
-//         var lineArray = line.split(" ");
-
-//         var lineArrayLength = lineArray.length;
-//         if (lineArrayLength > 0){
-//             // return w.lastIndexOf(prefix, 0) == 0;
-            
-//             if(lineArrayLength > 1){
-                
-//                 var lastWord = lineArray[lineArrayLength - 2].toLowerCase();
-
-//                 if( lastWord == "from"){
-//                     keywords = tableArray;    
-//                 }else if(lastWord == "select"){
-//                     keywords = colsArray;                    
-//                 }               
-                
-
-//                 keywords = keywords.filter(function(w) {
-//                     return w.lastIndexOf(prefix, 0) == 0;
-//                 });
-
-//             }else{
-//                 keywords = [];
-//             }
-//         }
-
-//         callback(null, keywords.map(function(word) {
-//             return {
-//                 name: word,
-//                 value: word,
-//                 score: 0,
-//                 meta: "verix"
-//             };
-//         }));
-//     }
-// };
 
 var keyWordCompleter = {
-    getCompletions: function(editor, session, pos, prefix,line, callback) {
+    getCompletions: function(editor, session, pos, prefix, callback) {
         var keywords = session.$mode.$keywordList || [];        
 
         keywords = keywords.filter(function(w) {
@@ -120,7 +57,7 @@ var keyWordCompleter = {
 };
 
 var snippetCompleter = {
-    getCompletions: function(editor, session, pos, prefix,line, callback) {
+    getCompletions: function(editor, session, pos, prefix, callback) {
         var scope = snippetManager.$getScope(editor);
         var snippetMap = snippetManager.snippetMap;
         var completions = [];
@@ -166,23 +103,8 @@ var onChangeMode = function(e, editor) {
             if (m) {
                 snippetManager.files[id] = m;
 
-                // var snippetText;
-                // var newSnippetText = "";
-
-                // if(typeof(Storage)!=="undefined"){         
-            
-                //     var snippets = sessionStorage.getObject('snippets');
-                    
-                //     $.each( snippets, function( key, value ) {
-                //         newSnippetText += value;
-                //     });
-                // }
-
-                // var snippetText111 = m.snippetText;
-                // snippetText = newSnippetText + m.snippetText;
-
                 m.snippets = snippetManager.parseSnippetFile(m.snippetText);
-                //m.snippets = snippetManager.parseSnippetFile(snippetText);
+
                 snippetManager.register(m.snippets, m.scope);
             }
         });
@@ -1128,7 +1050,7 @@ var Autocomplete = function() {
 
         var matches = [];
         util.parForEach(editor.completers, function(completer, next) {
-            completer.getCompletions(editor, session, pos, prefix, line, function(err, results) {
+            completer.getCompletions(editor, session, pos, prefix, function(err, results) {
                 if (!err)
                     matches = matches.concat(results);
                 next();
@@ -1210,7 +1132,7 @@ var Autocomplete = function() {
 
             //array.sort(SortByName);
             var array = this.completions.filtered;
-            array.sort(SortByName);
+            array.sort(this.sortByName);
 
 
             this.openPopup(this.editor, keepPopupPosition);
@@ -1219,7 +1141,7 @@ var Autocomplete = function() {
     };
 
     //This will sort your array
-    SortByName = function(a, b){
+    this.sortByName = function(a, b){
       var aMeta = a.meta.toLowerCase();
       var bMeta = b.meta.toLowerCase(); 
 
@@ -1565,7 +1487,7 @@ ace.define('ace/autocomplete/text_completer', ['require', 'exports', 'module' , 
         return wordScores;
     }
 
-    exports.getCompletions = function(editor, session, pos, prefix,line, callback) {
+    exports.getCompletions = function(editor, session, pos, prefix, callback) {
         var wordScore = wordDistance(session, pos, prefix);
         var wordList = filterPrefix(prefix, Object.keys(wordScore));
         callback(null, wordList.map(function(word) {

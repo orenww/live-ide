@@ -40,10 +40,31 @@ vStudio.services.service('AceExtention', function() {
 				m.snippets = snippetManager.parseSnippetFile(m.snippetText);
 				snippetManager.register(m.snippets);
 			}
+
+
+
+			// var snippetText;
+            // var newSnippetText = "";
+
+            // if(typeof(Storage)!=="undefined"){         
+        
+            //     var snippets = sessionStorage.getObject('snippets');
+                
+            //     $.each( snippets, function( key, value ) {
+            //         newSnippetText += value;
+            //     });
+            // }
+
+            // var snippetText111 = m.snippetText;
+            // snippetText = newSnippetText + m.snippetText;
+            //m.snippets = snippetManager.parseSnippetFile(snippetText);
+
+
 		}
 
 		var verixKeyWordCompleter = {
-			getCompletions: function(editor, session, pos, prefix, line, callback) {
+			getCompletions: function(editor, session, pos, prefix, callback) {
+				var line = editor.getSession().getLine(pos.row);
 		        var tableColsMap = {};
 		        var colsArray = [];
 		        var tableArray = [];        
