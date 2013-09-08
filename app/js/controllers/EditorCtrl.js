@@ -1,4 +1,4 @@
-vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlService, AceExtentionService) {
+vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlService, AceSnippetsExtensionService, AceIntellisenseExtensionService) {
 	// $scope.treedata = VqlService.getData();
 
 	// if (jQuery.isEmptyObject($scope.treedata)) {
@@ -21,9 +21,17 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlS
 		}
 	}
 
-	$scope.setEditorExtension = function() {
-		return AceExtentionService;
+	$scope.getExtensions = function() {
+		return [AceSnippetsExtensionService, AceIntellisenseExtensionService];
 	};
+
+	// $scope.setSnippeteExtension = function() {
+	// 	return AceSnippetsExtensionService;
+	// };
+
+	// $scope.setIntellisenseExtension = function() {
+	// 	return AceIntellisenseExtensionService;
+	// };
 
 	$scope.getEditorOptions = function() {
 		return {
@@ -36,6 +44,10 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlS
 	}
 
 	$scope.onEditorChange = function(e, editor) {
+		if(!$scope.currentNode){
+			return;
+		}
+
 		var newValue = editor.getValue();
 		// console.log("e", e, "editor", editor);
 		if ($scope.currentNode.attrSelected) {

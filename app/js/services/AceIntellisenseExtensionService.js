@@ -1,27 +1,20 @@
-vStudio.services.service('AceExtentionService', function($http,$q, AutoCompleteService) {
+vStudio.services.service('AceIntellisenseExtensionService', function($http,$q, AutoCompleteService) {
 
-		var data = {};			
-		var promise;
+		var data = {};					
 
-		// Add object properties like this
-		this.editor = null;
+		// Add object properties like this		
 		this.langToolExt = null;
 
 		var colsArray =	[];
-	    var tableArray = [];
-
-		//editor
-		this.setEditor = function (editor) {
-			if (!this.editor) {
-				this.editor = editor;
-			}
-		}
-
-		this.getEditor = function () {
-			return this.editor;
-		}
+	    var tableArray = [];	    
 
 		//langToolExt
+		this.register = function(options) {
+			this.setLangToolExt(options.langToolExt);
+
+			this.langToolExt.addCompleter(verixIntellisenseCompleter);
+		};
+
 		this.setLangToolExt = function (langToolExt) {
 			if (!this.langToolExt) {
 				this.langToolExt = langToolExt;
@@ -30,62 +23,36 @@ vStudio.services.service('AceExtentionService', function($http,$q, AutoCompleteS
 
 		this.getLangToolExt = function () {
 			return this.langToolExt;
-		}
+		}		
 		
-		this.loadSnippets = function() {
-			var snippetManager = ace.require("ace/snippets").snippetManager;
-
-			var mode = this.editor.session.$mode;
-			var id = mode.$id
-			if (id) {
-				var m = snippetManager.files[id];
-				var newSnippetText = "";
-				var currentSnippetText = m.snippetText;
-
-				getAutoCompleteData()
-					.then(function(){
-						var snippets = AutoCompleteService.getInteliData().snippets;
-						$.each( snippets, function( key, value ) {
-			                newSnippetText += value;
-			            });
-			        })
-			        .then(function(){
-
-						newSnippetText = currentSnippetText + newSnippetText;
-
-						m.snippetText = newSnippetText;
-						snippetManager.unregister(m.snippets);
-						m.snippets = snippetManager.parseSnippetFile(m.snippetText);
-						snippetManager.register(m.snippets);
-					});
-			}			
-		}
 
 		var getAutoCompleteData = function(){
             return AutoCompleteService.getData();            
 		}
 
 		var getIntellisnseData = function(){
-		
 			getAutoCompleteData()
 				.then(function(){
 					tableColsMap = AutoCompleteService.getInteliData().tables;
-						var tmpObj = {};
+						var tmpObj = {};						 
 
 						$.each( tableColsMap, function( key, value ) {
-			                
-			            tableArray.push(key);
 
-		                tmpObj = value;
+							if(jQuery.inArray(key, tableArray) == -1){
+								
 
-		                $.each( tmpObj.cols, function( key, value ) {
-		                    colsArray.push(value);
-		                });
-	            	});
-		        });
-			}
+								tableArray.push(key);
+			                	tmpObj = value;
 
-		var verixKeyWordCompleter = {			
+			                	$.each( tmpObj.cols, function( key, value ) {
+				                    colsArray.push(value);
+			                	});	
+							}			                
+	            		});
+		        	});
+				}
+
+		var verixIntellisenseCompleter = {			
 
 			getCompletions: function(editor, session, pos, prefix, callback) {
 				var line = editor.getSession().getLine(pos.row);
@@ -130,10 +97,8 @@ vStudio.services.service('AceExtentionService', function($http,$q, AutoCompleteS
 		    }
 		};
 
-		this.loadKeywords = function(){
+		this.loadIntellisense = function(){
 			getIntellisnseData();
-
-			this.langToolExt.addCompleter(verixKeyWordCompleter);			
 		}
 	}
 );

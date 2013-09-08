@@ -12,7 +12,9 @@ vStudio.directives
 				change: '=',
 				code: '=',
 				uiAceOptions: '=',
-				extension: '='
+				extensions: '='
+				// snippetsExtension: '=',
+				// intellisenseExtension: '='
 			},
 
 			link: function(scope, element, attrs ) {
@@ -22,20 +24,22 @@ vStudio.directives
 				}
 				
 				// trigger extension
-				var langToolExt = ace.require("ace/ext/language_tools");
-				var editor = ace.edit("editor");
+				var requires = {
+					langToolExt: ace.require("ace/ext/language_tools"),
+					editor: ace.edit("editor")
+				}
 				//editor.session.setMode("ace/mode/sql");
 				//editor.setTheme("ace/theme/tomorrow");
 
 				// enable autocompletion and snippets
-				editor.setOptions({
+				requires.editor.setOptions({
 						enableBasicAutocompletion: true,
 						enableSnippets: true
 				});
 
 				var options = angular.extend({}, scope.uiAceOptions());
 
-				var acee = editor;
+				var acee = requires.editor;
 				var session = acee.getSession();
 
 				var onChange = function (e) {
@@ -63,12 +67,19 @@ vStudio.directives
 				if (angular.isString(options.fontSize)){
 					acee.setFontSize(options.fontSize);
 				}
-				// plugins
-				if (angular.isDefined(attrs.extension)) {
-					scope.extension().setEditor(editor);
 
-					scope.extension().setLangToolExt(langToolExt);
-				}
+				// plugins
+				for (var i = 0, extensions = scope.extensions(); i < extensions.length; i++) {
+					extensions[i].register(requires);
+				};
+
+				// if (angular.isDefined(attrs.snippetsExtension)) {
+				// 	scope.snippetsExtension().setEditor(editor);					
+				// }
+
+				// if (angular.isDefined(attrs.intellisenseExtension)) {					
+				// 	scope.intellisenseExtension().setLangToolExt(langToolExt);
+				// }
 
 				// SET CONTENT
 				scope.getEditor = function() {
@@ -78,7 +89,7 @@ vStudio.directives
 					return scope.getEditor().getValue() !== code;
 				}
 
-				editor.commands.addCommand({
+				acee.commands.addCommand({
 				    name: 'myCommand',
 				    bindKey: {win: 'Ctrl-M',  mac: 'Command-M'},
 				    exec: function(editor) {
@@ -89,16 +100,16 @@ vStudio.directives
 				});
 
 				// EVENTS
-				editor.on('change', onChange);
+				acee.on('change', onChange);
 
-				editor.onCursorChange()
+				acee.onCursorChange()
 
-				editor.getSession().selection.on('changeCursor', function(e) {
+				acee.getSession().selection.on('changeCursor', function(e) {
 					// console.log("bbb");
 					var bbb;
 				});
 
-				editor.getSession().selection.on('changeSelection', function(e) {
+				acee.getSession().selection.on('changeSelection', function(e) {
 					// console.log("ccc");
 					var ccc;
 				});

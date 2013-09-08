@@ -16,29 +16,7 @@ vStudio.services.factory('AutoCompleteService', function($http, $q) {
 
 	var parseIntelliData = function(response) {
 		// The then function here is an opportunity to modify the response
-		data = response.data;
-
-		// if(typeof(Storage)!=="undefined"){
-
-		// 	Storage.prototype.setObject = function(key, value) {
-		// 		this.setItem(key, JSON.stringify(value));
-		// 	}
-
-		// 	Storage.prototype.getObject = function(key) {
-		// 		return JSON.parse(this.getItem(key));
-		// 	}				
-			
-		//   	sessionStorage.setObject('kewords',data.keywords);
-		//   	sessionStorage.setObject('tables',data.tables);
-		//   	sessionStorage.setObject('snippets',data.snippets);
-		  	
-		  	
-		//   	// sessionStorage.setObject = data.keywords.keyword1;
-		//   	// sessionStorage.tables = data.tables.table1;
-
-		// }else{
-		//   // Sorry! No web storage support..
-		// }
+		data = response.data;		
 
 		return data;
 	}
@@ -46,6 +24,7 @@ vStudio.services.factory('AutoCompleteService', function($http, $q) {
 	var getInteliData = function(){
 		return data;
 	}
+	
 	getData();
 
 	// expose the service
