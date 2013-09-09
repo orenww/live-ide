@@ -1,4 +1,4 @@
-vStudio.controllers.controller('NavbarCtrl', function($scope, $routeParams, VqlService, AceSnippetsExtensionService, AceIntellisenseExtensionService) {
+vStudio.controllers.controller('NavbarCtrl', function($scope, $routeParams, VqlService,AceSnippetsExtensionService,AceIntellisenseExtensionService) {
 	// $scope.treedata = VqlService.getData();
 	$scope.inSaveMode = false;
 	

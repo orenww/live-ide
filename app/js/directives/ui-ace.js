@@ -73,13 +73,9 @@ vStudio.directives
 					extensions[i].register(requires);
 				};
 
-				// if (angular.isDefined(attrs.snippetsExtension)) {
-				// 	scope.snippetsExtension().setEditor(editor);					
 				// }
 
 				// if (angular.isDefined(attrs.intellisenseExtension)) {					
-				// 	scope.intellisenseExtension().setLangToolExt(langToolExt);
-				// }
 
 				// SET CONTENT
 				scope.getEditor = function() {
