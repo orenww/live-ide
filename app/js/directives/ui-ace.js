@@ -121,7 +121,7 @@ vStudio.directives
 			controller: function ($scope) {
 				$scope.$watch('code', function (newCode, oldCode) {
 						// console.log('newCode', newCode)
-						if (newCode && newCode.vqls.dataSelection) {
+						if (newCode && !jQuery.isEmptyObject(newCode) && newCode.vqls.dataSelection) {
 
 							if ($scope.hasChanged(newCode.vqls.dataSelection)) {
 								var newCodeToInsert = newCode.attrSelected && angular.isDefined(newCode.attrSelected) ? 

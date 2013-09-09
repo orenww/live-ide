@@ -22,16 +22,7 @@ vStudio.services.factory('VqlService', function($http, $q) {
 			if (data.id) {
 				treeData.push(data);
 			}
-			// The return value gets picked up by the then in the controller.
-			// treeData = treeData.concat(jQuery.map(data, function (value, key) {
-				
-			// 	if(key == "children"){
-			// 		return value;
-			// 	}
-			// 	if(key == "defaultParams"){
-			// 		param = value;		
-			// 	}				
-			// }));
+
 			return treeData;
 		});
 		// Return the promise to the controller
@@ -92,7 +83,55 @@ vStudio.services.factory('VqlService', function($http, $q) {
 		});
 	}
 
+	var currentNode = {};
+	var setSelectedNode = function(newNode) {
+	    currentNode = newNode;
+	}
+
+	var getSelectedNode = function() {
+	    return currentNode;
+	}	
+
+	var selectNodeById = function (id,prop) {
+		if (!id) {
+			return;
+		}
+
+		var node = getById(id);
+
+		// handle property leaf selection
+		if (angular.isDefined(prop)) {
+        	// select the selected node
+			node.attrSelected = prop;
+			selectNode(node);
+			return;
+		}
+
+		// Mark the node as the selected one
+		node.selected = 'selected';
+		node.attrSelected = undefined;	
+
+		selectNode(node);
+	}   
+
+	var selectNode = function(node){
+		var data = getTreeData();
+		if (data.selectedNode) {
+			// Nullify the previous selected node
+			data.selectedNode.selected = undefined;
+			if (data.selectedNode.id !== node.id) {
+				data.selectedNode.attrSelected = undefined;
+			}
+		}
+
+		// Set the selected node
+		data.selectedNode = node;
+		
+		currentNode = node;
+	}
+
 	getData();
+
 	// expose the service
 	return {
 		getTreeData: getTreeData
@@ -101,5 +140,8 @@ vStudio.services.factory('VqlService', function($http, $q) {
 		, getMap:getMap
 		, getParam:getParam
 		, save: saveCode
+		, setSelectedNode: setSelectedNode
+		, getSelectedNode: getSelectedNode
+		, selectNodeById: selectNodeById
 	}
 });

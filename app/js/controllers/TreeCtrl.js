@@ -1,12 +1,9 @@
-vStudio.controllers.controller('TreeCtrl', function($scope, VqlService){
+vStudio.controllers.controller('TreeCtrl', function($scope,$routeParams ,VqlService){
 
-    $scope.treedata = VqlService.getData();
+	//Treedata hold the data of the tree directive
+	$scope.treedata = VqlService.getTreeData();
 
-    $scope.$watch( 'currentNode', function( newObj, oldObj ) {
-        if( $scope.currentNode && angular.isObject($scope.currentNode) ) {
-            console.log( 'Node Selected!!' );
-            console.log( $scope.currentNode );
-
-        }
-    }, false);
+	VqlService.getData().then(function(){
+		VqlService.selectNodeById($routeParams.vqlid, $routeParams.vqlprop);
+	}); 
 })

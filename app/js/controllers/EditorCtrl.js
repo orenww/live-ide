@@ -1,18 +1,8 @@
 vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlService, AceSnippetsExtensionService, AceIntellisenseExtensionService) {
-	// $scope.treedata = VqlService.getData();
+	
 
-	// if (jQuery.isEmptyObject($scope.treedata)) {
-	// 	VqlService.getData().then(function(d) {
-	// 		$scope.treedata = VqlService.getTreeData();
-			
-	// 		$scope.param = VqlService.getParam();
-
-	// 		// handle display vql prop or node
-	// 		$scope.selectNodeById($routeParams.vqlid, $routeParams.vqlprop);
-	// 	});
-	// }
- 
 	$scope.getContent = function() {
+		$scope.currentNode = VqlService.getSelectedNode();
 		// debugger;
 		// var vqlId = $scope.currentNode ? $scope.currentNode.label : $routeParams.vqlId;
 		if ($scope.currentNode) {
@@ -23,15 +13,7 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlS
 
 	$scope.getExtensions = function() {
 		return [AceSnippetsExtensionService, AceIntellisenseExtensionService];
-	};
-
-	// $scope.setSnippeteExtension = function() {
-	// 	return AceSnippetsExtensionService;
-	// };
-
-	// $scope.setIntellisenseExtension = function() {
-	// 	return AceIntellisenseExtensionService;
-	// };
+	};	
 
 	$scope.getEditorOptions = function() {
 		return {
@@ -55,44 +37,5 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlS
 		}
 		$scope.currentNode.vqls.dataSelection = newValue;
 	}
-
-	$scope.selectNodeById = function(id, prop) {
-		if (!id) {
-			return;
-		}
-		// handle property leaf selection
-		if (angular.isDefined(prop)) {
-        	// select the selected node
-			$scope.currentNode = VqlService.getById(id);
-			$scope.currentNode.attrSelected = prop;
-			$scope.updateSelectedNode($scope.currentNode);
-			return;
-		}
-		// for the editor to change
-		$scope.currentNode = VqlService.getById(id);
-		$scope.currentNode.selected = 'selected';
-		$scope.currentNode.attrSelected = undefined;
-		// for the tree view
-		$scope.updateSelectedNode($scope.currentNode);
-	}
-
-	$scope.updateSelectedNode = function (node) {
-		if ($scope.treedata.selectedNode) {
-			$scope.treedata.selectedNode.selected = undefined;
-			if ($scope.treedata.selectedNode.id !== node.id) {
-				$scope.treedata.selectedNode.attrSelected = undefined;
-			}
-		}
-		$scope.treedata.selectedNode = node;
-	}
-
-	$scope.treedata = VqlService.getTreeData();
-			
-	$scope.param = VqlService.getParam();
-
-	// handle display vql prop or node
-
-	VqlService.getData().then(function(){
-		$scope.selectNodeById($routeParams.vqlid, $routeParams.vqlprop);
-	});
+	
 });

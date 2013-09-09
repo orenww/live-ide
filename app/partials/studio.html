@@ -1,7 +1,7 @@
 
 <article class="row-fluid fluid-height">
 
-  <section class="fluid-height span2 sidebar">
+  <section class="fluid-height span2 sidebar" ng-controller="TreeCtrl">
     <!--
       [TREE attribute]
       angular-treeview: the treeview directive
@@ -27,7 +27,7 @@
     </div>  
   </section>
 
-  <section class="fluid-height span10 ui-editor">
+  <section class="fluid-height span10 ui-editor" ng-controller="EditorCtrl">
       <ui-ace 
         code="getContent()"
         ui-ace-options="getEditorOptions"
