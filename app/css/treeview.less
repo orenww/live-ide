@@ -7,6 +7,7 @@
 	overflow: auto;
 	box-shadow: inset 0px 3px 8px #aaa;
 }
+
 // from angular.treeview.css
 div[data-angular-treeview] {
   /* prevent user selection */
@@ -53,7 +54,7 @@ div[data-tree-model] {
 
 	.tree-node {
 		position: relative;
-		padding: 0 0 0 20px;
+		// padding: 0 0 0 20px;
 		line-height: 25px;
 		font-size: 14px;
 
@@ -102,6 +103,21 @@ div[data-tree-model] {
 		i, div {
 		  cursor: pointer;
 		}
+
+		@nodeLevelIterations: 10;
+		// tree levels
+		.nodeLevelIterator (@nodeLevel) when (@nodeLevel > 0) {
+			.node-level-@{nodeLevel} {
+		        // resulting css
+		        @level: @nodeLevel * 1.5;
+		        padding-left: ~"@{level}rem";
+		    }
+		    .nodeLevelIterator(@nodeLevel - 1);
+		}
+
+		.nodeLevelIterator(0) {};
+
+		.nodeLevelIterator(@nodeLevelIterations);
 	}
 	.tree-node-label {
 		padding: 3px 3px 3px 5px;
@@ -110,4 +126,5 @@ div[data-tree-model] {
 			color: black;
 		}
 	}
+
 }

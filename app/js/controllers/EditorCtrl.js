@@ -1,4 +1,4 @@
-vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlService, AceSnippetsExtensionService, AceIntellisenseExtensionService) {
+vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlService, AceSnippetsExtensionService, AceIntellisenseExtensionService,VqlResultsService) {
 	
 
 	$scope.getContent = function() {
@@ -38,4 +38,10 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlS
 		$scope.currentNode.vqls.dataSelection = newValue;
 	}
 	
+	VqlResultsService.fetch().then(function(){
+		$scope.myData = VqlResultsService.getData();
+	});
+
+    $scope.gridOptions = { data: 'myData' };
+
 });

@@ -16,33 +16,6 @@
  *
  * Designed and built with all the love in the world by @mdo and @fat.
  */
-.clearfix {
-  *zoom: 1;
-}
-.clearfix:before,
-.clearfix:after {
-  display: table;
-  content: "";
-  line-height: 0;
-}
-.clearfix:after {
-  clear: both;
-}
-.hide-text {
-  font: 0/0 a;
-  color: transparent;
-  text-shadow: none;
-  background-color: transparent;
-  border: 0;
-}
-.input-block-level {
-  display: block;
-  width: 100%;
-  min-height: 30px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
 article,
 aside,
 details,
@@ -5279,6 +5252,33 @@ a.badge:focus {
  *
  * Designed and built with all the love in the world by @mdo and @fat.
  */
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+.hide-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+.input-block-level {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 @-ms-viewport {
   width: device-width;
 }
@@ -6403,11 +6403,10 @@ body {
   background: #999;
 }
 #editor {
-  position: absolute;
   width: 80%;
-  height: -webkit-calc(100% - 41px);
-  height: -ms-calc(100% - 41px);
-  height: calc(100% - 41px);
+  height: -webkit-calc(75% - 41px);
+  height: -ms-calc(75% - 41px);
+  height: calc(75% - 41px);
 }
 .row-fluid .span10.ui-editor {
   height: 100%;
@@ -6467,7 +6466,6 @@ div[data-tree-model] .tree-node-attr {
 }
 div[data-tree-model] .tree-node {
   position: relative;
-  padding: 0 0 0 20px;
   line-height: 25px;
   font-size: 14px;
 }
@@ -6509,9 +6507,44 @@ div[data-tree-model] .tree-node i,
 div[data-tree-model] .tree-node div {
   cursor: pointer;
 }
+div[data-tree-model] .tree-node .node-level-10 {
+  padding-left: 15rem;
+}
+div[data-tree-model] .tree-node .node-level-9 {
+  padding-left: 13.5rem;
+}
+div[data-tree-model] .tree-node .node-level-8 {
+  padding-left: 12rem;
+}
+div[data-tree-model] .tree-node .node-level-7 {
+  padding-left: 10.5rem;
+}
+div[data-tree-model] .tree-node .node-level-6 {
+  padding-left: 9rem;
+}
+div[data-tree-model] .tree-node .node-level-5 {
+  padding-left: 7.5rem;
+}
+div[data-tree-model] .tree-node .node-level-4 {
+  padding-left: 6rem;
+}
+div[data-tree-model] .tree-node .node-level-3 {
+  padding-left: 4.5rem;
+}
+div[data-tree-model] .tree-node .node-level-2 {
+  padding-left: 3rem;
+}
+div[data-tree-model] .tree-node .node-level-1 {
+  padding-left: 1.5rem;
+}
 div[data-tree-model] .tree-node-label {
   padding: 3px 3px 3px 5px;
 }
 div[data-tree-model] .tree-node-label:hover {
   color: black;
+}
+.gridStyle {
+  border: 1px solid #d4d4d4;
+  width: 100%;
+  height: 220px;
 }

@@ -38,7 +38,8 @@
 			replace: true,
 			scope: {
 				node: '=',
-				iconClick: '&'
+				iconClick: '&',
+				level: '='
 			},
 			templateUrl: 'lib/angular.treeview/tree-node.html'
 		};
@@ -80,12 +81,20 @@
 
 				var treeFilter = attrs.nodeFilter || 'treeFilter';
 
+				var level;
+				if (!attrs.level) {
+					level = 0;
+				}
+				if (attrs.level) {
+					level = parseInt(attrs.level) + 1;
+				}
+
 				var template = 
 				'<ul class="unstyled">' + 
 					'<li data-ng-repeat="node in ' + treeModel + ' | filter:' + treeFilter + '" class="tree-node">' + 
-						'<div tree-node node="node" icon-click="selectNodeHead(node)"></div>'+
+						'<div tree-node node="node" icon-click="selectNodeHead(node)" level="' + level + '"></div>'+
 						'<div tree-node-props node="node" toggle="showNodeProperties(node)" tree-node-props></div>' +
-						'<div data-ng-hide="node.collapsed" data-tree-model="node.' + nodeChildren + '" data-node-id=' + nodeId + ' data-node-label=' + nodeLabel + ' data-node-children=' + nodeChildren + '></div>' + 
+						'<div data-ng-hide="node.collapsed" level="' + level + '" data-tree-model="node.' + nodeChildren + '" data-node-id=' + nodeId + ' data-node-label=' + nodeLabel + ' data-node-children=' + nodeChildren + '></div>' + 
 					'</li>' + 
 				'</ul>';
 				
@@ -106,6 +115,12 @@
 							_node.showAttrs = !_node.showAttrs;
 						}
 					}
+
+					var hasChildren = scope.node && scope.node.children;
+					// if (hasChildren) {
+						// counter++;
+					// }
+					// scope.node.level = counter;
 					//Rendering template created.
 					element.html(null).append( $compile( template )( scope ) );
 				}

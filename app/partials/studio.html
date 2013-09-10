@@ -2,15 +2,8 @@
 <article class="row-fluid fluid-height">
 
   <section class="fluid-height span2 sidebar" ng-controller="TreeCtrl">
-    <!--
-      [TREE attribute]
-      angular-treeview: the treeview directive
-      tree-model : the tree model on $scope.
-      node-id : each node's id
-      node-label : each node's label
-      node-children: each node's children
-    -->
 
+    <!-- TREE VIEW -->
       <div class="tree-filter container">
         <input type="text" ng-model="treeFilter" placeholder="find vqls">
       </div>
@@ -24,10 +17,14 @@
         data-node-children="children"
         data-node-attrs="vqls" 
         data-node-filter="treeFilter">
-    </div>  
+    </div> 
+
   </section>
 
   <section class="fluid-height span10 ui-editor" ng-controller="EditorCtrl">
+
+    
+      <!-- EDITOR -->
       <ui-ace 
         code="getContent()"
         ui-ace-options="getEditorOptions"
@@ -36,6 +33,10 @@
         extensions="getExtensions"        
       >    
       </ui-ace>
+
+      <!-- GRID -->
+      <div class="gridStyle" ng-grid="gridOptions"></div>
+
   </section>
 
 </article>
