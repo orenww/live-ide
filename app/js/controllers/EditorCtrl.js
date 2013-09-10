@@ -1,4 +1,4 @@
-vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlService, AceExtention) {
+vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlService, AceExtention, VqlResultsService) {
 	// $scope.treedata = VqlService.getData();
 
 	if (jQuery.isEmptyObject($scope.treedata)) {
@@ -73,5 +73,11 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlS
 		}
 		$scope.treedata.selectedNode = node;
 	}
+
+	VqlResultsService.fetch().then(function(){
+		$scope.myData = VqlResultsService.getData();
+	});
+
+    $scope.gridOptions = { data: 'myData' };
 
 });
