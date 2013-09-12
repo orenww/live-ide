@@ -3,15 +3,16 @@ vStudio.directives
         return {
             restrict: 'E',
             scope: {
-                items: '=dropdownData',
-                doSelect: '&selectVal',
-                selectedItem: '=preselectedItem'
+                items:          '=dropdownData',
+                selectedItem:   '=preselectedItem',
+                doSelect:       '&selectVal',
+                handleClick:    '=handleClick'              
             },
             link: function (scope, element, attrs) {
 
-                scope.items = [{id: 1,name: "Low"}, {id: 2,name: "Normal"}, {id: 3,name: "High"},
-                                 {id: 4,name: "Urgent"}, {id: 5,name: "Immediate"}];
-                scope.selectedItem = 3;
+                // scope.items = [{id: 1,name: "Low"}, {id: 2,name: "Normal"}, {id: 3,name: "High"},
+                //                  {id: 4,name: "Urgent"}, {id: 5,name: "Immediate"}];
+                //scope.selectedItem = 3;
 
 
 
@@ -19,7 +20,7 @@ vStudio.directives
                 switch (attrs.menuType) {
                     case "button":
                         html += '<div class="btn-group">' + 
-                                    '<button class="btn button-label btn-info" data-ng-click="clicked(item)"">Action</button>' +
+                                    '<button class="btn button-label btn-info" data-ng-click="buttonClicked(item)"">Action</button>' +
                                     '<button class="btn btn-info dropdown-toggle" data-toggle="dropdown">' + 
                                         '<span class="caret"></span>' + 
                                     '</button>';
@@ -54,14 +55,16 @@ vStudio.directives
                             $('a.dropdown-toggle', element).html('<b class="caret"></b> ' + item.name);
                             break;
                     }
+
                     scope.doSelect({
                         selectedVal: item.id
                     });
                 };
                 scope.selectVal(scope.bSelectedItem);
 
-                scope.clicked = function (item) {
+                scope.buttonClicked = function () {
                     console.log(scope.bSelectedItem);
+                    scope.handleClick(scope.bSelectedItem);
                 }
             }
         };
