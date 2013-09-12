@@ -34,6 +34,43 @@
       >    
       </ui-ace>
 
+    <bs-dropdown 
+        data-menu-type="button" 
+        select-val="selected_status = selectedVal"
+        preselected-item="selected_status" 
+        data-dropdown-data="statuses">    
+    </bs-dropdown>  
+    <!-- <div class="btn-group">
+        <a class="btn dropdown-toggle">
+          Actions
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a>Action 1</a></li>
+            <li><a>Action 2</a></li>
+        </ul>
+        <a class="btn dropdown-toggle">
+          Actions
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a>Action 1</a></li>
+            <li><a>Action 2</a></li>
+        </ul>
+    </div> -->
+
+    <!--   <li class="dropdown">
+       <a class="dropdown-toggle">My Dropdown Menu</a>
+       <ul class="dropdown-menu">
+         <li ng-repeat="choice in dropChoices">
+           <a ng-href="{{choice.href}}">{{choice.text}}</a>
+         </li>
+       </ul>
+     </li> -->
+
+<!--       <buttons-radio class="btn-group" data-toggle="buttons-radio" model='myModel' options='myOptions'>
+      </buttons-radio> -->
+
       <!-- GRID -->
       <div class="gridStyle" ng-grid="gridOptions"></div>
 

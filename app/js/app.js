@@ -7,7 +7,7 @@ var vStudio = angular.module('vStudio', [
 	'vStudio.directives',
 	'vStudio.controllers',
 	'angularTreeview',
-	'$strap.directives',
+	'ui.bootstrap',	
 	'ngGrid'
 ]);
 vStudio.filters = angular.module('vStudio.filters', []);
