@@ -49,7 +49,13 @@ vStudio.directives
                     scope.bSelectedItem = item;
                     switch (attrs.menuType) {
                         case "button":
-                            $('button.button-label', element).html(item.name);
+                            var displayText = "";
+                            if(item.id == "0"){
+                                displayText = "Debug";
+                            }else{
+                                displayText = "Debug from step - " + item.name;
+                            }
+                            $('button.button-label', element).html(displayText);
                             break;
                         default:
                             $('a.dropdown-toggle', element).html('<b class="caret"></b> ' + item.name);

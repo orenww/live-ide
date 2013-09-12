@@ -92,6 +92,10 @@ vStudio.services.factory('VqlService', function($http, $q) {
 	    return currentNode;
 	}	
 
+	var getSelectionData = function(){
+		return getSelectedNode().vqls.dataSelection;
+	}
+
 	var selectNodeById = function (id,prop) {
 		if (!id) {
 			return;
@@ -143,5 +147,6 @@ vStudio.services.factory('VqlService', function($http, $q) {
 		, setSelectedNode: setSelectedNode
 		, getSelectedNode: getSelectedNode
 		, selectNodeById: selectNodeById
+		, getSelectionData: getSelectionData
 	}
 });
