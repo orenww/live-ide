@@ -1,0 +1,23 @@
+<button type="button" class="btn btn-primary" tooltip="Run">
+	<i class="icon-play iconAwesome"></i>Run
+</button>  
+
+<form class="form-inline inline">
+	<button type="submit" class="btn btn-primary" tooltip="Debug">
+		 <i class="icon-bug iconAwesome"></i>Debug
+	</button>
+	<input type="number" class="input-small" min="0" placeholder="Steps" tooltip="Input number of steps">
+
+	<div class="btn-group">
+		<button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="'Left'" tooltip="Steps from start">
+			<i class="icon-arrow-down iconAwesome"></i>Start
+		</button>
+		<button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="'Right'" tooltip="Steps from end">
+			<i class="icon-arrow-up iconAwesome"></i>End
+		</button>
+	</div>          
+</form>        
+
+<button type="button" class="btn btn-primary" tooltip="Next step">
+	<i class="icon-step-forward iconAwesome"></i>Next
+</button>

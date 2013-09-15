@@ -34,16 +34,8 @@
       </ui-ace>
 
       <div ng-controller="DropdownCtrl">
-        <bs-dropdown             
-            data-menu-type="button"
-            select-val="setSelectedItem(selectedVal)"
-            preselected-item="selectedItem" 
-            data-dropdown-data="getDropdownData()"  
-            handle-click="handleClick"
-        >
-        </bs-dropdown>
-        <!-- &nbsp; Selected Value : {{selected_status}}  --> 
-
+        
+        <div ng-include="'partials/debugger.html'"></div>
 
         <!-- GRID -->
         <div class="gridStyle" ng-grid="gridOptions"></div>
