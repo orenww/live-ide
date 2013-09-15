@@ -4,7 +4,7 @@ vStudio.controllers.controller('DropdownCtrl', function($scope, $routeParams,Vql
     //                              {id: 4,name: "Urgent"}, {id: 5,name: "Immediate"}];
 
     $scope.items = [{id: 0,name: "Standard"},{id: 1,name: "1"}, {id: 2,name: "2"}, {id: 3,name: "3"},{id: 4,name: "4"}, {id: 5,name: "5"}];
-    $scope.selectedItem = 3;
+    $scope.selectedItem = 0;
 
     //$scope.selected_status = 3;
 
