@@ -7427,9 +7427,9 @@ body {
 }
 #editor {
   width: 80%;
-  height: -webkit-calc(75% - 41px);
-  height: -ms-calc(75% - 41px);
-  height: calc(75% - 41px);
+  height: -webkit-calc(60% - 41px);
+  height: -ms-calc(60% - 41px);
+  height: calc(60% - 41px);
 }
 .row-fluid .span10.ui-editor {
   height: 100%;
@@ -7576,4 +7576,8 @@ div[data-tree-model] .tree-node-label:hover {
 }
 .iconAwesome {
   padding-right: 3px;
+}
+.debugger-editor {
+  height: 220px;
+  width: 80%;
 }

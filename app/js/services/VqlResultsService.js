@@ -1,14 +1,15 @@
 vStudio.services.factory('VqlResultsService', function($http){
 	var data = {};	
 	var promise;
-	var debugData = {};
+	var debugResultData = {};
+	var runResultData = {};
 
 	var fetch = function() {
 		if (!jQuery.isEmptyObject(promise)){
 			return promise;
 		}
 		// $http returns a promise, which has a then function, which also returns a promise
-		promise = $http.get('mock/vql-debug.json').then(function (response) {
+		promise = $http.get('mock/vql-run.json').then(function (response) {
 			// The then function here is an opportunity to modify the response
 			data = response.data;
 		});
@@ -21,20 +22,29 @@ vStudio.services.factory('VqlResultsService', function($http){
 	};
 
 	var debug = function(vql,step) {
-		// if (!jQuery.isEmptyObject(promise)){
-		// 	return promise;
-		// }
-		// $http returns a promise, which has a then function, which also returns a promise
 		promise = $http.get('mock/vql-debug.json').then(function (response) {
 			// The then function here is an opportunity to modify the response
-			debugData = response.data;
+			debugResultData = response.data;
 		});
 		// Return the promise to the controller
 		return promise;
 	};
 
 	var getDebugData = function () {
-		return debugData;
+		return debugResultData;
+	};
+
+	var run = function() {
+		promise = $http.get('mock/vql-run.json').then(function (response) {
+			// The then function here is an opportunity to modify the response
+			runResultData = response.data;
+		});
+		// Return the promise to the controller
+		return promise;
+	};
+
+	var getRunData = function () {
+		return runResultData;
 	};
 
 	fetch();
@@ -43,6 +53,8 @@ vStudio.services.factory('VqlResultsService', function($http){
 		fetch: fetch,
 		getData: getData,
 		debug: debug,
-		getDebugData: getDebugData
+		getDebugData: getDebugData,
+		run:run,
+		getRunData: getRunData
 	}
 });

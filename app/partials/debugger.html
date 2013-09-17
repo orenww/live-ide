@@ -1,5 +1,5 @@
 <div ng-controller="DebuggerCtrl">
-	<button type="button" class="btn btn-primary" tooltip="Run" ng-click="run">
+	<button type="button" class="btn btn-primary" tooltip="Run" ng-click="run()">
 		<i class="icon-play iconAwesome"></i>Run
 	</button>  
 
@@ -17,13 +17,36 @@
 			<button type="button" class="btn btn-primary" ng-model="$parent.direction" btn-radio="'fromEnd'" tooltip="Steps from end">
 				<i class="icon-arrow-up iconAwesome"></i>End
 			</button>
-		</div>          
+		</div> 		         
 	</form>        
 
-	<button type="button" class="btn btn-primary" tooltip="Next step">
+	<button type="button" 
+			class="btn btn-primary" 
+			tooltip="Next step" 
+			tooltip-trigger="" 
+			ng-click="next()" ng-disabled="$parent.isNextDisabled"
+		>
 		<i class="icon-step-forward iconAwesome"></i>Next
 	</button>
 
-	<!-- GRID -->
-	<div class="gridStyle" ng-grid="gridOptions"></div>
+	<div>	  
+	  <tabset>
+	    <tab heading="grid" active="runState.active">
+	    	<!-- GRID -->
+			<div class="gridStyle" ng-grid="gridOptions"></div>
+	    	
+	    </tab>
+	    <tab heading="sql" active="debugState.active">	
+	    	<ui-ace 	    		
+	    		class="debugger-editor"
+		        code="getContent()"
+		        ui-ace-options="getEditorOptions"
+		        content-attr="id"		        
+		        editor-id="debugResultViewer"
+	      	>    
+      		</ui-ace>      	      
+	    </tab>
+	  </tabset>
+
+	</div>	
 </div>

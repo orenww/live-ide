@@ -6,19 +6,21 @@ vStudio.directives
 		return {
 			restrict: 'EA',
 			// require: '?ngModel',
-			template: '<div id="editor" data-dummy-action=""></div>',
+			template: '<div id="" data-dummy-action=""></div>',
 			replace: true,
 			scope: {
 				change: '=',
 				code: '=',
 				uiAceOptions: '=',
-				extensions: '='
+				extensions: '=',
+				editorId: '@'
 				// snippetsExtension: '=',
 				// intellisenseExtension: '='
 			},
 
 			link: function(scope, element, attrs ) {
-
+				element.attr("id", attrs.editorId);
+				
 				if(scope.contentAttr == null){
 					scope.contentAttr = attrs.contentAttr || 'vql';	
 				}
@@ -26,7 +28,7 @@ vStudio.directives
 				// trigger extension
 				var requires = {
 					langToolExt: ace.require("ace/ext/language_tools"),
-					editor: ace.edit("editor")
+					editor: ace.edit(attrs.editorId)
 				}
 				//editor.session.setMode("ace/mode/sql");
 				//editor.setTheme("ace/theme/tomorrow");
@@ -37,7 +39,10 @@ vStudio.directives
 						enableSnippets: true
 				});
 
-				var options = angular.extend({}, scope.uiAceOptions());
+				var options = {};
+				if(scope.uiAceOptions){
+					options = angular.extend({}, scope.uiAceOptions());					
+				}
 
 				var acee = requires.editor;
 				var session = acee.getSession();
@@ -69,9 +74,11 @@ vStudio.directives
 				}
 
 				// plugins
-				for (var i = 0, extensions = scope.extensions(); i < extensions.length; i++) {
-					extensions[i].register(requires);
-				};
+				if(extensions){					
+					for (var i = 0, extensions = scope.extensions(); i < extensions.length; i++) {
+						extensions[i].register(requires);
+					}
+				}
 
 				// }
 
@@ -121,14 +128,14 @@ vStudio.directives
 			controller: function ($scope) {
 				$scope.$watch('code', function (newCode, oldCode) {
 						// console.log('newCode', newCode)
-						if (newCode && !jQuery.isEmptyObject(newCode) && newCode.vqls.dataSelection) {
+						if (newCode && !jQuery.isEmptyObject(newCode)) {
 
-							if ($scope.hasChanged(newCode.vqls.dataSelection)) {
-								var newCodeToInsert = newCode.attrSelected && angular.isDefined(newCode.attrSelected) ? 
-									newCode.vqls[newCode.attrSelected] :
-									newCode.vqls.dataSelection;
+							if ($scope.hasChanged(newCode)) {
+								// var newCodeToInsert = newCode.attrSelected && angular.isDefined(newCode.attrSelected) ? 
+								// 	newCode.vqls[newCode.attrSelected] :
+								// 	newCode.vqls.dataSelection;
 
-								$scope.getEditor().setValue(newCodeToInsert);
+								$scope.getEditor().setValue(newCode);
 							}
 						}
 				}, true);

@@ -29,14 +29,13 @@
         ui-ace-options="getEditorOptions"
         change="onEditorChange"
         content-attr="id"
-        extensions="getExtensions"        
+        extensions="getExtensions"
+        editor-id="editor"
       >    
       </ui-ace>
 
-        
-      <div ng-include="'partials/debugger.html'"></div>
-
-
+      <div ng-include="'partials/debugger.html'" class="fluid-height" ></div>
   </section>
 
+      
 </article>

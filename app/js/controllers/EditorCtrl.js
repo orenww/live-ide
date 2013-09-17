@@ -5,9 +5,14 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlS
 		$scope.currentNode = VqlService.getSelectedNode();
 		// debugger;
 		// var vqlId = $scope.currentNode ? $scope.currentNode.label : $routeParams.vqlId;
-		if ($scope.currentNode) {
-			var vqlCode = $scope.currentNode.type;
-			return $scope.currentNode;
+		if ($scope.currentNode && $scope.currentNode.id) {
+
+			var node = $scope.currentNode;
+			var code = node.attrSelected && angular.isDefined(node.attrSelected) ? 
+				node.vqls[node.attrSelected] :
+				node.vqls.dataSelection;
+
+			return code;
 		}
 	}
 
@@ -34,14 +39,15 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlS
 		// console.log("e", e, "editor", editor);
 		if ($scope.currentNode.attrSelected) {
 			$scope.currentNode.vqls[$scope.currentNode.attrSelected] = newValue;
+		}else{
+			$scope.currentNode.vqls.dataSelection = newValue;
 		}
-		$scope.currentNode.vqls.dataSelection = newValue;
 	}
 	
-	VqlResultsService.fetch().then(function(){
-		$scope.myData = VqlResultsService.getData();
-	});
+	// VqlResultsService.fetch().then(function(){
+	// 	$scope.myData = VqlResultsService.getData();
+	// });
 
-    $scope.gridOptions = { data: 'myData' };
+ //    $scope.gridOptions = { data: 'myData' };
 
 });
