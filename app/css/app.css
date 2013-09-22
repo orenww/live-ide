@@ -7425,6 +7425,10 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #999;
 }
+.ui-layout-pane {
+  padding: 0 !important;
+  overflow: hidden !important;
+}
 #editor {
   width: 80%;
   height: -webkit-calc(60% - 41px);

@@ -5,11 +5,14 @@
   <title>Verix Studio</title>
   <link rel="stylesheet" href="css/app.css">
   <link rel="stylesheet" href="lib/angular-ui-ng-grid/ng-grid.min.css">
+  
+  <link rel="stylesheet" href="lib/jquery.layout/layout-default-latest.css">
+  <link rel="stylesheet" href="lib/jquery-ui-1.10.3.custom/css/ui-lightness/jquery-ui-1.10.3.custom.css">
 
   
 </head>
 
-<body>
+<body >
   
   <div ng-include="'partials/navbar.html'" ng-controller='NavbarCtrl'></div>
 
@@ -17,6 +20,8 @@
   
   <!-- 3rd PARTY Before Angular -->
   <script src="lib/jquery-1.10.2.js"></script>
+  <script src="lib/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js"></script>
+  <script src="lib/jquery.layout/jquery.layout-latest.min.js"></script>
 
   <!-- In production use: -->
   <script src="lib/angular/angular.js"></script>  
@@ -25,6 +30,7 @@
   <!-- SERVICES -->  
   <script src="js/services/VqlService.js"></script>
   <script src="js/services/AutoCompleteService.js"></script>
+  <script src="js/services/Registry.js"></script>
   
   <script src="js/services/AceSnippetsExtensionService.js"></script>
   <script src="js/services/AceIntellisenseExtensionService.js"></script>  
@@ -44,7 +50,8 @@
   <script src="js/directives/button-group.js"></script>
   <script src="js/directives/bsDropdown.js"></script>
   <script src="js/directives/ui-ace.js"></script>
-  <script src="js/directives/ng-google-chart.js"></script>
+  <!-- // <script src="js/directives/ng-google-chart.js"></script> -->
+  <script src="js/directives/uiDivider.js"></script>
   <script src="lib/angular.treeview/angular.treeview.js"></script>
   <script src="lib/angular-ui-ng-grid/ng-grid-2.0.7.debug.js"></script>
 

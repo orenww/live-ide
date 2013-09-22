@@ -20,7 +20,7 @@ vStudio.controllers = angular.module('vStudio.controllers', []);
 vStudio.config(['$routeProvider', function($routeProvider) {
 	
 	$routeProvider.when('/studio', {
-		templateUrl: 'partials/studio.html'		
+		templateUrl: 'partials/studio.html'
 	});
 
 	$routeProvider.when('/studio/node/:vqlid', {

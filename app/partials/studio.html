@@ -1,7 +1,7 @@
 
-<article class="row-fluid fluid-height">
+<article class="row-fluid fluid-height" ui-divider resize-end="onMainLayoutResize()">
 
-  <section class="fluid-height span2 sidebar" ng-controller="TreeCtrl">
+  <section class="fluid-height span2 sidebar ui-layout-west" ng-controller="TreeCtrl">
 
     <!-- TREE VIEW -->
       <div class="tree-filter container">
@@ -20,8 +20,7 @@
     </div> 
 
   </section>
-
-  <section class="fluid-height span10 ui-editor" ng-controller="EditorCtrl">
+  <section ui-divider class="fluid-height span10 ui-editor ui-layout-center ui-layout-container" ng-controller="EditorCtrl">
 
       <!-- EDITOR -->
       <ui-ace 
@@ -31,11 +30,14 @@
         content-attr="id"
         extensions="getExtensions"
         editor-id="editor"
+        class="ui-layout-center"
       >    
       </ui-ace>
 
-      <div ng-include="'partials/debugger.html'" class="fluid-height" ></div>
+      <div class="ui-layout-south" ng-include="'partials/debugger.html'" class="fluid-height" ></div>
+
   </section>
+  
 
       
 </article>

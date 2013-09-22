@@ -1,4 +1,4 @@
-vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlService, AceSnippetsExtensionService, AceIntellisenseExtensionService,VqlResultsService) {
+vStudio.controllers.controller('EditorCtrl', function($scope, $rootScope, $routeParams, VqlService, AceSnippetsExtensionService, AceIntellisenseExtensionService,VqlResultsService, Registry) {
 	
 
 	$scope.getContent = function() {
@@ -49,5 +49,10 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $routeParams, VqlS
 	// });
 
  //    $scope.gridOptions = { data: 'myData' };
-
+ $rootScope.$on('resize-end', function (ev, message) {
+ 	console.log(arguments);
+ })
+ 	$scope.$watch(Registry.getAppSettings, function(newValue, oldValue){
+ 		console.log('app changed', newValue);
+ 	});
 });
