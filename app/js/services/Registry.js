@@ -1,18 +1,23 @@
 vStudio.services.factory('Registry', function($http, $q) {
-	var settings = {
-		app: {}
+	var data = {
+		layout: ''
 	};
 
 	var getAppSettings = function() {
-		return settings;
+		return data;
 	};
 
 	var setLayout = function(layout) {
-		settings.app.layout = layout;
+		data.layout = layout;
 	};
+
+	var getLayout = function () {
+		return data.layout;
+	}
 
 	return {
 		getAppSettings: getAppSettings,
-		setLayout: setLayout
+		setLayout: setLayout,
+		getLayout: getLayout
 	};
 });

@@ -1,4 +1,4 @@
-vStudio.directives.directive('uiDivider', function($timeout, $rootScope, Registry){
+vStudio.directives.directive('uiDivider', function($timeout, $parse){
 	// Runs during compile
 	return {
 		// name: '',
@@ -15,11 +15,12 @@ vStudio.directives.directive('uiDivider', function($timeout, $rootScope, Registr
 		// replace: true,
 		// transclude: true,
 		// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
-		link: function($scope, element, attrs) {
+		link: function(scope, element, attrs) {
 			var options = {};
-			options.onresize_end = function(ev) {
-				Registry.setLayout(ev);
-				$rootScope.$broadcast('resize-end', ev);
+			options.onresize_end = function(paneName, paneElement, paneState, paneOptions, layoutName) {
+				if (attrs.resizeEnd && scope[attrs.resizeEnd]) {
+					scope[attrs.resizeEnd].apply(scope, Array.prototype.slice.call(arguments));
+				}
 			};
 
 			$timeout(function(){

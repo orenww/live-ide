@@ -44,15 +44,8 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $rootScope, $route
 		}
 	}
 	
-	// VqlResultsService.fetch().then(function(){
-	// 	$scope.myData = VqlResultsService.getData();
-	// });
-
- //    $scope.gridOptions = { data: 'myData' };
- $rootScope.$on('resize-end', function (ev, message) {
- 	console.log(arguments);
- })
- 	$scope.$watch(Registry.getAppSettings, function(newValue, oldValue){
- 		console.log('app changed', newValue);
+	$scope.resize = Registry.getLayout;
+ 	$scope.$watch('resize()', function(newValue, oldValue){
+ 			console.log('app changed to:', newValue);
  	});
 });

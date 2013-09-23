@@ -1,3 +1,6 @@
-vStudio.controllers.controller('StudioCtrl', function($scope) {
-	var editor = ace.edit("editor");
+vStudio.controllers.controller('StudioCtrl', function($scope, Registry) {
+	$scope.onResize = function (paneName, paneElement) {
+		console.log(paneName);
+		Registry.setLayout(paneName);
+	};
 })
