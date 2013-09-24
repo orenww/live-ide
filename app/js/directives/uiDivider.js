@@ -19,7 +19,12 @@ vStudio.directives.directive('uiDivider', function($timeout, $parse){
 			var options = {};
 			options.onresize_end = function(paneName, paneElement, paneState, paneOptions, layoutName) {
 				if (attrs.resizeEnd && scope[attrs.resizeEnd]) {
-					scope[attrs.resizeEnd].apply(scope, Array.prototype.slice.call(arguments));
+
+					// prepare real array from arguments
+					var args = Array.prototype.slice.call(arguments);
+
+					// invoke the callback function in relevant context 
+					scope[attrs.resizeEnd].apply(scope, args);
 				}
 			};
 
