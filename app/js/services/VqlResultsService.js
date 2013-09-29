@@ -21,7 +21,7 @@ vStudio.services.factory('VqlResultsService', function($http){
 		return data;
 	};
 
-	var debug = function(vql,step) {
+	var debug = function(vql,step,isFromStart) {
 		promise = $http.get('mock/vql-debug.json').then(function (response) {
 			// The then function here is an opportunity to modify the response
 			debugResultData = response.data;

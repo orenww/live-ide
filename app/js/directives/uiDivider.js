@@ -17,6 +17,22 @@ vStudio.directives.directive('uiDivider', function($timeout, $parse){
 		// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
 		link: function(scope, element, attrs) {
 			var options = {};
+
+			if (attrs.uiDividerFixed){
+
+				var fixed = attrs.uiDividerFixed.split(',');
+
+				angular.forEach(fixed, function(value, key){
+					options[value] = {
+					    enableCursorHotkey: false,
+					    closable: false,
+					    resizable: false,
+					    spacing_open: 0,
+					    spacing_closed: 0
+					}
+				});
+			}
+			
 			options.onresize_end = function(paneName, paneElement, paneState, paneOptions, layoutName) {
 				if (attrs.resizeEnd && scope[attrs.resizeEnd]) {
 
@@ -29,8 +45,9 @@ vStudio.directives.directive('uiDivider', function($timeout, $parse){
 			};
 
 			$timeout(function(){
+
 				element.layout(options);
-			}, 0);
+			}, 100);
 		}
 	};
 });

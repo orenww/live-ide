@@ -12,11 +12,11 @@
   
 </head>
 
-<body >
+<body ui-divider ui-divider-fixed="north">
   
-  <div ng-include="'partials/navbar.html'" ng-controller='NavbarCtrl'></div>
+  <div ng-include="'partials/navbar.html'" ng-controller='NavbarCtrl' class="ui-layout-north"></div>
 
-  <section ng-view class="fluid-height"></section>
+  <section ng-view class="fluid-height ui-layout-center"></section>
   
   <!-- 3rd PARTY Before Angular -->
   <script src="lib/jquery-1.10.2.js"></script>

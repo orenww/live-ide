@@ -1,6 +1,7 @@
 
 <article ng-controller="StudioCtrl" class="row-fluid fluid-height" ui-divider resize-end="onResize">
-
+  
+  <!-- tree -->
   <section class="fluid-height span2 sidebar ui-layout-west" ng-controller="TreeCtrl">
 
     <!-- TREE VIEW -->
@@ -18,9 +19,10 @@
         data-node-attrs="vqls" 
         data-node-filter="treeFilter">
     </div> 
-
   </section>
-  <section ui-divider class="fluid-height span10 ui-editor ui-layout-center ui-layout-container" ng-controller="EditorCtrl">
+
+  
+  <section ui-divider resize-end="onResize" class="fluid-height span10 ui-editor ui-layout-center ui-layout-container" ng-controller="EditorCtrl">
 
       <!-- EDITOR -->
       <ui-ace 

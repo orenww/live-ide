@@ -1,27 +1,40 @@
 <div ng-controller="DebuggerCtrl">
-	<button type="button" class="btn btn-primary" tooltip="Run" ng-click="run()">
+	<button type="button" class="btn btn-primary btn-small" tooltip="Run" ng-click="run()">
 		<i class="icon-play iconAwesome"></i>Run
 	</button>  
 
 	<form class="form-inline inline">
-		<button type="submit" class="btn btn-primary" tooltip="Debug" ng-click="debug()">
+		<button type="submit" class="btn btn-primary btn-small" tooltip="Debug" ng-click="debug()">
 			 <i class="icon-bug iconAwesome"></i>Debug
 		</button>
 
-		<input type="number" class="input-small" ng-model="$parent.numOfSteps" min="0" placeholder="Steps" tooltip="Input number of steps">
+		<input type="number" class="input-small steps" ng-model="$parent.numOfSteps" min="0" placeholder="Steps" tooltip="Input number of steps">
+		
+		
 
-		<div class="btn-group">
+		<!-- <div class="btn-group">
 			<button type="button" class="btn btn-primary" ng-model="$parent.direction" btn-radio="'fromStart'" tooltip="Steps from start">
 				<i class="icon-arrow-down iconAwesome"></i>Start
 			</button>
 			<button type="button" class="btn btn-primary" ng-model="$parent.direction" btn-radio="'fromEnd'" tooltip="Steps from end">
 				<i class="icon-arrow-up iconAwesome"></i>End
 			</button>
-		</div> 		         
-	</form>        
+		</div> 		          -->
+	</form>    
+
+
+	<span><strong>Steps from </strong></span>
+	<div class="onoffswitch">
+	    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked 
+	    		ng-model="isFromStart">
+	    <label class="onoffswitch-label" for="myonoffswitch">
+	        <div class="onoffswitch-inner btn-primary btn-small"></div>
+	        <div class="onoffswitch-switch"></div>
+	    </label>
+	</div>  
 
 	<button type="button" 
-			class="btn btn-primary" 
+			class="btn btn-primary btn-small" 
 			tooltip="Next step" 
 			tooltip-trigger="" 
 			ng-click="next()" ng-disabled="$parent.isNextDisabled"

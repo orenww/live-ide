@@ -1,6 +1,6 @@
 vStudio.controllers.controller('EditorCtrl', function($scope, $rootScope, $routeParams, VqlService, AceSnippetsExtensionService, AceIntellisenseExtensionService,VqlResultsService, Registry) {
 	
-
+	$scope.editor = {}
 	$scope.getContent = function() {
 		$scope.currentNode = VqlService.getSelectedNode();
 		// debugger;
@@ -31,7 +31,9 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $rootScope, $route
 	}
 
 	$scope.onEditorChange = function(e, editor) {
-		if(!$scope.currentNode){
+		$scope.editor = editor;
+
+		if(!$scope.currentNode || jQuery.isEmptyObject($scope.currentNode)){
 			return;
 		}
 
@@ -43,6 +45,14 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $rootScope, $route
 			$scope.currentNode.vqls.dataSelection = newValue;
 		}
 	}
+
+	$scope.onResize = function (paneName, paneElement) {
+		console.log("EditorCtrl - " + paneName);
+		Registry.setLayout(paneName);
+
+		$scope.editor.resize(true);
+
+	};
 	
 	$scope.resize = Registry.getLayout;
  	$scope.$watch('resize()', function(newValue, oldValue){

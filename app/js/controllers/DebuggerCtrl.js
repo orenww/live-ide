@@ -1,6 +1,6 @@
 vStudio.controllers.controller('DebuggerCtrl', function($scope, $routeParams,VqlService, VqlResultsService) {
 	
-	$scope.direction = "fromStart";
+	$scope.isFromStart = true;
 	$scope.numOfSteps = 3;
 
 	//Next
@@ -15,7 +15,7 @@ vStudio.controllers.controller('DebuggerCtrl', function($scope, $routeParams,Vql
 		var vql = VqlService.getSelectionData();
 
 		var step;
-		var direction;
+		var isFromStart = $scope.isFromStart;
 
 		if(isNext){
 			step = $scope.currentStep;
@@ -24,7 +24,7 @@ vStudio.controllers.controller('DebuggerCtrl', function($scope, $routeParams,Vql
 			$scope.currentStep = step;
 		}
 
-		VqlResultsService.debug(vql,step).then(function(){
+		VqlResultsService.debug(vql,step,isFromStart	).then(function(){
 			var debugResultData = VqlResultsService.getDebugData();
 
 			$scope.isNextDisabled = debugResultData.isLastStep;
@@ -63,7 +63,7 @@ vStudio.controllers.controller('DebuggerCtrl', function($scope, $routeParams,Vql
 			$scope.run();
 		}else{
 			//debug
-			if($scope.direction == "fromStart"){
+			if($scope.isFromStart == true){
 				$scope.currentStep++;
 			}else{
 				if($scope.currentStep == 1){
