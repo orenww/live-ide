@@ -74,7 +74,7 @@ vStudio.directives
 				}
 
 				// plugins
-				if(extensions){					
+				if(scope.extensions){					
 					for (var i = 0, extensions = scope.extensions(); i < extensions.length; i++) {
 						extensions[i].register(requires);
 					}
