@@ -93,7 +93,13 @@ vStudio.services.factory('VqlService', function($http, $q) {
 	}	
 
 	var getSelectionData = function(){
-		return getSelectedNode().vqls.dataSelection;
+		var node = getSelectedNode();
+
+		if (node.vql){
+			return no.vqls.dataSelection;			
+		}else{
+			return "";
+		}
 	}
 
 	var selectNodeById = function (id,prop) {
