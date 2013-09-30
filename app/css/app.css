@@ -8970,7 +8970,13 @@ body {
   overflow: auto;
   box-shadow: inset 0px 3px 8px #aaa;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000312}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000310}}
+.tree-filter {
+  background-color: #EEEEEE;
+  padding: 10px 10px 0 10px;
+  border-bottom: 1px solid #ddd;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000317}}
 div[angular-treeview] {
   /* prevent user selection */
 
@@ -8982,146 +8988,140 @@ div[angular-treeview] {
   /* default */
 
   font-family: Tahoma;
-  font-size: 13px;
+  font-size: 14px;
   color: #555;
   text-decoration: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000327}}
-.tree-filter {
-  background-color: #EEEEEE;
-  padding: 10px 10px 0 10px;
-  border-bottom: 1px solid #ddd;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000333}}
-div[tree-model] ul {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000332}}
+div[angular-treeview] ul {
   margin: 0;
   padding: 0;
   list-style: none;
   border: none;
   overflow: hidden;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000341}}
-div[tree-model] .prop-toggle {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000340}}
+div[angular-treeview] .prop-toggle {
   margin-left: 7px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000345}}
-div[tree-model] .vqls-list {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000344}}
+div[angular-treeview] .vqls-list {
   padding-left: 0;
   font-size: 11px;
   font-style: italic;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000351}}
-div[tree-model] .tree-node {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000350}}
+div[angular-treeview] .tree-node {
   position: relative;
   line-height: 25px;
   font-size: 14px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000358}}
-div[tree-model] .tree-node .expanded {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000357}}
+div[angular-treeview] .tree-node .expanded {
   padding: 0;
   display: inline-block;
   width: 15px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000364}}
-div[tree-model] .tree-node .collapsed {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000363}}
+div[angular-treeview] .tree-node .collapsed {
   padding: 0;
   display: inline-block;
   width: 15px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000370}}
-div[tree-model] .tree-node .normal {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000369}}
+div[angular-treeview] .tree-node .normal {
   padding: 0px;
   cursor: default;
   display: inline-block;
   width: 15px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000377}}
-div[tree-model] .tree-node .attr {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000376}}
+div[angular-treeview] .tree-node .attr {
   padding: 1px 5px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000381}}
-div[tree-model] .tree-node .attr-toggle {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000380}}
+div[angular-treeview] .tree-node .attr-toggle {
   padding: 0px 2px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000384}}
-div[tree-model] .tree-node .selected {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000383}}
+div[angular-treeview] .tree-node .selected {
   padding: 2px 5px;
   background: -webkit-linear-gradient(top, #65b2fb, #3492e9);
   border-color: #318ce4 #2b82db #2878c7;
   border-width: 1px 0px 1px;
   border-style: solid;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000393}}
-div[tree-model] .tree-node .selected a {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000392}}
+div[angular-treeview] .tree-node .selected a {
   color: white;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000398}}
-div[tree-model] .tree-node i,
-div[tree-model] .tree-node div {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\0000397}}
+div[angular-treeview] .tree-node i,
+div[angular-treeview] .tree-node div {
   cursor: pointer;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003105}}
-div[tree-model] .tree-node .node-level-10 {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003104}}
+div[angular-treeview] .tree-node .node-level-10 {
   padding-left: 15rem;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003105}}
-div[tree-model] .tree-node .node-level-9 {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003104}}
+div[angular-treeview] .tree-node .node-level-9 {
   padding-left: 13.5rem;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003105}}
-div[tree-model] .tree-node .node-level-8 {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003104}}
+div[angular-treeview] .tree-node .node-level-8 {
   padding-left: 12rem;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003105}}
-div[tree-model] .tree-node .node-level-7 {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003104}}
+div[angular-treeview] .tree-node .node-level-7 {
   padding-left: 10.5rem;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003105}}
-div[tree-model] .tree-node .node-level-6 {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003104}}
+div[angular-treeview] .tree-node .node-level-6 {
   padding-left: 9rem;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003105}}
-div[tree-model] .tree-node .node-level-5 {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003104}}
+div[angular-treeview] .tree-node .node-level-5 {
   padding-left: 7.5rem;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003105}}
-div[tree-model] .tree-node .node-level-4 {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003104}}
+div[angular-treeview] .tree-node .node-level-4 {
   padding-left: 6rem;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003105}}
-div[tree-model] .tree-node .node-level-3 {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003104}}
+div[angular-treeview] .tree-node .node-level-3 {
   padding-left: 4.5rem;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003105}}
-div[tree-model] .tree-node .node-level-2 {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003104}}
+div[angular-treeview] .tree-node .node-level-2 {
   padding-left: 3rem;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003105}}
-div[tree-model] .tree-node .node-level-1 {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003104}}
+div[angular-treeview] .tree-node .node-level-1 {
   padding-left: 1.5rem;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003105}}
-div[tree-model] .tree-node .node-level-0 {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003104}}
+div[angular-treeview] .tree-node .node-level-0 {
   padding-left: 0rem;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003120}}
-div[tree-model] .tree-node-label {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003119}}
+div[angular-treeview] .tree-node-label {
   padding: 3px 3px 3px 5px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003123}}
-div[tree-model] .tree-node-label:hover {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003122}}
+div[angular-treeview] .tree-node-label:hover {
   color: black;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003127}}
-div[tree-model] .tree-node-label .dropdown {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003126}}
+div[angular-treeview] .tree-node-label .dropdown {
   display: inline-block;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003132}}
-div[tree-model] .tree-node-attr {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003131}}
+div[angular-treeview] .tree-node-attr {
   padding: 2px 5px 2px 15px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003136}}
-div[tree-model] .tree-node-attr.selected {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/treeview\.less}line{font-family:\00003135}}
+div[angular-treeview] .tree-node-attr.selected {
   padding: 2px 5px 2px 15px;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/orenf\/Documents\/GitHub\/my-angular-seed\/app\/css\/debugger\.less}line{font-family:\000031}}

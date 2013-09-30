@@ -1,7 +1,7 @@
-<div class="tree-node-label node-level-{{ level }}" ng-class="node.selected">
-	<i title="expand component" class="collapsed icon-folder-close" ng-show="node.children.length && node.collapsed" ng-click="onIconClick(node)"></i> 
-	<i title="collapse component" class="expanded icon-folder-open" ng-show="node.children.length && !node.collapsed" ng-click="onIconClick(node)"></i> 
+<div class="tree-node-label node-level-{{ level }}" ng-class="selected">
+	<i title="expand component" class="collapsed icon-folder-close" ng-show="node.children.length && showAttrs.folderCollapsed" ng-click="onIconClick(showAttrs)"></i> 
+	<i title="collapse component" class="expanded icon-folder-open" ng-show="node.children.length && !showAttrs.folderCollapsed" ng-click="onIconClick(showAttrs)"></i> 
 	<i class="normal icon-file" ng-hide="node.children.length"></i>
-	<i class="attr-toggle icon-expand-alt" ng-click="toggle(node)" ng-class="{ 'icon-collapse-alt': node.showAttrs }"></i>
+	<i class="attr-toggle icon-expand-alt" ng-click="toggle(showAttrs)" ng-class="{ 'icon-collapse-alt': showAttrs.expand }"></i>
 	<a href="#/studio/node/{{ node.id }}">{{ node.type }}</a>
 </div>

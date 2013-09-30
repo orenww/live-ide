@@ -7,9 +7,10 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $rootScope, $route
 		// var vqlId = $scope.currentNode ? $scope.currentNode.label : $routeParams.vqlId;
 		if ($scope.currentNode && $scope.currentNode.id) {
 
-			var node = $scope.currentNode;
-			var code = node.attrSelected && angular.isDefined(node.attrSelected) ? 
-				node.vqls[node.attrSelected] :
+			var currentNode = $scope.currentNode;
+			var node = currentNode.node;
+			var code = node.isAttr && angular.isDefined(currentNode.attrKey) ? 
+				node.vqls[currentNode.attrKey] :
 				node.vqls.dataSelection;
 
 			return code;
@@ -39,8 +40,8 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $rootScope, $route
 
 		var newValue = editor.getValue();
 		// console.log("e", e, "editor", editor);
-		if ($scope.currentNode.attrSelected) {
-			$scope.currentNode.vqls[$scope.currentNode.attrSelected] = newValue;
+		if ($scope.currentNode.isAttr) {
+			$scope.currentNode.vqls[$scope.currentNode.attrKey] = newValue;
 		}else{
 			$scope.currentNode.vqls.dataSelection = newValue;
 		}

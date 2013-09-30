@@ -38,11 +38,26 @@
 			replace: true,
 			scope: {
 				node: '=',
+				nodeSelected: '=',
 				onIconClick: '&',
 				toggle: '&',
-				level: '='
+				level: '=',
+				showAttrs: '='
 			},
-			templateUrl: 'lib/angular.treeview/tree-node.html'
+			templateUrl: 'lib/angular.treeview/tree-node.html',
+			link: function (scope, element, attrs) {
+				scope.selected = {};
+				// evaluate this only when nodeSelected has been set
+				if (scope.nodeSelected.node && scope.nodeSelected.node.id) {
+					if (scope.nodeSelected.node.id == scope.node.id) {
+						scope.selected = "selected";
+					}
+				}
+				if (scope.nodeSelected && scope.nodeSelected.isAttr) {
+					scope.showAttrs.expand = true;
+					scope.attrKey = scope.nodeSelected.attrKey;
+				}
+			}
 		};
 
 	});
@@ -54,28 +69,34 @@
 			replace: true,
 			scope: {
 				node: '=',
+				nodeSelected: '=',
 				level: '=',
-				toggle: '&'
+				toggle: '&',
+				showAttrs: '='
 			},
 			templateUrl: 'lib/angular.treeview/tree-node-props.html',
 			link: function (scope, element, attrs) {
-				var attrSelected = scope.node.attrSelected;
-				if (attrSelected) {
-					scope.node.showAttrs = true;
+				// var attrSelected = scope.node.attrSelected;
+				// if (attrSelected) {
+				// 	scope.node.showAttrs = true;
+				// }
+				if (scope.nodeSelected && scope.nodeSelected.isAttr) {
+					scope.showAttrs.expand = true;
+					scope.attrKey = scope.nodeSelected.attrKey;
 				}
 			}
 		}
 
 	});
 
-	app.directive( 'treeModel', function( $compile ) {
+	app.directive( 'uiTree', function( $compile ) {
 		return {
 			restrict: 'A',
-
+			
 			link: function ( scope, element, attrs ) {
 				//tree model
-				var treeModel = attrs.treeModel;
-
+				var treeModel = attrs.ngModel;
+				
 				//node id
 				var nodeId = attrs.nodeId || 'id';
 
@@ -89,6 +110,15 @@
 
 				var treeFilter = attrs.nodeFilter || 'treeFilter';
 
+				var nodeSelected = attrs.nodeSelected;
+
+				// flags that control ui-actions for toggling ui-visibility states
+				scope.showAttrs = {
+					expand: false,
+					folderCollapsed: false
+				};
+
+				// level is used for indenting childnodes and keeping the selected style full left-to-right
 				var level;
 				if (!attrs.level) {
 					level = 0;
@@ -108,7 +138,6 @@
 				 *	'</li>' + 
 				 *'</ul>';
 				 */
-				
 				var ul = angular.element('<ul></ul>');
 				ul.attr('class', 'unstyled');
 				var li = angular.element('<li></li');
@@ -124,25 +153,31 @@
 				var treeNodeEl = angular.element('<treenode></treenode>');
 				treeNodeEl.attr({
 					'node': 'node',
-					'toggle': 'showNodeProperties(node)',
-					'onIconClick': 'selectNodeHead(node)',
-					'level': level
+					'node-selected': nodeSelected,
+					'toggle': 'showNodeProperties(showAttrs)',
+					'on-icon-click': 'selectNodeHead(showAttrs)',
+					'level': level,
+					'show-attrs': 'showAttrs'
 				});
 				liChilds.push(treeNodeEl);
 				
 				var treeNodePropsEl = angular.element('<treenodeprops></treenodeprops>');
 				treeNodePropsEl.attr({
 					'node': 'node',
-					'toggle': 'showNodeProperties(node)',
-					'level': level
+					'node-selected': nodeSelected,
+					'toggle': 'showNodeProperties(showAttrs)',
+					'level': level,
+					'show-attrs': 'showAttrs'
 				});
 				liChilds.push(treeNodePropsEl);
 				
 				var childNodes = angular.element('<div></div>');
 				childNodes.attr({
-					'ng-hide': 'node.collapsed',
+					'ng-hide': 'showAttrs.folderCollapsed',
 					'level': level,
-					'tree-model': 'node.' + nodeChildren,
+					'ui-tree': '',
+					'ng-model': 'node.' + nodeChildren,
+					'node-selected': nodeSelected,
 					'node-id': nodeId,
 					'node-label': nodeLabel,
 					'node-children': nodeChildren
@@ -159,23 +194,18 @@
 					if( attrs.angularTreeview ) {
 
 						//if node head clicks,
-						scope.selectNodeHead = function( selectedNode ){
+						scope.selectNodeHead = function( showAttrs ){
 
 							//Collapse or Expand
-							selectedNode.collapsed = !selectedNode.collapsed;
+							showAttrs.folderCollapsed = !showAttrs.folderCollapsed;
 						};
 
-						scope.showNodeProperties = function( _node ) {
-							_node.showAttrs = !_node.showAttrs;
+						scope.showNodeProperties = function( showAttrs ) {
+							showAttrs.expand = !showAttrs.expand;
 						};
 					}
 
-					var hasChildren = scope.node && scope.node.children;
-					// if (hasChildren) {
-						// counter++;
-					// }
-					// scope.node.level = counter;
-					//Rendering template created.
+					// Rendering template created.
 					element.html(null).append( $compile( ul )( scope ) );
 				}
 			}

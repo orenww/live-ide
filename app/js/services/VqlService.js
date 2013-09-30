@@ -83,9 +83,13 @@ vStudio.services.factory('VqlService', function($http, $q) {
 		});
 	}
 
-	var currentNode = {};
+	var currentNode = {
+		node: {},
+		isAttr: false,
+		attrKey: ''
+	};
 	var setSelectedNode = function(newNode) {
-	    currentNode = newNode;
+	    currentNode.node = newNode;
 	}
 
 	var getSelectedNode = function() {
@@ -106,32 +110,36 @@ vStudio.services.factory('VqlService', function($http, $q) {
 		// handle property leaf selection
 		if (angular.isDefined(prop)) {
         	// select the selected node
-			node.attrSelected = prop;
+			// node.attrSelected = prop;
+			getSelectedNode().attrKey = prop;
+			getSelectedNode().isAttr = true;
 			selectNode(node);
 			return;
 		}
 
 		// Mark the node as the selected one
-		node.selected = 'selected';
-		node.attrSelected = undefined;	
+		// node.selected = 'selected';
+		// node.attrSelected = undefined;	
+		getSelectedNode().isAttr = false;
+		getSelectedNode().attrKey = '';
 
 		selectNode(node);
 	}   
 
 	var selectNode = function(node){
-		var data = getTreeData();
-		if (data.selectedNode) {
-			// Nullify the previous selected node
-			data.selectedNode.selected = undefined;
-			if (data.selectedNode.id !== node.id) {
-				data.selectedNode.attrSelected = undefined;
-			}
-		}
+		// var data = getTreeData();
+		// if (data.selectedNode) {
+		// 	// Nullify the previous selected node
+		// 	data.selectedNode.selected = undefined;
+		// 	if (data.selectedNode.id !== node.id) {
+		// 		data.selectedNode.attrSelected = undefined;
+		// 	}
+		// }
 
 		// Set the selected node
-		data.selectedNode = node;
+		// data.selectedNode = node;
 		
-		currentNode = node;
+		currentNode.node = node;
 	}
 
 	getData();

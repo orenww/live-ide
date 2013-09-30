@@ -11,8 +11,11 @@
 
      <div
         id="vql-tree"
+
+        ui-tree
         angular-treeview="true"
-        tree-model="treedata"
+        ng-model="treedata"
+        node-selected="nodeSelected"
         node-id="id"
         node-label="type"
         node-children="children"

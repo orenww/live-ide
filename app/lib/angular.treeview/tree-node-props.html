@@ -1,7 +1,7 @@
 <div class="node-props node-level-{{ level }}">
 	
-	<ul class="vqls-list" ng-show="node.showAttrs">
-		<li class="tree-node-attr" ng-repeat="(key, val) in node.vqls" ng-class="{ selected: node.attrSelected == key }">
+	<ul class="vqls-list" ng-show="showAttrs.expand">
+		<li class="tree-node-attr" ng-repeat="(key, val) in node.vqls" ng-class="{ selected: attrKey == key }">
 			<i class="attr icon-list-alt"></i>  
 			<a href="#/studio/node/{{ node.id }}/vql/{{ key }}">{{ key }}</a>
 		</li>
