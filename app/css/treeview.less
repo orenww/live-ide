@@ -9,7 +9,7 @@
 }
 
 // from angular.treeview.css
-div[data-angular-treeview] {
+div[angular-treeview] {
   /* prevent user selection */
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
@@ -29,7 +29,7 @@ div[data-angular-treeview] {
 	padding: 10px 10px 0 10px;
 	border-bottom: 1px solid #ddd;
 }
-div[data-tree-model] {
+div[tree-model] {
 	ul {
 	  margin: 0;
 	  padding: 0;
@@ -43,13 +43,9 @@ div[data-tree-model] {
 	}
 
 	.vqls-list {
-		padding-left: 8px;
+		padding-left: 0;
 		font-size: 11px;
 		font-style: italic;
-	}
-
-	.tree-node-attr {
-		padding: 2px 5px;
 	}
 
 	.tree-node {
@@ -57,42 +53,41 @@ div[data-tree-model] {
 		// padding: 0 0 0 20px;
 		line-height: 25px;
 		font-size: 14px;
-
+		@iconWidth: 15px;
 
 		.expanded {
-			padding: 1px 10px;
-			background-image: url("../img/folder.png");
-			background-repeat: no-repeat;
-			background-size: cover;
+			padding: 0;
+			display: inline-block;
+			width: @iconWidth;
 		}
 
 		.collapsed {
-			padding: 1px 10px;
-			background-image: url("../img/folder-closed.png");
-			background-repeat: no-repeat;
-			background-size: cover;
+			padding: 0;
+			display: inline-block;
+			width: @iconWidth;
 		}
 
 		.normal {
-			padding: 0px 10px;
-			background-image: url("../img/file.png");
-			background-repeat: no-repeat;
+			padding: 0px;
 			cursor: default;
+			display: inline-block;
+			width: @iconWidth;
 		}
 
 		.attr {
-			padding: 1px 10px;
-			background-image: url("../img/brick.png");
-			background-repeat: no-repeat;
+			padding: 1px 5px;
 		}
 
+		.attr-toggle {
+			padding: 0px 2px;
+		}
 		.selected {
-			color: white;
+			// color: white;
 			padding: 2px 5px;
 
 			background: -webkit-linear-gradient(top, #65b2fb, #3492e9);
 			border-color: #318ce4 #2b82db #2878c7;
-			border-width: 1px;
+			border-width: 1px 0px 1px;
 			border-style: solid;
 
 			a {
@@ -106,7 +101,7 @@ div[data-tree-model] {
 
 		@nodeLevelIterations: 10;
 		// tree levels
-		.nodeLevelIterator (@nodeLevel) when (@nodeLevel > 0) {
+		.nodeLevelIterator (@nodeLevel) when (@nodeLevel > -1) {
 			.node-level-@{nodeLevel} {
 		        // resulting css
 		        @level: @nodeLevel * 1.5;
@@ -115,15 +110,31 @@ div[data-tree-model] {
 		    .nodeLevelIterator(@nodeLevel - 1);
 		}
 
-		.nodeLevelIterator(0) {};
+		// .nodeLevelIterator(0) {
+		// 	padding-left: 0.4rem;
+		// };
 
 		.nodeLevelIterator(@nodeLevelIterations);
 	}
+
 	.tree-node-label {
 		padding: 3px 3px 3px 5px;
-	
+		
 		&:hover {
 			color: black;
+		}
+
+		.dropdown {
+			display: inline-block;
+		}
+	}
+
+	.tree-node-attr {
+		@iconIndent: 2px 5px 2px 15px;
+		padding: @iconIndent;
+
+		&.selected {
+			padding: @iconIndent;
 		}
 	}
 

@@ -31,14 +31,15 @@
 
 	var app = angular.module( 'angularTreeview', [] );
 
-	app.directive( 'treeNode', function(){
+	app.directive( 'treenode', function(){
 
 		return {
-			restrict: 'A',
+			restrict: 'EA',
 			replace: true,
 			scope: {
 				node: '=',
-				iconClick: '&',
+				onIconClick: '&',
+				toggle: '&',
 				level: '='
 			},
 			templateUrl: 'lib/angular.treeview/tree-node.html'
@@ -46,19 +47,26 @@
 
 	});
 
-	app.directive( 'treeNodeProps', function(){
+	app.directive( 'treenodeprops', function(){
 
 		return {
-			restrict: 'A',
+			restrict: 'EA',
 			replace: true,
 			scope: {
 				node: '=',
+				level: '=',
 				toggle: '&'
 			},
-			templateUrl: 'lib/angular.treeview/tree-node-props.html'
-		};
+			templateUrl: 'lib/angular.treeview/tree-node-props.html',
+			link: function (scope, element, attrs) {
+				var attrSelected = scope.node.attrSelected;
+				if (attrSelected) {
+					scope.node.showAttrs = true;
+				}
+			}
+		}
 
-	})
+	});
 
 	app.directive( 'treeModel', function( $compile ) {
 		return {
@@ -89,15 +97,61 @@
 					level = parseInt(attrs.level) + 1;
 				}
 
-				var template = 
-				'<ul class="unstyled">' + 
-					'<li data-ng-repeat="node in ' + treeModel + ' | filter:' + treeFilter + '" class="tree-node">' + 
-						'<div tree-node node="node" icon-click="selectNodeHead(node)" level="' + level + '"></div>'+
-						'<div tree-node-props node="node" toggle="showNodeProperties(node)" tree-node-props></div>' +
-						'<div data-ng-hide="node.collapsed" level="' + level + '" data-tree-model="node.' + nodeChildren + '" data-node-id=' + nodeId + ' data-node-label=' + nodeLabel + ' data-node-children=' + nodeChildren + '></div>' + 
-					'</li>' + 
-				'</ul>';
+				/*
+				 *	the template for the tree is build with dom nodes 
+				 * for maintainable code 
+				 *'<ul class="unstyled">' + 
+				 *	'<li data-ng-repeat="node in ' + treeModel + ' | filter:' + treeFilter + '" class="tree-node">' + 
+				 *		'<div tree-node node="node" toggle="showNodeProperties(node)" icon-click="selectNodeHead(node)" level="' + level + '"></div>'+
+				 *		'<div tree-node-props node="node" level="' + level + '" toggle="showNodeProperties(node)"></div>' +
+				 *		'<div data-ng-hide="node.collapsed" level="' + level + '" data-tree-model="node.' + nodeChildren + '" data-node-id=' + nodeId + ' data-node-label=' + nodeLabel + ' data-node-children=' + nodeChildren + '></div>' + 
+				 *	'</li>' + 
+				 *'</ul>';
+				 */
 				
+				var ul = angular.element('<ul></ul>');
+				ul.attr('class', 'unstyled');
+				var li = angular.element('<li></li');
+				li.attr({
+					'ng-repeat': 'node in ' + treeModel + '|filter:' + treeFilter,
+					'class': 'tree-node'
+				});
+				// placeholder for li children
+				// to remove a child, simply comment its code: 
+				// the angular.element, its 'attr' definition and the push operation
+				var liChilds = [];
+				
+				var treeNodeEl = angular.element('<treenode></treenode>');
+				treeNodeEl.attr({
+					'node': 'node',
+					'toggle': 'showNodeProperties(node)',
+					'onIconClick': 'selectNodeHead(node)',
+					'level': level
+				});
+				liChilds.push(treeNodeEl);
+				
+				var treeNodePropsEl = angular.element('<treenodeprops></treenodeprops>');
+				treeNodePropsEl.attr({
+					'node': 'node',
+					'toggle': 'showNodeProperties(node)',
+					'level': level
+				});
+				liChilds.push(treeNodePropsEl);
+				
+				var childNodes = angular.element('<div></div>');
+				childNodes.attr({
+					'ng-hide': 'node.collapsed',
+					'level': level,
+					'tree-model': 'node.' + nodeChildren,
+					'node-id': nodeId,
+					'node-label': nodeLabel,
+					'node-children': nodeChildren
+				});
+				liChilds.push(childNodes);
+
+				// build the whoel template for this directive
+				ul.append( li.append(liChilds) );
+
 				//check tree model
 				if( treeModel && treeModel.length ) {
 
@@ -113,7 +167,7 @@
 
 						scope.showNodeProperties = function( _node ) {
 							_node.showAttrs = !_node.showAttrs;
-						}
+						};
 					}
 
 					var hasChildren = scope.node && scope.node.children;
@@ -122,7 +176,7 @@
 					// }
 					// scope.node.level = counter;
 					//Rendering template created.
-					element.html(null).append( $compile( template )( scope ) );
+					element.html(null).append( $compile( ul )( scope ) );
 				}
 			}
 		};
