@@ -2,12 +2,12 @@
    "type": "VqlApplication",
    "id": "app-1",
    "vqls": {
-      "dataSelection": "select * from ",
+      "dataSelection": "select * from data",
       "globalDataFormat": "",
-      "columnsDataFormat": "",
+      "columnsDataFormat": "222dfsa3221321 dwsefq",
       "actions": {},
-      "title": "",
-      "layout": ""
+      "title": "fadsfasdf",
+      "layout": "444444"
    },
    "inParams": [],
    "outParams": [],
@@ -19,14 +19,14 @@
       "id": "container-1",
       "vqls": {
          "dataSelection": "select * from ",
-         "globalDataFormat": "",
-         "columnsDataFormat": "",
+         "globalDataFormat": "Oren",
+         "columnsDataFormat": "products",
          "actions": {
-            "onClick": "",
+            "onClick": "5555",
             "onFocus": ""
          },
-         "title": "",
-         "layout": ""
+         "title": "my title",
+         "layout": "special layout"
       },
       "inParams": [],
       "outParams": [],
@@ -37,13 +37,13 @@
          "id": "grid-1",
          "vqls": {
             "dataSelection": "select \r\nc.product_ \"Product\",\r\n [select case when {SP_MARKET}=948 and {20}=0 then '\"% Shr Chg\" \"Nation % Shr Chg\" '\r\n                        when {SP_MARKET}=948 then '\"% Shr Chg\" ' \r\n                        when {20}=0 then '\"% Vol Chg\" \"Nation % Vol Chg\" ' \r\n              else '\"% Vol Chg\"' end from dual],\r\n[select case when {20}=0 then ' ' when {SP_MARKET}=948 then '\"Nation % Shr Chg\",'\r\nelse '\"Nation % Vol Chg\" ,' end from dual]\r\n\r\n 1 as SP_USER  \r\nfrom \r\n(select market_id, prod,\r\n[select case when {SP_MARKET}=948 then 'round(((cq/decode(sum(cq)over(),0,null,sum(cq)over())) - (pq/decode(sum(pq)over(),0,null,sum(pq)over())))*100,2) \"% Shr Chg\"'\r\nelse 'round(100*(sum(decode(is_daiichi,1,cq,0))-sum(decode(is_daiichi,1,pq,0)))/decode(sum(decode(is_daiichi,1,pq,0)),0,null,sum(decode(is_daiichi,1,pq,0))),2) \"% Vol Chg\"' end from dual>},\r\n[select case when {SP_MARKET}=948 then 'round(((ntn_cq/decode(sum(ntn_cq)over(),0,null,sum(ntn_cq)over())) - (ntn_pq/decode(sum(ntn_pq)over(),0,null,sum(ntn_pq)over())))*100,2) \"Nation % Shr Chg\"'\r\nelse 'round(100*(sum(decode(is_daiichi,1,ntn_cq,0))-sum(decode(is_daiichi,1,ntn_pq,0)))/decode(sum(decode(is_daiichi,1,ntn_pq,0)),0,null,sum(decode(is_daiichi,1,ntn_pq,0))),2) \"Nation % Vol Chg\"' end from dual]\r\nfrom (\r\nselect is_daiichi, market_id, decode(is_daiichi,1,product_id,999) prod,\r\nsum(case when d8=0 and d11={11} and d7={7} and d13={13} and d20={20} then t_cq else 0 end) cq,\r\nsum(case when d20=0 then t_cq else 0 end) ntn_cq,\r\nsum(case when d8=0 and d11={11} and d7={7} and d13={13} and d20={20} then t_pq else 0 end) pq,\r\nsum(case when d20=0 then t_pq else 0 end) ntn_pq,\r\nsum(case when d8=0 and d11={11} and d7={7} and d13={13} and d20={20} then t_pfq else 0 end) pfq,\r\nsum(case when d20=0 then t_pfq else 0 end) ntn_pfq\r\nfrom [select case when {19}=1 then 'info_in_all_pc_q' when {19}=2 then 'info_in_all_cv_q'  else 'info_in_all_hos_q' end from dual] a\r\nwhere market_id={SP_MARKET} and ({SP_MARKET}<>910 or {SP_IC_CODE}<>'A')\r\ngroup by is_daiichi, market_id, decode(is_daiichi,1,product_id,999)) {<select case when {SP_MARKET}=948 then ' ' else ' group by market_id, prod' end from dual>} ) a, info_prods b, demo_products_dim c \r\nwhere a.prod=b.product_id and\r\n           a.prod=c.product_id(+) and \r\n           a.market_id=c.market_id and  \r\n           a.market_id=b.market_id \r\n            and b.d19={19}\r\norder by {<select case when {SP_MARKET}=948 then 'decode(c.product_,''Product A17'',''1'',''Product A1'',''2'',''Product A2'',''3'',c.product_)' else 'c.product_' end from dual>}     ",
-            "globalDataFormat": "",
-            "columnsDataFormat": "",
+            "globalDataFormat": "223113123",
+            "columnsDataFormat": "dsadsasd",
             "actions": {
-               "onClick": "",
+               "onClick": "31231231231",
                "onFocus": ""
             },
-            "title": ""
+            "title": "2312312312"
          },
          "inParams": [],
          "outParams": [],
@@ -56,15 +56,15 @@
       "type": "VqlContainer",
       "id": "container-2",
       "vqls": {
-         "dataSelection": "select * from ",
-         "globalDataFormat": "",
-         "columnsDataFormat": "",
+         "dataSelection": "select * from XXXX",
+         "globalDataFormat": "31 23123 123 1",
+         "columnsDataFormat": "312312 123 23 1",
          "actions": {
-            "onClick": "",
+            "onClick": "3123123",
             "onFocus": ""
          },
-         "title": "",
-         "layout": ""
+         "title": "ssss dsa d",
+         "layout": "FDSFA SDFSDFAFD"
       },
       "inParams": [],
       "outParams": [],

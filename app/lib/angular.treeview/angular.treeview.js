@@ -40,23 +40,48 @@
 				node: '=',
 				nodeSelected: '=',
 				onIconClick: '&',
+				onNodeSelected: '&',
 				toggle: '&',
 				level: '=',
-				showAttrs: '='
+				uiAttrs: '='
 			},
 			templateUrl: 'lib/angular.treeview/tree-node.html',
 			link: function (scope, element, attrs) {
-				scope.selected = {};
-				// evaluate this only when nodeSelected has been set
-				if (scope.nodeSelected.node && scope.nodeSelected.node.id) {
-					if (scope.nodeSelected.node.id == scope.node.id) {
-						scope.selected = "selected";
+				scope.selected = '';
+
+				scope.hasChildren = function() {
+					return scope.node.children && scope.node.children.length;
+				};
+				scope.isFolderCollapsed = function (uiAttrs) {
+					return scope.hasChildren() && !uiAttrs.expandFolder;
+				};
+
+				scope.isFolderExpanded = function (uiAttrs) {
+					return scope.hasChildren() && uiAttrs.expandFolder;
+				};
+				
+				scope.onNodeSelection = function (node) {
+					scope.onNodeSelected({
+						node: node,
+						key: false
+					});
+				};
+
+				if (scope.nodeSelected && scope.nodeSelected.isAttr) {
+					var isNodeSelected = scope.nodeSelected.node.id == scope.node.id;
+					if (isNodeSelected) {
+						scope.uiAttrs.expandProps = true;
+						scope.attrKey = scope.nodeSelected.attrKey;
 					}
 				}
-				if (scope.nodeSelected && scope.nodeSelected.isAttr) {
-					scope.showAttrs.expand = true;
-					scope.attrKey = scope.nodeSelected.attrKey;
-				}
+
+				scope.$watch( 'nodeSelected', function (newSelectedNode, oldVal) {
+					if (newSelectedNode.node.id === scope.node.id) {
+						scope.selected = 'selected';
+					} else {
+						scope.selected = '';
+					}
+				}, true);
 			}
 		};
 
@@ -70,20 +95,48 @@
 			scope: {
 				node: '=',
 				nodeSelected: '=',
+				onNodeSelected: '&',
 				level: '=',
 				toggle: '&',
-				showAttrs: '='
+				uiAttrs: '='
 			},
 			templateUrl: 'lib/angular.treeview/tree-node-props.html',
 			link: function (scope, element, attrs) {
-				// var attrSelected = scope.node.attrSelected;
-				// if (attrSelected) {
-				// 	scope.node.showAttrs = true;
-				// }
 				if (scope.nodeSelected && scope.nodeSelected.isAttr) {
-					scope.showAttrs.expand = true;
-					scope.attrKey = scope.nodeSelected.attrKey;
+					var isNodeSelected = scope.nodeSelected.node.id == scope.node.id;
+					if (isNodeSelected) {
+						scope.uiAttrs.expandProps = true;
+						scope.attrKey = scope.nodeSelected.attrKey;
+					}
 				}
+				scope.selected = '';
+
+				scope.isSelected = function (key) {
+					// var selected = '';
+					var isNodeSelected = scope.nodeSelected.node.id == scope.node.id;
+					var isCurrentKey = scope.nodeSelected.attrKey === key;
+					if (isNodeSelected && isCurrentKey) {
+						scope.selected = 'selected';
+					} else {
+						scope.selected = '';
+					}
+					return scope.selected;
+				}
+				
+				scope.onNodeSelection = function (node, key) {
+					scope.onNodeSelected({
+						node: scope.node,
+						key: key
+					});
+				};
+
+				scope.$watch( 'nodeSelected', function (newSelectedNode, oldVal) {
+					if (newSelectedNode.node.id === scope.node.id) {
+						scope.selected = 'selected';
+					} else {
+						scope.selected = '';
+					}
+				}, true);
 			}
 		}
 
@@ -112,10 +165,12 @@
 
 				var nodeSelected = attrs.nodeSelected;
 
+				var onNodeSelectedCallback = attrs.onNodeSelect || null;
+
 				// flags that control ui-actions for toggling ui-visibility states
-				scope.showAttrs = {
-					expand: false,
-					folderCollapsed: false
+				scope.uiAttrs = {
+					expandProps: false,
+					expandFolder: true
 				};
 
 				// level is used for indenting childnodes and keeping the selected style full left-to-right
@@ -154,10 +209,11 @@
 				treeNodeEl.attr({
 					'node': 'node',
 					'node-selected': nodeSelected,
-					'toggle': 'showNodeProperties(showAttrs)',
-					'on-icon-click': 'selectNodeHead(showAttrs)',
+					'toggle': 'showNodeProperties(uiAttrs)',
+					'on-icon-click': 'selectNodeHead(uiAttrs)',
+					'on-node-selected': 'callOnNodeSelected(node, "")',
 					'level': level,
-					'show-attrs': 'showAttrs'
+					'ui-attrs': 'uiAttrs'
 				});
 				liChilds.push(treeNodeEl);
 				
@@ -165,15 +221,16 @@
 				treeNodePropsEl.attr({
 					'node': 'node',
 					'node-selected': nodeSelected,
-					'toggle': 'showNodeProperties(showAttrs)',
+					'on-node-selected': 'callOnNodeSelected(node, key)',
+					'toggle': 'showNodeProperties(uiAttrs)',
 					'level': level,
-					'show-attrs': 'showAttrs'
+					'ui-attrs': 'uiAttrs'
 				});
 				liChilds.push(treeNodePropsEl);
 				
 				var childNodes = angular.element('<div></div>');
 				childNodes.attr({
-					'ng-hide': 'showAttrs.folderCollapsed',
+					'ng-hide': '!uiAttrs.expandFolder',
 					'level': level,
 					'ui-tree': '',
 					'ng-model': 'node.' + nodeChildren,
@@ -194,15 +251,19 @@
 					if( attrs.angularTreeview ) {
 
 						//if node head clicks,
-						scope.selectNodeHead = function( showAttrs ){
+						scope.selectNodeHead = function( uiAttrs ){
 
-							//Collapse or Expand
-							showAttrs.folderCollapsed = !showAttrs.folderCollapsed;
+							//Collapse or expandProps
+							uiAttrs.expandFolder = !uiAttrs.expandFolder;
 						};
 
-						scope.showNodeProperties = function( showAttrs ) {
-							showAttrs.expand = !showAttrs.expand;
+						scope.showNodeProperties = function( uiAttrs ) {
+							uiAttrs.expandProps = !uiAttrs.expandProps;
 						};
+
+						scope.callOnNodeSelected = function (node, key) {
+							scope[onNodeSelectedCallback].call(scope, node, key);
+						}
 					}
 
 					// Rendering template created.

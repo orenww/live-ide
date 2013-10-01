@@ -75,7 +75,7 @@ vStudio.services.factory('VqlService', function($http, $q) {
 
 	// post the data object to the server
 	var saveCode = function () {
-		console.log('data saved!!!!!', data);
+		console.log('data saved!!!!!', angular.toJson(data));
 		return;
 
 		$http.post('/someUrl', data).then(function(result){
@@ -88,8 +88,19 @@ vStudio.services.factory('VqlService', function($http, $q) {
 		isAttr: false,
 		attrKey: ''
 	};
-	var setSelectedNode = function(newNode) {
+	var setSelectedNode = function(newNode, key) {
+	    var isAttr = false;
+	    var attrKey = '';
+
 	    currentNode.node = newNode;
+
+	    // checks if the selected node is a property of the node's 'vqls'
+	    if (key && key.length) {
+			isAttr = true;
+			attrKey = key;
+	    }
+	    currentNode.isAttr = isAttr;
+	    currentNode.attrKey = attrKey;
 	}
 
 	var getSelectedNode = function() {

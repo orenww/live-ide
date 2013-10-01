@@ -3,16 +3,20 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $rootScope, $route
 	$scope.editor = {}
 	$scope.getContent = function() {
 		$scope.currentNode = VqlService.getSelectedNode();
-		// debugger;
-		// var vqlId = $scope.currentNode ? $scope.currentNode.label : $routeParams.vqlId;
-		if ($scope.currentNode && $scope.currentNode.id) {
+
+		if ($scope.currentNode && $scope.currentNode.node && $scope.currentNode.node.id) {
 
 			var currentNode = $scope.currentNode;
 			var node = currentNode.node;
-			var code = node.isAttr && angular.isDefined(currentNode.attrKey) ? 
+			var code = currentNode.isAttr && angular.isDefined(currentNode.attrKey) ? 
 				node.vqls[currentNode.attrKey] :
 				node.vqls.dataSelection;
 
+			// currently, "actions" attribute holds json
+			// so it needs to be stringify
+			if (currentNode.attrKey === "actions") {
+				code = "CURRENTLY SHOWING 'code.onClick' value: " + code.onClick;
+			}
 			return code;
 		}
 	}
@@ -37,13 +41,18 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $rootScope, $route
 		if(!$scope.currentNode || jQuery.isEmptyObject($scope.currentNode)){
 			return;
 		}
-
 		var newValue = editor.getValue();
+		var currentNode = $scope.currentNode;
+		var node = currentNode.node;
 		// console.log("e", e, "editor", editor);
-		if ($scope.currentNode.isAttr) {
-			$scope.currentNode.vqls[$scope.currentNode.attrKey] = newValue;
+		if (currentNode.isAttr) {
+			//  TODO - currently a hack - since actions is an object
+			if (currentNode.attrKey === "actions") {
+				return;
+			}
+			node.vqls[currentNode.attrKey] = newValue;
 		}else{
-			$scope.currentNode.vqls.dataSelection = newValue;
+			node.vqls.dataSelection = newValue;
 		}
 	}
 

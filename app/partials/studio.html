@@ -8,7 +8,7 @@
       <div class="tree-filter container">
         <input type="text" ng-model="treeFilter" placeholder="find vqls">
       </div>
-
+      
      <div
         id="vql-tree"
 
@@ -20,7 +20,8 @@
         node-label="type"
         node-children="children"
         node-attrs="vqls" 
-        node-filter="treeFilter">
+        node-filter="treeFilter"
+        on-node-select="onNodeSelection">
     </div> 
   </section>
 
