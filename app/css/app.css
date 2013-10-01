@@ -7586,6 +7586,10 @@ div[angular-treeview] .tree-node-label .dropdown {
 div[angular-treeview] .tree-node-attr {
   padding: 2px 5px 2px 15px;
 }
+div[angular-treeview] .tree-node-attr:hover {
+  color: black;
+  background-color: #dedede;
+}
 div[angular-treeview] .tree-node-attr.selected {
   padding: 2px 5px 2px 15px;
 }
