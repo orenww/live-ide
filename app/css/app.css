@@ -7670,3 +7670,18 @@ div[data-tree-model] .tree-node-label:hover {
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
   right: 0px;
 }
+.sidebar-right .tab-content {
+  height: 100%;
+}
+.snippets {
+  overflow: auto;
+}
+.snippets .frame {
+  display: inline-block;
+}
+.snippets .name {
+  margin-left: 5px;
+}
+.height100percent {
+  height: 100%;
+}

@@ -41,10 +41,18 @@
   </section>
   
   <section class="fluid-height span3 ui-layout-east sidebar-right">    
-    <tabset>
-      <tab heading="params" active="runState.active">
+    <tabset class="height100percent">
+      <tab class="height100percent" heading="snippets" active="debugState.active"> 
+        <h2>Snippets</h2>
+        <div class="snippets height100percent" ng-controller="SnippetsCtrl">
+
+          <snippets-list items="getSnippets()" display="getDisplay(todos)"></snippets-list> 
+          
+        </div>
+
+                
       </tab>
-      <tab heading="snippets" active="debugState.active">          
+      <tab heading="params" active="runState.active">
       </tab>
       <tab heading="procedures" active="aaa.active">
       </tab>

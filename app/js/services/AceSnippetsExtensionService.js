@@ -6,6 +6,8 @@ vStudio.services.service('AceSnippetsExtensionService', function($http,$q, AutoC
 		// Add object properties like this
 		this.editor = null;
 
+		this.snippets = null;
+
 		//editor
 		this.register = function(options) {
 			this.setEditor(options.editor);
@@ -19,6 +21,20 @@ vStudio.services.service('AceSnippetsExtensionService', function($http,$q, AutoC
 
 		this.getEditor = function () {
 			return this.editor;
+		}
+
+		this.getSnippets = function () {
+			if(!this.snippets){
+				var snippetManager = ace.require("ace/snippets").snippetManager;
+				var mode = this.editor.session.$mode;
+				var id = mode.$id
+				if (id) {
+					var m = snippetManager.files[id];
+					this.snippets = m.snippets;
+				}
+			}
+			
+			return this.snippets;
 		}
 
 		
@@ -49,6 +65,8 @@ vStudio.services.service('AceSnippetsExtensionService', function($http,$q, AutoC
 						snippetManager.unregister(m.snippets);
 						m.snippets = snippetManager.parseSnippetFile(m.snippetText);
 						snippetManager.register(m.snippets);
+
+						this.snippets = m.snippets;
 					});
 			}			
 		}
