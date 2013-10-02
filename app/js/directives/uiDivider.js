@@ -1,4 +1,4 @@
-vStudio.directives.directive('uiDivider', function($timeout, $parse){
+vStudio.directives.directive('uiDivider', function($timeout){
 	// Runs during compile
 	return {
 		// name: '',
@@ -30,6 +30,15 @@ vStudio.directives.directive('uiDivider', function($timeout, $parse){
 					    spacing_open: 0,
 					    spacing_closed: 0
 					}
+				});
+			}
+
+
+			if(attrs.uiDividerWidth){
+				var sidesWidth = scope.$eval(attrs.uiDividerWidth);
+
+				angular.forEach(sidesWidth, function(value, key){					
+					options[key + "__size"] = value;
 				});
 			}
 			

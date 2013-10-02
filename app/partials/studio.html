@@ -1,5 +1,5 @@
 
-<article ng-controller="StudioCtrl" class="row-fluid fluid-height" ui-divider resize-end="onResize">
+<article ng-controller="StudioCtrl" class="row-fluid fluid-height" ui-divider ui-divider-width="{east:370}" resize-end="onResize">
   
   <!-- tree -->
   <section class="fluid-height span2 sidebar ui-layout-west" ng-controller="TreeCtrl">
@@ -26,7 +26,7 @@
   </section>
 
   
-  <section ui-divider resize-end="onResize" class="fluid-height span10 ui-editor ui-layout-center ui-layout-container" ng-controller="EditorCtrl">
+  <section ui-divider resize-end="onResize" class="fluid-height span7 ui-editor ui-layout-center ui-layout-container" ng-controller="EditorCtrl">
 
       <!-- EDITOR -->
       <ui-ace 
@@ -44,6 +44,17 @@
 
   </section>
   
-
+  <section class="fluid-height span3 ui-layout-east sidebar-right">    
+    <tabset>
+      <tab heading="params" active="runState.active">
+      </tab>
+      <tab heading="snippets" active="debugState.active">          
+      </tab>
+      <tab heading="procedures" active="aaa.active">
+      </tab>
+      <tab heading="schema" active="bbb.active">          
+      </tab>
+    </tabset>
+  </section>
       
 </article>
