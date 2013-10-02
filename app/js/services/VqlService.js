@@ -75,7 +75,7 @@ vStudio.services.factory('VqlService', function($http, $q) {
 
 	// post the data object to the server
 	var saveCode = function () {
-		console.log('data saved!!!!!', data);
+		console.log('data saved!!!!!', angular.toJson(data));
 		return;
 
 		$http.post('/someUrl', data).then(function(result){
@@ -83,9 +83,24 @@ vStudio.services.factory('VqlService', function($http, $q) {
 		});
 	}
 
-	var currentNode = {};
-	var setSelectedNode = function(newNode) {
-	    currentNode = newNode;
+	var currentNode = {
+		node: {},
+		isAttr: false,
+		attrKey: ''
+	};
+	var setSelectedNode = function(newNode, key) {
+	    var isAttr = false;
+	    var attrKey = '';
+
+	    currentNode.node = newNode;
+
+	    // checks if the selected node is a property of the node's 'vqls'
+	    if (key && key.length) {
+			isAttr = true;
+			attrKey = key;
+	    }
+	    currentNode.isAttr = isAttr;
+	    currentNode.attrKey = attrKey;
 	}
 
 	var getSelectedNode = function() {
@@ -112,32 +127,36 @@ vStudio.services.factory('VqlService', function($http, $q) {
 		// handle property leaf selection
 		if (angular.isDefined(prop)) {
         	// select the selected node
-			node.attrSelected = prop;
+			// node.attrSelected = prop;
+			getSelectedNode().attrKey = prop;
+			getSelectedNode().isAttr = true;
 			selectNode(node);
 			return;
 		}
 
 		// Mark the node as the selected one
-		node.selected = 'selected';
-		node.attrSelected = undefined;	
+		// node.selected = 'selected';
+		// node.attrSelected = undefined;	
+		getSelectedNode().isAttr = false;
+		getSelectedNode().attrKey = '';
 
 		selectNode(node);
 	}   
 
 	var selectNode = function(node){
-		var data = getTreeData();
-		if (data.selectedNode) {
-			// Nullify the previous selected node
-			data.selectedNode.selected = undefined;
-			if (data.selectedNode.id !== node.id) {
-				data.selectedNode.attrSelected = undefined;
-			}
-		}
+		// var data = getTreeData();
+		// if (data.selectedNode) {
+		// 	// Nullify the previous selected node
+		// 	data.selectedNode.selected = undefined;
+		// 	if (data.selectedNode.id !== node.id) {
+		// 		data.selectedNode.attrSelected = undefined;
+		// 	}
+		// }
 
 		// Set the selected node
-		data.selectedNode = node;
+		// data.selectedNode = node;
 		
-		currentNode = node;
+		currentNode.node = node;
 	}
 
 	getData();

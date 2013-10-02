@@ -8,16 +8,20 @@
       <div class="tree-filter container">
         <input type="text" ng-model="treeFilter" placeholder="find vqls">
       </div>
-
+      
      <div
         id="vql-tree"
-        data-angular-treeview="true"
-        data-tree-model="treedata"
-        data-node-id="id"
-        data-node-label="type"
-        data-node-children="children"
-        data-node-attrs="vqls" 
-        data-node-filter="treeFilter">
+
+        ui-tree
+        angular-treeview="true"
+        ng-model="treedata"
+        node-selected="nodeSelected"
+        node-id="id"
+        node-label="type"
+        node-children="children"
+        node-attrs="vqls" 
+        node-filter="treeFilter"
+        on-node-select="onNodeSelection">
     </div> 
   </section>
 

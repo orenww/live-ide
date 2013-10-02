@@ -31,43 +31,125 @@
 
 	var app = angular.module( 'angularTreeview', [] );
 
-	app.directive( 'treeNode', function(){
+	app.directive( 'treenode', function(){
 
 		return {
-			restrict: 'A',
+			restrict: 'EA',
 			replace: true,
 			scope: {
 				node: '=',
-				iconClick: '&',
-				level: '='
+				nodeSelected: '=',
+				onIconClick: '&',
+				onNodeSelected: '&',
+				toggle: '&',
+				level: '=',
+				uiAttrs: '='
 			},
-			templateUrl: 'lib/angular.treeview/tree-node.html'
+			templateUrl: 'lib/angular.treeview/tree-node.html',
+			link: function (scope, element, attrs) {
+				scope.selected = '';
+
+				scope.hasChildren = function() {
+					return scope.node.children && scope.node.children.length;
+				};
+				scope.isFolderCollapsed = function (uiAttrs) {
+					return scope.hasChildren() && !uiAttrs.expandFolder;
+				};
+
+				scope.isFolderExpanded = function (uiAttrs) {
+					return scope.hasChildren() && uiAttrs.expandFolder;
+				};
+				
+				scope.onNodeSelection = function (node) {
+					scope.onNodeSelected({
+						node: node,
+						key: false
+					});
+				};
+
+				if (scope.nodeSelected && scope.nodeSelected.isAttr) {
+					var isNodeSelected = scope.nodeSelected.node.id == scope.node.id;
+					if (isNodeSelected) {
+						scope.uiAttrs.expandProps = true;
+						scope.attrKey = scope.nodeSelected.attrKey;
+					}
+				}
+
+				scope.$watch( 'nodeSelected', function (newSelectedNode, oldVal) {
+					if (newSelectedNode.node.id === scope.node.id) {
+						scope.selected = 'selected';
+					} else {
+						scope.selected = '';
+					}
+				}, true);
+			}
 		};
 
 	});
 
-	app.directive( 'treeNodeProps', function(){
+	app.directive( 'treenodeprops', function(){
 
 		return {
-			restrict: 'A',
+			restrict: 'EA',
 			replace: true,
 			scope: {
 				node: '=',
-				toggle: '&'
+				nodeSelected: '=',
+				onNodeSelected: '&',
+				level: '=',
+				toggle: '&',
+				uiAttrs: '='
 			},
-			templateUrl: 'lib/angular.treeview/tree-node-props.html'
-		};
+			templateUrl: 'lib/angular.treeview/tree-node-props.html',
+			link: function (scope, element, attrs) {
+				if (scope.nodeSelected && scope.nodeSelected.isAttr) {
+					var isNodeSelected = scope.nodeSelected.node.id == scope.node.id;
+					if (isNodeSelected) {
+						scope.uiAttrs.expandProps = true;
+						scope.attrKey = scope.nodeSelected.attrKey;
+					}
+				}
+				scope.selected = '';
 
-	})
+				scope.isSelected = function (key) {
+					// var selected = '';
+					var isNodeSelected = scope.nodeSelected.node.id == scope.node.id;
+					var isCurrentKey = scope.nodeSelected.attrKey === key;
+					if (isNodeSelected && isCurrentKey) {
+						scope.selected = 'selected';
+					} else {
+						scope.selected = '';
+					}
+					return scope.selected;
+				}
+				
+				scope.onNodeSelection = function (node, key) {
+					scope.onNodeSelected({
+						node: scope.node,
+						key: key
+					});
+				};
 
-	app.directive( 'treeModel', function( $compile ) {
+				scope.$watch( 'nodeSelected', function (newSelectedNode, oldVal) {
+					if (newSelectedNode.node.id === scope.node.id) {
+						scope.selected = 'selected';
+					} else {
+						scope.selected = '';
+					}
+				}, true);
+			}
+		}
+
+	});
+
+	app.directive( 'uiTree', function( $compile ) {
 		return {
 			restrict: 'A',
-
+			
 			link: function ( scope, element, attrs ) {
 				//tree model
-				var treeModel = attrs.treeModel;
-
+				var treeModel = attrs.ngModel;
+				
 				//node id
 				var nodeId = attrs.nodeId || 'id';
 
@@ -81,6 +163,18 @@
 
 				var treeFilter = attrs.nodeFilter || 'treeFilter';
 
+				var nodeSelected = attrs.nodeSelected;
+
+				var onNodeSelectedCallback = attrs.onNodeSelect || null;
+
+				// flags that control ui-actions for toggling ui-visibility states
+				scope.uiAttrs = {
+					expandProps: false,
+					expandFolder: true,
+					toggled: false
+				};
+
+				// level is used for indenting childnodes and keeping the selected style full left-to-right
 				var level;
 				if (!attrs.level) {
 					level = 0;
@@ -89,15 +183,75 @@
 					level = parseInt(attrs.level) + 1;
 				}
 
-				var template = 
-				'<ul class="unstyled">' + 
-					'<li data-ng-repeat="node in ' + treeModel + ' | filter:' + treeFilter + '" class="tree-node">' + 
-						'<div tree-node node="node" icon-click="selectNodeHead(node)" level="' + level + '"></div>'+
-						'<div tree-node-props node="node" toggle="showNodeProperties(node)" tree-node-props></div>' +
-						'<div data-ng-hide="node.collapsed" level="' + level + '" data-tree-model="node.' + nodeChildren + '" data-node-id=' + nodeId + ' data-node-label=' + nodeLabel + ' data-node-children=' + nodeChildren + '></div>' + 
-					'</li>' + 
-				'</ul>';
+				/*
+				 *	the template for the tree is build with dom nodes 
+				 * for maintainable code 
+				 *'<ul class="unstyled">' + 
+				 *	'<li data-ng-repeat="node in ' + treeModel + ' | filter:' + treeFilter + '" class="tree-node">' + 
+				 *		'<div tree-node node="node" toggle="showNodeProperties(node)" icon-click="selectNodeHead(node)" level="' + level + '"></div>'+
+				 *		'<div tree-node-props node="node" level="' + level + '" toggle="showNodeProperties(node)"></div>' +
+				 *		'<div data-ng-hide="node.collapsed" level="' + level + '" data-tree-model="node.' + nodeChildren + '" data-node-id=' + nodeId + ' data-node-label=' + nodeLabel + ' data-node-children=' + nodeChildren + '></div>' + 
+				 *	'</li>' + 
+				 *'</ul>';
+				 */
+				var ul = angular.element('<ul></ul>');
+				ul.attr('class', 'unstyled');
+				var li = angular.element('<li></li');
+				li.attr({
+					'ng-repeat': 'node in ' + treeModel + '|filter:' + treeFilter,
+					'class': 'tree-node'
+				});
+				// placeholder for li children
+				// to remove a child, simply comment its code: 
+				// the angular.element, its 'attr' definition and the push operation
+				var liChilds = [];
 				
+				var treeNodeEl = angular.element('<treenode></treenode>');
+				treeNodeEl.attr({
+					'node': 'node',
+					'node-selected': nodeSelected,
+					'toggle': 'showNodeProperties(uiAttrs)',
+					'on-icon-click': 'selectNodeHead(uiAttrs)',
+					'on-node-selected': 'callOnNodeSelected(node, "")',
+					'level': level,
+					'ui-attrs': 'uiAttrs'
+				});
+				liChilds.push(treeNodeEl);
+				
+				var treeNodePropsEl = angular.element('<treenodeprops></treenodeprops>');
+				treeNodePropsEl.attr({
+					'node': 'node',
+					'node-selected': nodeSelected,
+					'on-node-selected': 'callOnNodeSelected(node, key)',
+					'toggle': 'showNodeProperties(uiAttrs)',
+					'level': level,
+					'ui-attrs': 'uiAttrs'
+				});
+				liChilds.push(treeNodePropsEl);
+				
+				var childNodes = angular.element('<div></div>');
+				childNodes.attr({
+					// 'ng-hide': '!uiAttrs.expandFolder',
+					'level': level,
+					'ui-tree': '',
+					'ng-model': 'node.' + nodeChildren,
+					'node-selected': nodeSelected,
+					'node-id': nodeId,
+					'node-label': nodeLabel,
+					'node-children': nodeChildren
+				});
+				liChilds.push(childNodes);
+
+				// animation for toggling nodes
+				scope.$watch('uiAttrs', function (newval,oldval) {
+					if (newval.toggled != oldval.toggled) {
+						element.slideToggle(200);
+					}
+				}, true)
+
+				// build the whoel template for this directive
+				ul.append( li.append(liChilds) );
+
 				//check tree model
 				if( treeModel && treeModel.length ) {
 
@@ -105,24 +259,23 @@
 					if( attrs.angularTreeview ) {
 
 						//if node head clicks,
-						scope.selectNodeHead = function( selectedNode ){
-
-							//Collapse or Expand
-							selectedNode.collapsed = !selectedNode.collapsed;
+						scope.selectNodeHead = function( uiAttrs ){
+							uiAttrs.toggled = !uiAttrs.toggled;
+							//Collapse or expandProps
+							uiAttrs.expandFolder = !uiAttrs.expandFolder;
 						};
 
-						scope.showNodeProperties = function( _node ) {
-							_node.showAttrs = !_node.showAttrs;
+						scope.showNodeProperties = function( uiAttrs ) {
+							uiAttrs.expandProps = !uiAttrs.expandProps;
+						};
+
+						scope.callOnNodeSelected = function (node, key) {
+							scope[onNodeSelectedCallback].call(scope, node, key);
 						}
 					}
 
-					var hasChildren = scope.node && scope.node.children;
-					// if (hasChildren) {
-						// counter++;
-					// }
-					// scope.node.level = counter;
-					//Rendering template created.
-					element.html(null).append( $compile( template )( scope ) );
+					// Rendering template created.
+					element.html(null).append( $compile( ul )( scope ) );
 				}
 			}
 		};
