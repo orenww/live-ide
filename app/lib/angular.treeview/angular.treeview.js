@@ -188,7 +188,7 @@
 				 * for maintainable code 
 				 *'<ul class="unstyled">' + 
 				 *	'<li data-ng-repeat="node in ' + treeModel + ' | filter:' + treeFilter + '" class="tree-node">' + 
-				 *		'<div tree-node node="node" toggle="showNodeProperties(node)" icon-click="selectNodeHead(node)" level="' + level + '"></div>'+
+				 *		'<div tree-node node="node" toggle="showNodeProperties(node)" icon-click="showNodeChildren(node)" level="' + level + '"></div>'+
 				 *		'<div tree-node-props node="node" level="' + level + '" toggle="showNodeProperties(node)"></div>' +
 				 *		'<div data-ng-hide="node.collapsed" level="' + level + '" data-tree-model="node.' + nodeChildren + '" data-node-id=' + nodeId + ' data-node-label=' + nodeLabel + ' data-node-children=' + nodeChildren + '></div>' + 
 				 *	'</li>' + 
@@ -211,7 +211,7 @@
 					'node': 'node',
 					'node-selected': nodeSelected,
 					'toggle': 'showNodeProperties(uiAttrs)',
-					'on-icon-click': 'selectNodeHead(uiAttrs)',
+					'on-icon-click': 'showNodeChildren(uiAttrs)',
 					'on-node-selected': 'callOnNodeSelected(node, "")',
 					'level': level,
 					'ui-attrs': 'uiAttrs'
@@ -259,7 +259,7 @@
 					if( attrs.angularTreeview ) {
 
 						//if node head clicks,
-						scope.selectNodeHead = function( uiAttrs ){
+						scope.showNodeChildren = function( uiAttrs ){
 							uiAttrs.toggled = !uiAttrs.toggled;
 							//Collapse or expandProps
 							uiAttrs.expandFolder = !uiAttrs.expandFolder;
