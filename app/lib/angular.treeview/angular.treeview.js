@@ -170,7 +170,8 @@
 				// flags that control ui-actions for toggling ui-visibility states
 				scope.uiAttrs = {
 					expandProps: false,
-					expandFolder: true
+					expandFolder: true,
+					toggled: false
 				};
 
 				// level is used for indenting childnodes and keeping the selected style full left-to-right
@@ -230,7 +231,7 @@
 				
 				var childNodes = angular.element('<div></div>');
 				childNodes.attr({
-					'ng-hide': '!uiAttrs.expandFolder',
+					// 'ng-hide': '!uiAttrs.expandFolder',
 					'level': level,
 					'ui-tree': '',
 					'ng-model': 'node.' + nodeChildren,
@@ -240,6 +241,13 @@
 					'node-children': nodeChildren
 				});
 				liChilds.push(childNodes);
+
+				// animation for toggling nodes
+				scope.$watch('uiAttrs', function (newval,oldval) {
+					if (newval.toggled != oldval.toggled) {
+						element.slideToggle(200);
+					}
+				}, true)
 
 				// build the whoel template for this directive
 				ul.append( li.append(liChilds) );
@@ -252,7 +260,7 @@
 
 						//if node head clicks,
 						scope.selectNodeHead = function( uiAttrs ){
-
+							uiAttrs.toggled = !uiAttrs.toggled;
 							//Collapse or expandProps
 							uiAttrs.expandFolder = !uiAttrs.expandFolder;
 						};

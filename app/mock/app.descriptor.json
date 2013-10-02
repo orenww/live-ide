@@ -1,87 +1,281 @@
 {
-   "type": "VqlApplication",
-   "id": "app-1",
-   "vqls": {
-      "dataSelection": "select * from data",
-      "globalDataFormat": "",
-      "columnsDataFormat": "222dfsa3221321 dwsefq",
-      "actions": {},
-      "title": "fadsfasdf",
-      "layout": "444444"
-   },
-   "inParams": [],
-   "outParams": [],
-   "refreshTriggers": ["p1"],
-   "exportExcel": {},
-   "exportImage": {},
-   "children": [{
-      "type": "VqlContainer",
-      "id": "container-1",
-      "vqls": {
-         "dataSelection": "select * from ",
-         "globalDataFormat": "Oren",
-         "columnsDataFormat": "products",
-         "actions": {
-            "onClick": "5555",
-            "onFocus": ""
-         },
-         "title": "my title",
-         "layout": "special layout"
-      },
-      "inParams": [],
-      "outParams": [],
-      "refreshTriggers": ["p2"],
-      "exportExcel": {},
-      "children": [{
-         "type": "VqlGrid",
-         "id": "grid-1",
-         "vqls": {
-            "dataSelection": "select \r\nc.product_ \"Product\",\r\n [select case when {SP_MARKET}=948 and {20}=0 then '\"% Shr Chg\" \"Nation % Shr Chg\" '\r\n                        when {SP_MARKET}=948 then '\"% Shr Chg\" ' \r\n                        when {20}=0 then '\"% Vol Chg\" \"Nation % Vol Chg\" ' \r\n              else '\"% Vol Chg\"' end from dual],\r\n[select case when {20}=0 then ' ' when {SP_MARKET}=948 then '\"Nation % Shr Chg\",'\r\nelse '\"Nation % Vol Chg\" ,' end from dual]\r\n\r\n 1 as SP_USER  \r\nfrom \r\n(select market_id, prod,\r\n[select case when {SP_MARKET}=948 then 'round(((cq/decode(sum(cq)over(),0,null,sum(cq)over())) - (pq/decode(sum(pq)over(),0,null,sum(pq)over())))*100,2) \"% Shr Chg\"'\r\nelse 'round(100*(sum(decode(is_daiichi,1,cq,0))-sum(decode(is_daiichi,1,pq,0)))/decode(sum(decode(is_daiichi,1,pq,0)),0,null,sum(decode(is_daiichi,1,pq,0))),2) \"% Vol Chg\"' end from dual>},\r\n[select case when {SP_MARKET}=948 then 'round(((ntn_cq/decode(sum(ntn_cq)over(),0,null,sum(ntn_cq)over())) - (ntn_pq/decode(sum(ntn_pq)over(),0,null,sum(ntn_pq)over())))*100,2) \"Nation % Shr Chg\"'\r\nelse 'round(100*(sum(decode(is_daiichi,1,ntn_cq,0))-sum(decode(is_daiichi,1,ntn_pq,0)))/decode(sum(decode(is_daiichi,1,ntn_pq,0)),0,null,sum(decode(is_daiichi,1,ntn_pq,0))),2) \"Nation % Vol Chg\"' end from dual]\r\nfrom (\r\nselect is_daiichi, market_id, decode(is_daiichi,1,product_id,999) prod,\r\nsum(case when d8=0 and d11={11} and d7={7} and d13={13} and d20={20} then t_cq else 0 end) cq,\r\nsum(case when d20=0 then t_cq else 0 end) ntn_cq,\r\nsum(case when d8=0 and d11={11} and d7={7} and d13={13} and d20={20} then t_pq else 0 end) pq,\r\nsum(case when d20=0 then t_pq else 0 end) ntn_pq,\r\nsum(case when d8=0 and d11={11} and d7={7} and d13={13} and d20={20} then t_pfq else 0 end) pfq,\r\nsum(case when d20=0 then t_pfq else 0 end) ntn_pfq\r\nfrom [select case when {19}=1 then 'info_in_all_pc_q' when {19}=2 then 'info_in_all_cv_q'  else 'info_in_all_hos_q' end from dual] a\r\nwhere market_id={SP_MARKET} and ({SP_MARKET}<>910 or {SP_IC_CODE}<>'A')\r\ngroup by is_daiichi, market_id, decode(is_daiichi,1,product_id,999)) {<select case when {SP_MARKET}=948 then ' ' else ' group by market_id, prod' end from dual>} ) a, info_prods b, demo_products_dim c \r\nwhere a.prod=b.product_id and\r\n           a.prod=c.product_id(+) and \r\n           a.market_id=c.market_id and  \r\n           a.market_id=b.market_id \r\n            and b.d19={19}\r\norder by {<select case when {SP_MARKET}=948 then 'decode(c.product_,''Product A17'',''1'',''Product A1'',''2'',''Product A2'',''3'',c.product_)' else 'c.product_' end from dual>}     ",
-            "globalDataFormat": "223113123",
-            "columnsDataFormat": "dsadsasd",
-            "actions": {
-               "onClick": "31231231231",
-               "onFocus": ""
+    "id": "app-1",
+    "refreshTriggers": ["p1"],
+    "exportExcel": {},
+    "defaultParams": {
+        "p7": "k",
+        "p6": "k",
+        "p5": "k",
+        "p4": "k",
+        "p3": "k",
+        "p2": "k",
+        "p1": "k"
+    },
+    "children": [
+        {
+            "id": "container-1",
+            "refreshTriggers": ["p2"],
+            "exportExcel": {},
+            "children": [
+                {
+                    "id": "grid-1",
+                    "refreshTriggers": ["p3"],
+                    "exportExcel": {},
+                    "outParams": [],
+                    "type": "VqlGrid",
+                    "exportImage": {},
+                    "vqls": {
+                        "title": "vqlStmt5",
+                        "layout": "grid-1-l",
+                        "columnsDataFormat": "vqlStmt3",
+                        "globalDataFormat": "vqlStmt2",
+                        "actions": "vqlStmt4",
+                        "dataSelection": "vqlStmt1"
+                    },
+                    "inParams": []
+                },
+                {
+                    "id": "grid-3",
+                    "refreshTriggers": ["p5"],
+                    "exportExcel": {},
+                    "children": [
+                        {
+                            "id": "grid-3-1",
+                            "refreshTriggers": ["p3"],
+                            "exportExcel": {},
+                            "outParams": [],
+                            "type": "VqlGrid",
+                            "exportImage": {},
+                            "vqls": {
+                                "title": "vqlStmt15",
+                                "layout": "grid-3-1-l",
+                                "columnsDataFormat": "vqlStmt13",
+                                "globalDataFormat": "vqlStmt12",
+                                "actions": "vqlStmt14",
+                                "dataSelection": "vqlStmt11"
+                            },
+                            "inParams": []
+                        },
+                        {
+                            "id": "grid-3-2",
+                            "refreshTriggers": ["p3"],
+                            "exportExcel": {},
+                            "outParams": [],
+                            "type": "VqlGrid",
+                            "exportImage": {},
+                            "vqls": {
+                                "title": "vqlStmt20",
+                                "layout": "grid-3-2-l",
+                                "columnsDataFormat": "vqlStmt18",
+                                "globalDataFormat": "vqlStmt17",
+                                "actions": "vqlStmt19",
+                                "dataSelection": "vqlStmt16"
+                            },
+                            "inParams": []
+                        }
+                    ],
+                    "outParams": [],
+                    "type": "VqlGrid",
+                    "exportImage": {},
+                    "vqls": {
+                        "title": "vqlStmt10",
+                        "layout": "grid-3-l",
+                        "columnsDataFormat": "vqlStmt8",
+                        "globalDataFormat": "vqlStmt7",
+                        "actions": "vqlStmt9",
+                        "dataSelection": "vqlStmt6"
+                    },
+                    "inParams": []
+                },
+                {
+                    "id": "grid-4",
+                    "refreshTriggers": ["p6"],
+                    "exportExcel": {},
+                    "outParams": [],
+                    "type": "VqlGrid",
+                    "exportImage": {},
+                    "vqls": {
+                        "title": "vqlStmt25",
+                        "layout": "grid-4-l",
+                        "columnsDataFormat": "vqlStmt23",
+                        "globalDataFormat": "vqlStmt22",
+                        "actions": "vqlStmt24",
+                        "dataSelection": "vqlStmt21"
+                    },
+                    "inParams": []
+                },
+                {
+                    "id": "grid-5",
+                    "refreshTriggers": ["p7"],
+                    "exportExcel": {},
+                    "outParams": [],
+                    "type": "VqlGrid",
+                    "exportImage": {},
+                    "vqls": {
+                        "title": "vqlStmt30",
+                        "layout": "grid-5-l",
+                        "columnsDataFormat": "vqlStmt28",
+                        "globalDataFormat": "vqlStmt27",
+                        "actions": "vqlStmt29",
+                        "dataSelection": "vqlStmt26"
+                    },
+                    "inParams": []
+                }
+            ],
+            "outParams": [],
+            "type": "VqlContainer",
+            "exportImage": {},
+            "vqls": {
+                "title": "",
+                "layout": "container-1-l",
+                "columnsDataFormat": "",
+                "globalDataFormat": "",
+                "actions": "",
+                "dataSelection": ""
             },
-            "title": "2312312312"
-         },
-         "inParams": [],
-         "outParams": [],
-         "refreshTriggers": ["p3"],
-         "exportExcel": {},
-         "exportImage": {}
-      }],
-      "exportImage": {}
-   }, {
-      "type": "VqlContainer",
-      "id": "container-2",
-      "vqls": {
-         "dataSelection": "select * from XXXX",
-         "globalDataFormat": "31 23123 123 1",
-         "columnsDataFormat": "312312 123 23 1",
-         "actions": {
-            "onClick": "3123123",
-            "onFocus": ""
-         },
-         "title": "ssss dsa d",
-         "layout": "FDSFA SDFSDFAFD"
-      },
-      "inParams": [],
-      "outParams": [],
-      "refreshTriggers": [],
-      "exportExcel": {},
-      "exportImage": {}
-   }],
-   "defaultParams": {
-      "p1": "v1",
-      "p2": "v2",
-      "p3": "v3"
-   },
-   "database": {
-      "host": "",
-      "port": "",
-      "service": "",
-      "user": "",
-      "password": ""
-   }
+            "inParams": []
+        },
+        {
+            "id": "container-2",
+            "refreshTriggers": ["p5"],
+            "exportExcel": {},
+            "children": [
+                {
+                    "id": "grid-1",
+                    "refreshTriggers": ["p3"],
+                    "exportExcel": {},
+                    "outParams": [],
+                    "type": "VqlGrid",
+                    "exportImage": {},
+                    "vqls": {
+                        "title": "vqlStmt39",
+                        "layout": "grid-1-l",
+                        "columnsDataFormat": "vqlStmt37",
+                        "globalDataFormat": "vqlStmt36",
+                        "actions": "vqlStmt38",
+                        "dataSelection": "vqlStmt35"
+                    },
+                    "inParams": []
+                },
+                {
+                    "id": "grid-3",
+                    "refreshTriggers": ["p5"],
+                    "exportExcel": {},
+                    "children": [
+                        {
+                            "id": "grid-3-1",
+                            "refreshTriggers": ["p3"],
+                            "exportExcel": {},
+                            "outParams": [],
+                            "type": "VqlGrid",
+                            "exportImage": {},
+                            "vqls": {
+                                "title": "vqlStmt48",
+                                "layout": "grid-3-1-l",
+                                "columnsDataFormat": "vqlStmt47",
+                                "globalDataFormat": "vqlStmt46",
+                                "actions": "vqlStmt47",
+                                "dataSelection": "vqlStmt45"
+                            },
+                            "inParams": []
+                        },
+                        {
+                            "id": "grid-3-2",
+                            "refreshTriggers": ["p3"],
+                            "exportExcel": {},
+                            "outParams": [],
+                            "type": "VqlGrid",
+                            "exportImage": {},
+                            "vqls": {
+                                "title": "vqlStmt53",
+                                "layout": "grid-3-2-l",
+                                "columnsDataFormat": "vqlStmt51",
+                                "globalDataFormat": "vqlStmt50",
+                                "actions": "vqlStmt52",
+                                "dataSelection": "vqlStmt49"
+                            },
+                            "inParams": []
+                        }
+                    ],
+                    "outParams": [],
+                    "type": "VqlGrid",
+                    "exportImage": {},
+                    "vqls": {
+                        "title": "vqlStmt44",
+                        "layout": "grid-3-l",
+                        "columnsDataFormat": "vqlStmt42",
+                        "globalDataFormat": "vqlStmt41",
+                        "actions": "vqlStmt43",
+                        "dataSelection": "vqlStmt40"
+                    },
+                    "inParams": []
+                },
+                {
+                    "id": "grid-4",
+                    "refreshTriggers": ["p6"],
+                    "exportExcel": {},
+                    "outParams": [],
+                    "type": "VqlGrid",
+                    "exportImage": {},
+                    "vqls": {
+                        "title": "vqlStmt58",
+                        "layout": "grid-4-l",
+                        "columnsDataFormat": "vqlStmt56",
+                        "globalDataFormat": "vqlStmt55",
+                        "actions": "vqlStmt57",
+                        "dataSelection": "vqlStmt54"
+                    },
+                    "inParams": []
+                },
+                {
+                    "id": "grid-5",
+                    "refreshTriggers": ["p7"],
+                    "exportExcel": {},
+                    "outParams": [],
+                    "type": "VqlGrid",
+                    "exportImage": {},
+                    "vqls": {
+                        "title": "vqlStmt63",
+                        "layout": "grid-5-l",
+                        "columnsDataFormat": "vqlStmt61",
+                        "globalDataFormat": "vqlStmt60",
+                        "actions": "vqlStmt62",
+                        "dataSelection": "vqlStmt59"
+                    },
+                    "inParams": []
+                }
+            ],
+            "outParams": [],
+            "type": "VqlContainer",
+            "exportImage": {},
+            "vqls": {
+                "title": "vqlStmt35",
+                "layout": "container-2-l",
+                "columnsDataFormat": "vqlStmt33",
+                "globalDataFormat": "vqlStmt32",
+                "actions": "vqlStmt34",
+                "dataSelection": "vqlStmt31"
+            },
+            "inParams": []
+        }
+    ],
+    "outParams": [],
+    "type": "VqlApplication",
+    "database": {
+        "port": "1522",
+        "host": "shashlik",
+        "service": "shashlik",
+        "password": "BAYER_ONC_TEST_250813",
+        "user": "BAYER_ONC_TEST_250813"
+    },
+    "exportImage": {},
+    "vqls": {
+        "title": "",
+        "layout": "app-1-l",
+        "columnsDataFormat": "",
+        "globalDataFormat": "",
+        "actions": "",
+        "dataSelection": ""
+    },
+    "inParams": []
 }
