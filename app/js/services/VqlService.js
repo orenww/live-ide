@@ -7,6 +7,8 @@ vStudio.services.factory('VqlService', function($http, $q) {
 	// tree map of the (vql) leaf nodes
 	var map = {};
 
+	var url = 'mock/app.descriptor.json';
+
 	var param;
 	var promise = {};
 	var getData = function() {
@@ -14,7 +16,7 @@ vStudio.services.factory('VqlService', function($http, $q) {
 			return promise;
 		}
 		// $http returns a promise, which has a then function, which also returns a promise
-		promise = $http.get('mock/app.descriptor.json').then(function (response) {
+		promise = $http.get(url).then(function (response) {
 			// The then function here is an opportunity to modify the response
 			data = response.data;
 
@@ -75,11 +77,11 @@ vStudio.services.factory('VqlService', function($http, $q) {
 
 	// post the data object to the server
 	var saveCode = function () {
-		console.log('data saved!!!!!', angular.toJson(data));
-		return;
+		// console.log('data saved!!!!!', angular.toJson(data));
+		// return;
 
-		$http.post('/someUrl', data).then(function(result){
-			console.log('handle the result', result);
+		$http.post(url, angular.toJson(data)).then(function(result){
+			console.log('data saved!', result);
 		});
 	}
 
