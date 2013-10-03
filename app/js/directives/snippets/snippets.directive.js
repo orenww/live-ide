@@ -15,19 +15,7 @@
 	        },
 	        
 			templateUrl:'js/directives/snippets/snippetTemplate.html',
-	    //     template:'<div>' + 
-	    //     			'<dl class="frame">' + 
-  			// 				'<dt class="name">{{data.name}}</dt>' +
-  			// 				'<dd>{{data.content}}</dd>' +
-					// 	'</dl>' + 
-					// 	// '<button class="btn btn-small btn-primary">Edit</button>' + 
-					//  '</div>'
-					// ,
-
-	      //   template:	'<li>' + 	            			
-							// '<span >{{data.name}} </span>' + 
-							// '<span >{{data.content}} </span>' + 
-	      //   			'</li>',
+	   
 	        link: function ( scope, element, attrs ) {	       		
 	       	}
 	    };
@@ -45,9 +33,8 @@
 	            display: '&'
 	        },
 	        
-	        template: '<ul class="unstyled padBottom">' + 
-	        			'<snippet ng-repeat="snippet in snippets" item="snippet" text="{{snippet.text}}" display="display()"/>' + 
-	        		 '</ul>',
+	        templateUrl:'js/directives/snippets/snippetsTemplate.html',
+	        
 	       	link: function ( scope, element, attrs ) {	       		
 	       	}
 	    };
