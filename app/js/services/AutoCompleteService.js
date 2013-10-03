@@ -1,4 +1,4 @@
-vStudio.services.factory('AutoCompleteService', function($http, $q) {	
+vStudio.services.factory('AutoCompleteService', function($http, $q, Constants) {	
 	//console.log("AutoCompleteService LOADED!!!!!")
 	var data = {};	
 	
@@ -30,6 +30,10 @@ vStudio.services.factory('AutoCompleteService', function($http, $q) {
 	var getSnippets = function () {
 		return data.snippets;
 	}
+
+	var getSchema = function () {
+		return data[Constants.TABLES];
+	}
 	
 	getData();
 
@@ -37,6 +41,7 @@ vStudio.services.factory('AutoCompleteService', function($http, $q) {
 	return {
 		getData: getData,
 		getInteliData: getInteliData,
-		getSnippets: getSnippets
+		getSnippets: getSnippets,
+		getSchema: getSchema
 	}
 });

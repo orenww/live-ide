@@ -47,7 +47,7 @@ vStudio.services.service('AceSnippetsExtensionService', function($http,$q, AutoC
 
 				getAutoCompleteData()
 					.then(function(){
-						var snippets = AutoCompleteService.getInteliData().snippets;
+						var snippets = AutoCompleteService.getSnippets();
                         if(snippets != null){
                             $.each( snippets, function( key, value ) {
                                 newSnippetText += value.content;

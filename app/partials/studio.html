@@ -47,22 +47,28 @@
   
   <section class="fluid-height span3 ui-layout-east sidebar-right">    
     <tabset class="fluid-height">
+
+      <tab heading="schema" heading="Schema" active="bbb.active">          
+        <h2>Schema</h2>
+        <div class="snippets fluid-height" ng-controller="SchemaCtrl">
+          <schema-tables items="getSchema()"></schema-tables>
+          <!-- <snippets-list items="getSnippets()" display="getDisplay(todos)"></snippets-list>            -->
+        </div>                
+      </tab>
+      
       <tab class="fluid-height" heading="snippets" active="debugState.active"> 
         <h2>Snippets</h2>
         <div class="snippets fluid-height" ng-controller="SnippetsCtrl">
-
-          <snippets-list items="getSnippets()" display="getDisplay(todos)"></snippets-list> 
-          
-        </div>
-
-                
+          <snippets-list items="getSnippets()" display="getDisplay(todos)"></snippets-list>           
+        </div>                
       </tab>
+      
       <tab heading="params" active="runState.active">
       </tab>
+      
       <tab heading="procedures" active="aaa.active">
       </tab>
-      <tab heading="schema" active="bbb.active">          
-      </tab>
+      
     </tabset>
   </section>
       
