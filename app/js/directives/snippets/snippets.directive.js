@@ -45,7 +45,7 @@
 	            display: '&'
 	        },
 	        
-	        template: '<ul class="unstyled">' + 
+	        template: '<ul class="unstyled padBottom">' + 
 	        			'<snippet ng-repeat="snippet in snippets" item="snippet" text="{{snippet.text}}" display="display()"/>' + 
 	        		 '</ul>',
 	       	link: function ( scope, element, attrs ) {	       		

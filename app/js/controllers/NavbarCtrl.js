@@ -7,10 +7,10 @@ vStudio.controllers.controller('NavbarCtrl', function($scope, $routeParams, VqlS
 
 	}
 
-	$scope.saveSnippet = function() {
-		AceSnippetsExtensionService.loadSnippets();
+	$scope.loadExtentions = function() {
+		//AceSnippetsExtensionService.loadSnippets();
 
-		AceIntellisenseExtensionService.loadIntellisense();
+		//AceIntellisenseExtensionService.loadIntellisense();
 	}
 
 });

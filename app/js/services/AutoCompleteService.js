@@ -4,6 +4,8 @@ vStudio.services.factory('AutoCompleteService', function($http, $q) {
 	
 	var promise;
 
+	var snippets;
+
 	var getData = function() {
 		if (!jQuery.isEmptyObject(promise)){
 			return promise;
@@ -24,12 +26,17 @@ vStudio.services.factory('AutoCompleteService', function($http, $q) {
 	var getInteliData = function(){
 		return data;
 	}
+
+	var getSnippets = function () {
+		return data.snippets;
+	}
 	
 	getData();
 
 	// expose the service
 	return {
 		getData: getData,
-		getInteliData: getInteliData
+		getInteliData: getInteliData,
+		getSnippets: getSnippets
 	}
 });

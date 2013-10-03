@@ -1,30 +1,25 @@
-vStudio.controllers.controller('SnippetsCtrl', function ($scope, AceSnippetsExtensionService) {
+vStudio.controllers.controller('SnippetsCtrl', function ($scope, AceSnippetsExtensionService, AutoCompleteService) {
   // $scope.todos = [
   //   {text:'learn angular', done:true},
   //   {text:'build an angular app', done:false}];
 
   $scope.getSnippets = function() {
-    var debug  = AceSnippetsExtensionService.getSnippets();
-    return AceSnippetsExtensionService.getSnippets();
-  };
 
-  // $scope.remaining = function() {
-  //   var count = 0;
-  //   angular.forEach($scope.todos, function(todo) {
-  //     count += todo.done ? 0 : 1;
-  //   });
-  //   return count;
-  // };
+    var snippetsObject = {};
 
-  // $scope.archive = function() {
-  //   var oldTodos = $scope.todos;
-  //   $scope.todos = [];
-  //   angular.forEach(oldTodos, function(todo) {
-  //     if (!todo.done) $scope.todos.push(todo);
-  //   });
-  // };
+    var serverSnippetsObj = AutoCompleteService.getSnippets();
+
+
+    snippetsObject = serverSnippetsObj;
+
     
-  //   $scope.getDisplay = function(){
-  //       return "DISPLAY";
-  //   }
+    var editorsSnippetsArray = AceSnippetsExtensionService.getEditorSnippets();
+
+    angular.forEach(editorsSnippetsArray, function(value, key){
+      snippetsObject[key] = value;
+    });    
+
+    return snippetsObject;    
+  };
+ 
 });

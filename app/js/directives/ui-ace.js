@@ -2,7 +2,7 @@
 
 /* Directives */
 vStudio.directives
-	.directive('uiAce', function(){
+	.directive('uiAce', function($timeout){
 		return {
 			restrict: 'EA',
 			// require: '?ngModel',
@@ -13,9 +13,8 @@ vStudio.directives
 				code: '=',
 				uiAceOptions: '=',
 				extensions: '=',
-				editorId: '@'
-				// snippetsExtension: '=',
-				// intellisenseExtension: '='
+				editorId: '@',
+				loaded: '='				
 			},
 
 			link: function(scope, element, attrs ) {
@@ -105,24 +104,14 @@ vStudio.directives
 				// EVENTS
 				acee.on('change', onChange);
 
-				acee.onCursorChange()
+				//acee.onCursorChange()
 
-				acee.getSession().selection.on('changeCursor', function(e) {
-					// console.log("bbb");
-					var bbb;
-				});
-
-				acee.getSession().selection.on('changeSelection', function(e) {
-					// console.log("ccc");
-					var ccc;
-				});
-				// session.selection.on('changeCursor', function(e) {
-				// 	debugger;
-				// });
-
-				session.on('changeCursor', function(e) {
-					
-				});
+				$timeout(function(){
+					if(scope.loaded){
+						scope.loaded();
+					}
+				}, 1000);		
+		
 			},
 
 			controller: function ($scope) {

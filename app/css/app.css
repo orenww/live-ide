@@ -7706,6 +7706,6 @@ div[angular-treeview] .tree-node-attr.selected .prop-label {
 .snippets .name {
   margin-left: 5px;
 }
-.height100percent {
-  height: 100%;
+.snippets .padBottom {
+  padding-bottom: 40px;
 }
