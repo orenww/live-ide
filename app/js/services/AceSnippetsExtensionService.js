@@ -6,7 +6,7 @@ vStudio.services.service('AceSnippetsExtensionService', function($http,$q, AutoC
 		// Add object properties like this
 		this.editor = null;
 
-		this.snippets = null;
+		this.editorSnippets = null;
 
 		//editor
 		this.register = function(options) {
@@ -23,18 +23,8 @@ vStudio.services.service('AceSnippetsExtensionService', function($http,$q, AutoC
 			return this.editor;
 		}
 
-		this.getSnippets = function () {
-			if(!this.snippets){
-				var snippetManager = ace.require("ace/snippets").snippetManager;
-				var mode = this.editor.session.$mode;
-				var id = mode.$id
-				if (id) {
-					var m = snippetManager.files[id];
-					this.snippets = m.snippets;
-				}
-			}
-			
-			return this.snippets;
+		this.getEditorSnippets = function () {			
+			return this.editorSnippets;
 		}
 
 		
@@ -42,18 +32,25 @@ vStudio.services.service('AceSnippetsExtensionService', function($http,$q, AutoC
 			var snippetManager = ace.require("ace/snippets").snippetManager;
 
 			var mode = this.editor.session.$mode;
-			var id = mode.$id
+			var id = this.editor.session.$modeId
 			if (id) {
 				var m = snippetManager.files[id];
 				var newSnippetText = "";
+
+				if(!m){
+					return;
+				}
+
 				var currentSnippetText = m.snippetText;
+
+				this.editorSnippets = m.snippets;
 
 				getAutoCompleteData()
 					.then(function(){
 						var snippets = AutoCompleteService.getInteliData().snippets;
                         if(snippets != null){
                             $.each( snippets, function( key, value ) {
-                                newSnippetText += value;
+                                newSnippetText += value.content;
                             });
                         }
 			        })
@@ -64,9 +61,7 @@ vStudio.services.service('AceSnippetsExtensionService', function($http,$q, AutoC
 						m.snippetText = newSnippetText;
 						snippetManager.unregister(m.snippets);
 						m.snippets = snippetManager.parseSnippetFile(m.snippetText);
-						snippetManager.register(m.snippets);
-
-						this.snippets = m.snippets;
+						snippetManager.register(m.snippets);						
 					});
 			}			
 		}
@@ -74,6 +69,9 @@ vStudio.services.service('AceSnippetsExtensionService', function($http,$q, AutoC
 		var getAutoCompleteData = function(){
             return AutoCompleteService.getData();            
 		}
+
+
+		//this.loadSnippets();
 		
 	}
 );

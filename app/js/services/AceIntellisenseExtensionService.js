@@ -1,4 +1,7 @@
-vStudio.services.service('AceIntellisenseExtensionService', function($http,$q, AutoCompleteService) {
+vStudio.services.service('AceIntellisenseExtensionService', function($http,$q, AutoCompleteService,AceSnippetsExtensionService) {
+
+		var TABLES = "Tables";
+		var COLUMNS = "Columns";
 
 		var data = {};					
 
@@ -39,8 +42,8 @@ vStudio.services.service('AceIntellisenseExtensionService', function($http,$q, A
 						console.log("Save the schema");
 						
 						// Save the schema
-						tablesObj 	= AutoCompleteService.getInteliData().Tables;
-						colsObj 	= AutoCompleteService.getInteliData().Columns;
+						tablesObj 	= AutoCompleteService.getInteliData()[TABLES];
+						colsObj 	= AutoCompleteService.getInteliData()[COLUMNS];
 
 		        	});
 				}

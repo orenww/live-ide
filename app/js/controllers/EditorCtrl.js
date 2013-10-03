@@ -68,4 +68,11 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $rootScope, $route
  	$scope.$watch('resize()', function(newValue, oldValue){
  			console.log('app changed to:', newValue);
  	});
+
+ 	
+ 	$scope.onEditorLoaded = function(){ 	
+ 		AceSnippetsExtensionService.loadSnippets();
+
+ 		AceIntellisenseExtensionService.loadIntellisense();
+ 	}
 });

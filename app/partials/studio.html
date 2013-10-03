@@ -37,6 +37,7 @@
         extensions="getExtensions"
         editor-id="editor"
         class="ui-layout-center"
+        loaded="onEditorLoaded"
       >    
       </ui-ace>
 
@@ -45,10 +46,10 @@
   </section>
   
   <section class="fluid-height span3 ui-layout-east sidebar-right">    
-    <tabset class="height100percent">
-      <tab class="height100percent" heading="snippets" active="debugState.active"> 
+    <tabset class="fluid-height">
+      <tab class="fluid-height" heading="snippets" active="debugState.active"> 
         <h2>Snippets</h2>
-        <div class="snippets height100percent" ng-controller="SnippetsCtrl">
+        <div class="snippets fluid-height" ng-controller="SnippetsCtrl">
 
           <snippets-list items="getSnippets()" display="getDisplay(todos)"></snippets-list> 
           

@@ -1,5 +1,5 @@
 {
-   "tables": {
+   "Tables": {
       "table1":{
          "id": "tables-1",
          "cols": {
@@ -23,11 +23,19 @@
    "keywords": {
       "keyword1":"keywords1",
       "keyword2":"keywords2"      
-   },
+   },  
 
    "snippets":{      
-      "snippet1":"snippet verixSnippetSelect*\n\tselect * from ${1:table}\n",
-      "snippet2":"snippet verixSnippetCol\n\t${1:name}   ${2:type}   ${3:default ''}   ${4:not null}\n"
+      "snippet1":{
+         "name":"snippet1",
+         "content": "snippet verixSnippetSelect*\n\tselect * from ${1:table}\n",
+         "description":"description1"
+         },
+      "snippet2":{
+         "name":"snippet2",
+         "content": "snippet verixSnippetSelect*\n\tselect * from ${1:table}\n",
+         "description":"description2"
+      }
    }
 }
 
