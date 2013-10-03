@@ -1,6 +1,7 @@
-<div><strong>{{table.id}}</strong>
+<div ng-click="expression"><strong>{{table.id}}</strong>
 	<ul class="unstyled" ng-repeat="(key, val) in table.cols">	
-		<li>{{val}}</li>
+		<column item="val"></column>
+		<!-- <li>{{val}}</li> -->
 		<!-- <div>{{val}}</div> -->
 	</ul>
 </div>

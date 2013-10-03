@@ -3,14 +3,12 @@
 
 	var app = angular.module( 'schema', [] );
 	
-	app.directive('col', function(){	   
+	app.directive('column', function(){	   
 	    return {
 	        restrict: 'E',
 	        replace: true,
 	        scope: {
-	            data: '=item',
-	            text: '@',
-	            display: '&'
+	            col: '=item'
 	        },
 	        
 			templateUrl:'js/directives/schema/colTemplate.html',
@@ -27,9 +25,8 @@
 	        restrict: 'E',
 	        replace: true,
 	        scope: {
-	            table: '=item',
-	            text: '@',
-	            display: '&'
+	            table: '=item'
+
 	        },
 	        
 			templateUrl:'js/directives/schema/tableTemplate.html',
@@ -52,8 +49,7 @@
 	        restrict: 'E',
 	        replace: true,
 	        scope: {
-	            tables: '=items',
-	            display: '&'
+	            tables: '=items'	           
 	        },
 	        
 	        templateUrl:'js/directives/schema/tablesTemplate.html',

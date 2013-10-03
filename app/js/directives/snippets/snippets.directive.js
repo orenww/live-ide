@@ -9,9 +9,8 @@
 	        restrict: 'E',
 	        replace: true,
 	        scope: {
-	            data: '=item',
-	            text: '@',
-	            display: '&'
+	            data: '=item'
+
 	        },
 	        
 			templateUrl:'js/directives/snippets/snippetTemplate.html',
@@ -29,8 +28,7 @@
 	        restrict: 'E',
 	        replace: true,
 	        scope: {
-	            snippets: '=items',
-	            display: '&'
+	            snippets: '=items'
 	        },
 	        
 	        templateUrl:'js/directives/snippets/snippetsTemplate.html',
