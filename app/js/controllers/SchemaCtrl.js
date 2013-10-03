@@ -8,5 +8,8 @@ vStudio.controllers.controller('SchemaCtrl', function ($scope, AceSnippetsExtens
 
     return schemaObject;    
   };
- 
+
+  $scope.expandTable = function(){
+  	console.log("expandTable");
+  } 
 });

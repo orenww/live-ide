@@ -1,5 +1,7 @@
-<div ng-click="expression"><strong>{{table.id}}</strong>
-	<ul class="unstyled" ng-repeat="(key, val) in table.cols">	
+<div ng-click="expandTable()">
+	<input type="checkbox" ng-model="checked">
+	<strong >{{table.id}}</strong>
+	<ul ng-show="checked" class="unstyled" ng-repeat="(key, val) in table.cols">	
 		<column item="val"></column>
 		<!-- <li>{{val}}</li> -->
 		<!-- <div>{{val}}</div> -->
