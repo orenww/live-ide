@@ -26,30 +26,24 @@
 	        replace: true,
 	        scope: {
 	            table: '=item'
-
-	        },
-	        
-			templateUrl:'js/directives/schema/tableTemplate.html',
-			// template: '<div>{{table.id}}</div>' + 
-			// '<ul class="unstyled"  item="col">' + 
-			// 	'<li>{{col.name}}</li>' + 
-			// '</ul>',
+	            // onclick: "&onclick"	            
+	        },	        
+			templateUrl:'js/directives/schema/tableTemplate.html',			
 	   
 	        link: function ( scope, element, attrs ) {	
 	        	scope.cols = scope.table.cols;
 	       	},
 
 	       	controller: function($scope) {
-	       		$scope.isShow = false;
-                $scope.expandTable = function(){
-  					console.log("expandTable");
 
+	       		$scope.isShow = false;
+
+                $scope.expandTable = function(){
   					$scope.isShow = !$scope.isShow;
   				}
 	       		return $scope;
 	       	}
-	    };
-	    
+	    };	    
 	});
 
 
@@ -67,15 +61,6 @@
 	        templateUrl:'js/directives/schema/tablesTemplate.html',
 	        
 	       	link: function ( scope, element, attrs ) {
-	       		// var getTable = $parse(attrs.onShow);
-	       		// var showGetTable = getTable.assign;
-
-	       		scope.showTable = function(t){
-	       			scope.onShow(t);
-	       			//showGetTable(scope.$parent, t,a);
-
-	       			scope.expandTable(t);
-	       		}
 	       	},
 
 	       	controller: function($scope) {
@@ -83,9 +68,8 @@
                 $scope.expandTable = function(tbl){
   					console.log("expandTable",tbl);
 
-  					$scope.tblId = true;
-  					
-  					// console.log("expandTable", ev);
+  					$scope[tbl.id] = true;  					
+
   				}
 	       		return $scope;
 	       	}
