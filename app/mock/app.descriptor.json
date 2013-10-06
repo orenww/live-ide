@@ -133,7 +133,7 @@
                 "actions": "",
                 "dataSelection": ""
             },
-            "inParams": []
+            "inParams": ["o1", "o2"]
         },
         {
             "id": "container-2",
@@ -155,7 +155,7 @@
                         "actions": "vqlStmt38",
                         "dataSelection": "vqlStmt35"
                     },
-                    "inParams": []
+                    "inParams": ["o3"]
                 },
                 {
                     "id": "grid-3",
@@ -177,7 +177,7 @@
                                 "actions": "vqlStmt47",
                                 "dataSelection": "vqlStmt45"
                             },
-                            "inParams": []
+                            "inParams": ["o4"]
                         },
                         {
                             "id": "grid-3-2",
