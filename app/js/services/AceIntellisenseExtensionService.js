@@ -1,4 +1,7 @@
-vStudio.services.service('AceIntellisenseExtensionService', function($http,$q, AutoCompleteService,AceSnippetsExtensionService,Constants) {
+vStudio.services.service('AceIntellisenseExtensionService', function($http,$q, AutoCompleteService,Constants) {
+
+		var TABLES = "Tables";
+		var COLUMNS = "Columns";
 		
 		var data = {};					
 
