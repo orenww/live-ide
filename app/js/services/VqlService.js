@@ -129,16 +129,12 @@ vStudio.services.factory('VqlService', function($http, $q) {
 		// handle property leaf selection
 		if (angular.isDefined(prop)) {
         	// select the selected node
-			// node.attrSelected = prop;
 			getSelectedNode().attrKey = prop;
 			getSelectedNode().isAttr = true;
 			selectNode(node);
 			return;
 		}
 
-		// Mark the node as the selected one
-		// node.selected = 'selected';
-		// node.attrSelected = undefined;	
 		getSelectedNode().isAttr = false;
 		getSelectedNode().attrKey = '';
 
@@ -146,20 +142,36 @@ vStudio.services.factory('VqlService', function($http, $q) {
 	}   
 
 	var selectNode = function(node){
-		// var data = getTreeData();
-		// if (data.selectedNode) {
-		// 	// Nullify the previous selected node
-		// 	data.selectedNode.selected = undefined;
-		// 	if (data.selectedNode.id !== node.id) {
-		// 		data.selectedNode.attrSelected = undefined;
-		// 	}
-		// }
-
-		// Set the selected node
-		// data.selectedNode = node;
-		
 		currentNode.node = node;
 	}
+
+	// return a unique array of all params in 'inParams'
+	var getParams = function() {
+		var tree = getTreeData();
+		var params = {}
+		// creates a copy of the main app params
+		angular.copy(tree[0] ? tree[0].defaultParams : {} , params);
+
+		// params should be used as a context
+		function extractParams(node) {
+			// go over inParams
+			angular.forEach(node.inParams, function(val, key){
+				params[val] = val;
+			});
+
+			// iterate on each node
+			if (node.children) {
+				angular.forEach(node.children, function(node){
+					extractParams(node);
+				});
+			}
+		}
+
+		angular.forEach(tree, function(val, key){
+			extractParams(val);
+		});
+		return Object.keys(params);
+	};
 
 	getData();
 
@@ -175,5 +187,6 @@ vStudio.services.factory('VqlService', function($http, $q) {
 		, getSelectedNode: getSelectedNode
 		, selectNodeById: selectNodeById
 		, getSelectionData: getSelectionData
+		, getParams: getParams
 	}
 });
