@@ -36,25 +36,58 @@
 			// '</ul>',
 	   
 	        link: function ( scope, element, attrs ) {	
-	        	scope.cols = scope.table.cols;       		
+	        	scope.cols = scope.table.cols;
+	       	},
+
+	       	controller: function($scope) {
+	       		$scope.isShow = false;
+                $scope.expandTable = function(){
+  					console.log("expandTable");
+
+  					$scope.isShow = !$scope.isShow;
+  				}
+	       		return $scope;
 	       	}
 	    };
 	    
 	});
 
 
-	app.directive('schemaTables', function(){
+	app.directive('schemaTables', function($parse){
 	   
 	    return {
 	        restrict: 'E',
 	        replace: true,
+	        require: '^ngModel',
 	        scope: {
-	            tables: '=items'	           
+	            tables: '=ngModel',
+	            onShow: '&onShow'	            
 	        },
 	        
 	        templateUrl:'js/directives/schema/tablesTemplate.html',
 	        
-	       	link: function ( scope, element, attrs ) {	       		
+	       	link: function ( scope, element, attrs ) {
+	       		// var getTable = $parse(attrs.onShow);
+	       		// var showGetTable = getTable.assign;
+
+	       		scope.showTable = function(t){
+	       			scope.onShow(t);
+	       			//showGetTable(scope.$parent, t,a);
+
+	       			scope.expandTable(t);
+	       		}
+	       	},
+
+	       	controller: function($scope) {
+
+                $scope.expandTable = function(tbl){
+  					console.log("expandTable",tbl);
+
+  					$scope.tblId = true;
+  					
+  					// console.log("expandTable", ev);
+  				}
+	       		return $scope;
 	       	}
 	    };
 	    
