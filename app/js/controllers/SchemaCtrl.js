@@ -1,15 +1,14 @@
-vStudio.controllers.controller('SchemaCtrl', function ($scope, AceSnippetsExtensionService, AutoCompleteService) {
+vStudio.controllers.controller('SchemaCtrl', function ($scope, AutoCompleteService) {
 
+	$scope.schema= {};
   $scope.getSchema = function() {
 
     var schemaObject = {};
 
     var schemaObject = AutoCompleteService.getSchema();
 
-    return schemaObject;    
-  };
-
-  $scope.expandTable = function(){
-  	console.log("expandTable");
-  } 
+    $scope.schema = schemaObject;    
+  };  
+  
+  $scope.getSchema();
 });
