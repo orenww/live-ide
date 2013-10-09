@@ -5,6 +5,8 @@ vStudio.controllers.controller('TreeCtrl', function($scope, $location, $route, $
 
 	$scope.nodeSelected = {};
 
+	$scope.changedNodes = VqlService.getChanges();
+
 	$scope.onNodeSelection = function (node, key) {
 		VqlService.setSelectedNode(node, key);
 		$scope.updateRoute(node.id, key);

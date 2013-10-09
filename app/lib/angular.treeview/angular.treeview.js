@@ -39,6 +39,7 @@
 			scope: {
 				node: '=',
 				nodeSelected: '=',
+				changedNodes: '=',
 				onIconClick: '&',
 				onNodeSelected: '&',
 				toggle: '&',
@@ -48,6 +49,7 @@
 			templateUrl: 'lib/angular.treeview/tree-node.html',
 			link: function (scope, element, attrs) {
 				scope.selected = '';
+				scope.changed = '';
 
 				scope.hasChildren = function() {
 					return scope.node.children && scope.node.children.length;
@@ -80,6 +82,14 @@
 						scope.selected = 'selected';
 					} else {
 						scope.selected = '';
+					}
+				}, true);
+
+				scope.$watch( 'changedNodes', function (newVal, oldVal) {
+					if (newVal[scope.node.id] && newVal[scope.node.id].changed) {
+						scope.changed = 'changed';
+					} else {
+						scope.changed = '';
 					}
 				}, true);
 			}
@@ -164,6 +174,7 @@
 				var treeFilter = attrs.nodeFilter || 'treeFilter';
 
 				var nodeSelected = attrs.nodeSelected;
+				var changedNodes = attrs.changedNodes;
 
 				var onNodeSelectedCallback = attrs.onNodeSelect || null;
 
@@ -210,6 +221,7 @@
 				treeNodeEl.attr({
 					'node': 'node',
 					'node-selected': nodeSelected,
+					'changed-nodes': changedNodes,
 					'toggle': 'showNodeProperties(uiAttrs)',
 					'on-icon-click': 'showNodeChildren(uiAttrs)',
 					'on-node-selected': 'callOnNodeSelected(node, "")',
@@ -236,6 +248,7 @@
 					'ui-tree': '',
 					'ng-model': 'node.' + nodeChildren,
 					'node-selected': nodeSelected,
+					'changed-nodes': changedNodes,
 					'node-id': nodeId,
 					'node-label': nodeLabel,
 					'node-children': nodeChildren

@@ -16,33 +16,6 @@
  *
  * Designed and built with all the love in the world by @mdo and @fat.
  */
-.clearfix {
-  *zoom: 1;
-}
-.clearfix:before,
-.clearfix:after {
-  display: table;
-  content: "";
-  line-height: 0;
-}
-.clearfix:after {
-  clear: both;
-}
-.hide-text {
-  font: 0/0 a;
-  color: transparent;
-  text-shadow: none;
-  background-color: transparent;
-  border: 0;
-}
-.input-block-level {
-  display: block;
-  width: 100%;
-  min-height: 30px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
 article,
 aside,
 details,
@@ -6302,6 +6275,33 @@ a.badge:focus {
  *
  * Designed and built with all the love in the world by @mdo and @fat.
  */
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+.hide-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+.input-block-level {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 @-ms-viewport {
   width: device-width;
 }
@@ -7515,6 +7515,19 @@ div[angular-treeview] .tree-node .attr {
   padding: 1px 5px;
   float: left;
   line-height: 20px;
+}
+div[angular-treeview] .tree-node .node-changed {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  display: none;
+  background-color: tomato;
+  top: 20px;
+  margin-left: 10px;
+  border-radius: 3px;
+}
+div[angular-treeview] .tree-node .changed .node-changed {
+  display: block;
 }
 div[angular-treeview] .tree-node .attr-toggle {
   padding: 0px 2px;

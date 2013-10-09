@@ -47,13 +47,15 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $rootScope, $route
 		// console.log("e", e, "editor", editor);
 		if (currentNode.isAttr) {
 			//  TODO - currently a hack - since actions is an object
-			if (currentNode.attrKey === "actions") {
-				return;
-			}
+			// if (currentNode.attrKey === "actions") {
+			// 	return;
+			// }
 			node.vqls[currentNode.attrKey] = newValue;
-		}else{
+		} else {
 			node.vqls.dataSelection = newValue;
 		}
+		VqlService.trackChanges(currentNode, newValue);
+		console.log(VqlService.getChanges());
 	}
 
 	$scope.onResize = function (paneName, paneElement) {

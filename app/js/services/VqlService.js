@@ -6,6 +6,11 @@ vStudio.services.factory('VqlService', function($http, $q) {
 	var treeData = [];
 	// tree map of the (vql) leaf nodes
 	var map = {};
+	// this is a copy of the map 
+	var nodesMapCopy = {};
+
+	// a map of which nodes have been changed
+	var changedNodes = {};
 
 	var url = 'mock/app.descriptor.json';
 
@@ -172,6 +177,40 @@ vStudio.services.factory('VqlService', function($http, $q) {
 		});
 		return Object.keys(params);
 	};
+	// return the pointer to the correct object to change the value 
+	var getValueOfNode = function(node, isAttr, attrKey) {
+		if (isAttr) {
+			return node.vqls[attrKey];
+		} else {
+			return node.vqls.dataSelection;
+		}
+	};
+
+	var trackChanges = function(currentNode, newValue) {
+		var nodeId = currentNode.node.id;
+		var isAttr = currentNode.isAttr;
+		// if a copy of the map hasn't been created
+		// it will create it only once
+		if (jQuery.isEmptyObject(nodesMapCopy)){
+			angular.copy(map, nodesMapCopy);
+		}
+
+		if (!nodesMapCopy[currentNode.node.id]) {
+			!nodesMapCopy[currentNode.node.id] = {}
+		}
+
+		// if the vql has changed - mark as true
+		var hasChanged = newValue !== getValueOfNode(nodesMapCopy[nodeId], isAttr, currentNode.attrKey)
+
+		changedNodes[nodeId] = {
+			changed: hasChanged,
+			attr: isAttr
+		};
+	};
+
+	var getChanges = function () {
+		return changedNodes;
+	}
 
 	getData();
 
@@ -188,5 +227,7 @@ vStudio.services.factory('VqlService', function($http, $q) {
 		, selectNodeById: selectNodeById
 		, getSelectionData: getSelectionData
 		, getParams: getParams
+		, trackChanges: trackChanges
+		, getChanges: getChanges
 	}
 });
