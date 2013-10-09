@@ -31,7 +31,7 @@
 			templateUrl:'js/directives/schema/tableTemplate.html',			
 	   
 	        link: function ( scope, element, attrs ) {	
-	        	scope.cols = scope.table.cols;
+	        	//scope.cols = scope.table.cols;
 	       	},
 
 	       	controller: function($scope) {
@@ -52,27 +52,28 @@
 	    return {
 	        restrict: 'E',
 	        replace: true,
-	        require: '^ngModel',
+	        // require: '^ngModel',
 	        scope: {
-	            tables: '=ngModel',
+	            tables: '=items',
 	            onShow: '&onShow'	            
 	        },
 	        
 	        templateUrl:'js/directives/schema/tablesTemplate.html',
 	        
 	       	link: function ( scope, element, attrs ) {
-	       	},
-
-	       	controller: function($scope) {
-
-                $scope.expandTable = function(tbl){
-  					console.log("expandTable",tbl);
-
-  					$scope[tbl.id] = true;  					
-
-  				}
-	       		return $scope;
 	       	}
+
+	     //   	,
+	     //   	controller: function($scope) {
+
+      //           $scope.expandTable = function(tbl){
+  				// 	console.log("expandTable",tbl);
+
+  				// 	$scope[tbl.id] = true;  					
+
+  				// }
+	     //   		return $scope;
+	     //   	}
 	    };
 	    
 	});

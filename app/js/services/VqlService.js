@@ -1,4 +1,4 @@
-vStudio.services.factory('VqlService', function($http, $q) {
+vStudio.services.factory('VqlService', function($http, $q, Constants) {
 	
 	// the app descriptor json fetched from the server
 	var data = {};
@@ -7,7 +7,9 @@ vStudio.services.factory('VqlService', function($http, $q) {
 	// tree map of the (vql) leaf nodes
 	var map = {};
 
-	var url = 'mock/app.descriptor.json';
+	//var url = 'mock/app.descriptor.json';
+	//var url = 'http://localhost:8080/AppDescriptorServlet?appId=app-1'; 
+	var url = Constants.APP_URL;
 
 	var param;
 	var promise = {};

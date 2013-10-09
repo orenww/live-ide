@@ -1,14 +1,19 @@
 vStudio.controllers.controller('SchemaCtrl', function ($scope, AutoCompleteService) {
 
-	$scope.schema= {};
-  $scope.getSchema = function() {
+   $scope.getSchema = function() {
 
     var schemaObject = {};
 
-    var schemaObject = AutoCompleteService.getSchema();
+    var serverSchemaObj = AutoCompleteService.getSchema();
+    if(serverSchemaObj){
 
-    $scope.schema = schemaObject;    
-  };  
-  
-  $scope.getSchema();
+    	angular.forEach(serverSchemaObj, function(value, key){
+      		serverSchemaObj[key]["id"] = key;
+    	}); 
+
+    	schemaObject = serverSchemaObj;    	
+    }
+
+    return schemaObject;    
+  };
 });

@@ -8,16 +8,17 @@ vStudio.controllers.controller('SnippetsCtrl', function ($scope, AceSnippetsExte
     var snippetsObject = {};
 
     var serverSnippetsObj = AutoCompleteService.getSnippets();
-
-
-    snippetsObject = serverSnippetsObj;
-
+    if(serverSnippetsObj){
+      snippetsObject = serverSnippetsObj;      
+    }
     
     var editorsSnippetsArray = AceSnippetsExtensionService.getEditorSnippets();
 
-    angular.forEach(editorsSnippetsArray, function(value, key){
-      snippetsObject[key] = value;
-    });    
+    if(snippetsObject){
+      angular.forEach(editorsSnippetsArray, function(value, key){
+        snippetsObject[key] = value;
+      });          
+    }
 
     return snippetsObject;    
   };
