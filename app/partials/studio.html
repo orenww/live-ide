@@ -51,15 +51,14 @@
       <tab heading="schema" heading="Schema" active="bbb.active">          
         <h2>Schema</h2>
         <div class="snippets fluid-height" ng-controller="SchemaCtrl">
-          <schema-tables items="getSchema()"></schema-tables>
-          <!-- <snippets-list items="getSnippets()" display="getDisplay(todos)"></snippets-list>            -->
+          <schema-tables items="getSchema()"></schema-tables>          
         </div>                
       </tab>
       
       <tab class="fluid-height" heading="snippets" active="debugState.active"> 
         <h2>Snippets</h2>
         <div class="snippets fluid-height" ng-controller="SnippetsCtrl">
-          <snippets-list items="getSnippets()" display="getDisplay(todos)"></snippets-list>           
+          <snippets-list items="getSnippets()"></snippets-list>           
         </div>                
       </tab>
       

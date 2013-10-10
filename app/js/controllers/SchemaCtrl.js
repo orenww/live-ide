@@ -1,8 +1,8 @@
 vStudio.controllers.controller('SchemaCtrl', function ($scope, AutoCompleteService) {
 
-   $scope.getSchema = function() {
+  $scope.schemaObject = {};
 
-    var schemaObject = {};
+  $scope.getSchema = function() {    
 
     var serverSchemaObj = AutoCompleteService.getSchema();
     if(serverSchemaObj){
@@ -11,9 +11,9 @@ vStudio.controllers.controller('SchemaCtrl', function ($scope, AutoCompleteServi
       		serverSchemaObj[key]["id"] = key;
     	}); 
 
-    	schemaObject = serverSchemaObj;    	
+    	$scope.schemaObject = serverSchemaObj;    	
     }
 
-    return schemaObject;    
+    return $scope.schemaObject;    
   };
 });
