@@ -1,5 +1,5 @@
 <div>
-	<ul class="unstyled padBottom">  
-		<snippet ng-repeat="snippet in snippets" item="snippet"/>  
+	<ul class="unstyled padBottom"> 
+		<snippet ng-repeat="(key, value) in snippets|filter:{name:search}" item="value" />  
 	</ul>
 </div>
