@@ -42,7 +42,7 @@ vStudio.directives
 				if(scope.uiAceOptions){
 					options = angular.extend({}, scope.uiAceOptions());					
 				}
-
+				
 				var acee = requires.editor;
 				var session = acee.getSession();
 
@@ -105,18 +105,24 @@ vStudio.directives
 					
 					// Call the user onChange function.
 					if(angular.isDefined(scope.change)){
-						scope.change(e, acee);
+						scope.change.call(scope, e, acee);
+						// running safe apply method
+						// since change event is triggered in several scenarios
+						var phase = scope.$root.$$phase;
+						if (phase !== '$digest' && phase !== '$apply') {
+							scope.$apply();
+						}
 					}
 				};
-				
+
 				// EVENTS
-				acee.on('change', onChange);
+				acee.session.on('change', onChange);
 
 				//acee.onCursorChange()
 
 				$timeout(function(){
 					if(scope.loaded){
-						scope.loaded();
+						scope.loaded(requires.editor);
 					}
 				}, 1000);		
 		
@@ -136,7 +142,7 @@ vStudio.directives
 								$scope.getEditor().setValue(newCode);
 							}
 						}
-				}, true);
+				});
 			}
 		}
 	});

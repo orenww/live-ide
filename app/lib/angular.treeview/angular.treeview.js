@@ -47,6 +47,24 @@
 				uiAttrs: '='
 			},
 			templateUrl: 'lib/angular.treeview/tree-node.html',
+			controller: function ($scope) {
+				$scope.$watch( 'nodeSelected', function (newSelectedNode, oldVal) {
+					if (newSelectedNode.node.id === $scope.node.id) {
+						$scope.selected = 'selected';
+					} else {
+						$scope.selected = '';
+					}
+				}, true);
+
+				$scope.$watch( 'changedNodes', function (newVal, oldVal) {
+					if (newVal[$scope.node.id] && newVal[$scope.node.id].changed) {
+						$scope.changed = 'changed';
+					} else {
+						$scope.changed = '';
+					}
+				}, true);
+			},
+
 			link: function (scope, element, attrs) {
 				scope.selected = '';
 				scope.changed = '';
@@ -76,22 +94,6 @@
 						scope.attrKey = scope.nodeSelected.attrKey;
 					}
 				}
-
-				scope.$watch( 'nodeSelected', function (newSelectedNode, oldVal) {
-					if (newSelectedNode.node.id === scope.node.id) {
-						scope.selected = 'selected';
-					} else {
-						scope.selected = '';
-					}
-				}, true);
-
-				scope.$watch( 'changedNodes', function (newVal, oldVal) {
-					if (newVal[scope.node.id] && newVal[scope.node.id].changed) {
-						scope.changed = 'changed';
-					} else {
-						scope.changed = '';
-					}
-				}, true);
 			}
 		};
 

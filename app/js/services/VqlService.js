@@ -1,4 +1,4 @@
-vStudio.services.factory('VqlService', function($http, $q) {
+vStudio.services.factory('VqlService', function($http, $q, ChangesTracker) {
 	
 	// the app descriptor json fetched from the server
 	var data = {};
@@ -62,7 +62,8 @@ vStudio.services.factory('VqlService', function($http, $q) {
 		if(jQuery.isEmptyObject(map)){
 			for(var i = 0; i < treeData.length; i++){
 				createMap(treeData[i]);
-			}			
+			}
+			ChangesTracker.init(map);
 		}
 
 		return map;
@@ -99,7 +100,7 @@ vStudio.services.factory('VqlService', function($http, $q) {
 	    var isAttr = false;
 	    var attrKey = '';
 
-	    currentNode.node = newNode;
+	    selectNode(newNode);
 
 	    // checks if the selected node is a property of the node's 'vqls'
 	    if (key && key.length) {
@@ -147,6 +148,7 @@ vStudio.services.factory('VqlService', function($http, $q) {
 	}   
 
 	var selectNode = function(node){
+		currentNode.prevNode = currentNode.node;
 		currentNode.node = node;
 	}
 
@@ -196,16 +198,17 @@ vStudio.services.factory('VqlService', function($http, $q) {
 		}
 
 		if (!nodesMapCopy[currentNode.node.id]) {
-			!nodesMapCopy[currentNode.node.id] = {}
+			nodesMapCopy[currentNode.node.id] = {}
 		}
 
 		// if the vql has changed - mark as true
 		var hasChanged = newValue !== getValueOfNode(nodesMapCopy[nodeId], isAttr, currentNode.attrKey)
 
-		changedNodes[nodeId] = {
-			changed: hasChanged,
-			attr: isAttr
-		};
+		if (!changedNodes[nodeId]) {
+			changedNodes[nodeId] = {};
+		}
+		changedNodes[nodeId].changed = hasChanged;
+		changedNodes[nodeId].attr = isAttr;
 	};
 
 	var getChanges = function () {
