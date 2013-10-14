@@ -26,14 +26,14 @@
    },  
 
    "snippets":[ 
-     {
-         "name":"snippet1",
-         "content": "snippet verixSnippetSelect*\n\tselect * from ${1:table}\n",
+      {
+         "name":"verixSnippetSelect1",
+         "content": "snippet verixSnippetSelect1*\n\tselect * from ${1:table}\n",
          "description":"description1"
-         },
-     {
-         "name":"snippet2",
-         "content": "snippet verixSnippetSelect*\n\tselect * from ${1:table}\n",
+      },
+      {
+         "name":"verixSnippetSelect2",
+         "content": "snippet verixSnippetSelect2*\n\tselect * from ${1:table}\n",
          "description":"description2"
       }
    ]

@@ -56,18 +56,24 @@
         <div ng-controller="SnippetsCtrl">
           <!-- title -->
           <h2>Snippets</h2>
-          <!-- filter -->
-          <div class="tree-filter container">
-            <input type="text" ng-model="search" placeholder="find snippet">
+<!--           <button class="btn btn-primary" ng-click="changeMode()">Edit</button>
+          <button class="btn btn-primary" ng-show="isEditMode" ng-click="save()">Save</button> -->
+         
+
+          <div class="flip-container {{currentMode}}">
+            <div class="flipper">
+              <div class="front">
+                <div ng-include="templates[0].url"></div>
+              </div>
+              <div class="back">
+                <div ng-include="templates[1].url"></div>                
+              </div>
+            </div>
           </div>
-          <!-- content -->          
-          <div class="snippets fluid-height">
-            <snippets-list 
-              items="getSnippets()"
-              search="search"            
-            >
-            </snippets-list>           
-          </div>
+
+          <!-- <div class="example-animate-container">
+            <div class="include-example" ng-include="template.url"></div>
+          </div> -->
 
         </div>
       </tab>
