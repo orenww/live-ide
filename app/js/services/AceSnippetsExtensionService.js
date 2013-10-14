@@ -8,6 +8,8 @@ vStudio.services.service('AceSnippetsExtensionService', function($http,$q, AutoC
 
 		this.editorSnippets = null;
 
+		this.snippetManager = null;
+
 		//editor
 		this.register = function(options) {
 			this.setEditor(options.editor);
@@ -26,10 +28,52 @@ vStudio.services.service('AceSnippetsExtensionService', function($http,$q, AutoC
 		this.getEditorSnippets = function () {			
 			return this.editorSnippets;
 		}
-
 		
+
+		this.getSnippetManagerText = function(){
+			if(this.snippetManager){
+				
+				var snippetManager = this.snippetManager;
+				
+				var currentSnippetText = "";
+
+				var mode = this.editor.session.$mode;
+				var id = this.editor.session.$modeId
+				if (id) {
+					var m = snippetManager.files[id];
+					var newSnippetText = "";
+
+					if(!m){
+						return;
+					}
+
+					currentSnippetText = m.snippetText;				
+				}
+
+				return currentSnippetText;
+			}
+		}
+
+		this.setSnippetManagerText = function(snippetText){
+			var snippetManager = this.snippetManager;
+
+			var mode = this.editor.session.$mode;
+			var id = this.editor.session.$modeId
+			if (id) {
+				var m = snippetManager.files[id];
+			
+				m.snippetText = newSnippetText;
+				snippetManager.unregister(m.snippets);
+				m.snippets = snippetManager.parseSnippetFile(m.snippetText);
+				var a = snippetManager.register(m.snippets);
+				console.log(a);
+			}
+		}
+
+
 		this.loadSnippets = function() {
-			var snippetManager = ace.require("ace/snippets").snippetManager;
+			this.snippetManager = ace.require("ace/snippets").snippetManager;
+			var snippetManager = this.snippetManager;
 
 			var mode = this.editor.session.$mode;
 			var id = this.editor.session.$modeId

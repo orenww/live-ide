@@ -46,14 +46,6 @@ vStudio.directives
 				var acee = requires.editor;
 				var session = acee.getSession();
 
-				var onChange = function (e) {
-					var newValue = session.getValue();
-					// Call the user onChange function.
-					if(angular.isDefined(scope.change)){
-						scope.change(e, acee);
-					}
-				};
-
 				// Boolean options
 				if (angular.isDefined(options.showGutter)) {
 					acee.renderer.setShowGutter(options.showGutter);
@@ -101,15 +93,37 @@ vStudio.directives
 				    readOnly: true // false if this command should not apply in readOnly mode
 				});
 
+				var onChange = function (e) {
+					// checks if the change event occured because of
+					// a different node was selected
+					if (scope.isCodeReplacement) {
+						scope.isCodeReplacement = false;
+						return;
+					}
+
+					var newValue = session.getValue();
+					
+					// Call the user onChange function.
+					if(angular.isDefined(scope.change)){
+						scope.change.call(scope, e, acee);
+						// running safe apply method
+						// since change event is triggered in several scenarios
+						var phase = scope.$root.$$phase;
+						if (phase !== '$digest' && phase !== '$apply') {
+							scope.$apply();
+						}
+					}
+				};
+
 				// EVENTS
-				acee.on('change', onChange);
+				acee.session.on('change', onChange);
 				
 
 				// Called when mode is loaded, there is a problem with the snippetManager load therefore using timeout
 				function onModeLoaded(){					
 					$timeout(function(){
 						if(scope.loaded){
-							scope.loaded();
+						scope.loaded(requires.editor);
 						}
 					}, 1000);		
 				}		
@@ -121,14 +135,15 @@ vStudio.directives
 						if (newCode && !jQuery.isEmptyObject(newCode)) {
 
 							if ($scope.hasChanged(newCode)) {
+							// if (newCode !== oldCode) {
 								// var newCodeToInsert = newCode.attrSelected && angular.isDefined(newCode.attrSelected) ? 
 								// 	newCode.vqls[newCode.attrSelected] :
 								// 	newCode.vqls.dataSelection;
-
+								$scope.isCodeReplacement = true;
 								$scope.getEditor().setValue(newCode);
 							}
 						}
-				}, true);
+				});
 			}
 		}
 	});

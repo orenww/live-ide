@@ -23,54 +23,44 @@ vStudio.controllers.controller('SnippetsCtrl', function ($scope, AceSnippetsExte
     return $scope.array;  
   };
 
-  // $scope.search = "";
+  $scope.isEditMode = false;
+  $scope.currentMode = "read";
+  $scope.changeMode = function(){
+    if($scope.currentMode == "read"){
+      $scope.currentMode = "edit";
+      $scope.isEditMode = true;
 
-  // $scope.array = [];
+      $scope.getContent();
+      //$scope.template = $scope.templates[1];
+    }else{
+      $scope.currentMode = "read";
+      $scope.isEditMode = false;
+      //$scope.template = $scope.templates[0];
+    }
+  };
 
-  // $scope.isGotEditorSnippets = false;
-  // $scope.isGotServerSnippets = false;
+  $scope.saveSnippets = function(){
+    var snippetsContext = $scope.getContent();
+  };
 
-  // $scope.getSnippets = function() {
+  $scope.templates =
+    [ { name: 'template1.html', url: 'js/directives/snippets/readModeTemplate.html'}
+    , { name: 'template2.html', url: 'js/directives/snippets/editModeTemplate.html'} ];
+  $scope.template = $scope.templates[0];
 
-  //   var snippetsObject = {};
+  $scope.getContent = function() {
+    //return "aaaaaaaaaaaaaaaaaaaa\nbbbbbbbbbbbbbbbbbb";
+    var smText = AceSnippetsExtensionService.getSnippetManagerText();
+    return smText;    
+  }
 
-  //   var serverSnippetsObj = AutoCompleteService.getSnippets();
-  //   //return serverSnippetsObj;
-
-  //   // if(serverSnippetsObj){
-  //   //   snippetsObject = serverSnippetsObj;      
-  //   // }
-    
-  //   $scope.snippetsArr = AceSnippetsExtensionService.getEditorSnippets();
-
-  //   // if(snippetsObject){
-  //   //   angular.forEach(editorsSnippetsArray, function(value, key){
-  //   //     snippetsObject[key] = value;
-  //   //   });          
-  //   // }
-
-
-
-  //   if($scope.snippetsArr != null && !$scope.isGotEditorSnippets){
-  //     $scope.array = $scope.array.concat(serverSnippetsObj,$scope.snippetsArr);
-  //     $scope.isGotEditorSnippets = true;
-  //   }
-
-  //   return $scope.array;  
-  // };
-
-  // $scope.snippetsArr = AceSnippetsExtensionService.getEditorSnippets();
-  // $scope.$watch( 'snippetsArr', function (snippets, oldSnippets) {
-  //   for (var i = 0; i < snippets.length; i++) {
-  //     $scope.array.push(snippets[i]);
-  //   };
-  // }, true);
-
-  // $scope.serverSnippets = AutoCompleteService.getSnippets();
-  // $scope.$watch( 'serverSnippets', function (snippets, oldSnippets) {
-  //   for (var i = 0; i < snippets.length; i++) {
-  //     $scope.array.push(snippets[i]);
-  //   };
-  // }, true)
- 
+  $scope.getEditorOptions = function() {
+    return {
+      useWrapMode: true,
+      showGutter: true,
+      theme: 'twilight',
+      mode: 'vql',
+      fontSize: "14px"
+    };
+  } 
 });
