@@ -8,13 +8,15 @@
       <div class="tree-filter container">
         <input type="text" ng-model="treeFilter" placeholder="find vqls">
       </div>
-      
+      <button ng-click="add(nodeSelected)">Add</button>
+      <button ng-click="update(nodeSelected)">Update</button>
      <div
         id="vql-tree"
 
         ui-tree
         angular-treeview="true"
         ng-model="treedata"
+        changed-nodes="changedNodes"
         node-selected="nodeSelected"
         node-id="id"
         node-label="type"
@@ -22,7 +24,10 @@
         node-attrs="vqls" 
         node-filter="treeFilter"
         on-node-select="onNodeSelection">
-    </div> 
+    </div>
+
+    <!-- <ui-tree ng-model="treedata" node-selected="nodeSelected" angular-treeview="true"></ui-tree> -->
+
   </section>
 
   

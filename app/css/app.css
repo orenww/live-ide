@@ -7516,6 +7516,19 @@ div[angular-treeview] .tree-node .attr {
   float: left;
   line-height: 20px;
 }
+div[angular-treeview] .tree-node .node-changed {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  display: none;
+  background-color: tomato;
+  top: 20px;
+  margin-left: 10px;
+  border-radius: 3px;
+}
+div[angular-treeview] .tree-node .changed .node-changed {
+  display: block;
+}
 div[angular-treeview] .tree-node .attr-toggle {
   padding: 0px 2px;
 }

@@ -1,4 +1,4 @@
-vStudio.services.factory('VqlService', function($http, $q, Constants) {
+vStudio.services.factory('VqlService', function($http, $q, Constants, ChangesTracker) {
 	
 	// the app descriptor json fetched from the server
 	var data = {};
@@ -6,10 +6,14 @@ vStudio.services.factory('VqlService', function($http, $q, Constants) {
 	var treeData = [];
 	// tree map of the (vql) leaf nodes
 	var map = {};
+	// this is a copy of the map 
+	var nodesMapCopy = {};
 
 	//var url = 'mock/app.descriptor.json';
 	//var url = 'http://localhost:8080/AppDescriptorServlet?appId=app-1'; 
 	var url = Constants.APP_URL;
+	// a map of which nodes have been changed
+	var changedNodes = {};
 
 	var param;
 	var promise = {};
@@ -60,6 +64,7 @@ vStudio.services.factory('VqlService', function($http, $q, Constants) {
 			for(var i = 0; i < treeData.length; i++){
 				createMap(treeData[i]);
 			}			
+			ChangesTracker.init(map);
 		}
 
 		return map;
@@ -96,7 +101,7 @@ vStudio.services.factory('VqlService', function($http, $q, Constants) {
 	    var isAttr = false;
 	    var attrKey = '';
 
-	    currentNode.node = newNode;
+	    selectNode(newNode);
 
 	    // checks if the selected node is a property of the node's 'vqls'
 	    if (key && key.length) {
@@ -144,6 +149,7 @@ vStudio.services.factory('VqlService', function($http, $q, Constants) {
 	}   
 
 	var selectNode = function(node){
+		currentNode.prevNode = currentNode.node;
 		currentNode.node = node;
 	}
 
@@ -174,6 +180,41 @@ vStudio.services.factory('VqlService', function($http, $q, Constants) {
 		});
 		return Object.keys(params);
 	};
+	// return the pointer to the correct object to change the value 
+	var getValueOfNode = function(node, isAttr, attrKey) {
+		if (isAttr) {
+			return node.vqls[attrKey];
+		} else {
+			return node.vqls.dataSelection;
+		}
+	};
+
+	var trackChanges = function(currentNode, newValue) {
+		var nodeId = currentNode.node.id;
+		var isAttr = currentNode.isAttr;
+		// if a copy of the map hasn't been created
+		// it will create it only once
+		if (jQuery.isEmptyObject(nodesMapCopy)){
+			angular.copy(map, nodesMapCopy);
+		}
+
+		if (!nodesMapCopy[currentNode.node.id]) {
+			nodesMapCopy[currentNode.node.id] = {}
+		}
+
+		// if the vql has changed - mark as true
+		var hasChanged = newValue !== getValueOfNode(nodesMapCopy[nodeId], isAttr, currentNode.attrKey)
+
+		if (!changedNodes[nodeId]) {
+			changedNodes[nodeId] = {};
+		}
+		changedNodes[nodeId].changed = hasChanged;
+		changedNodes[nodeId].attr = isAttr;
+	};
+
+	var getChanges = function () {
+		return changedNodes;
+	}
 
 	getData();
 
@@ -190,5 +231,7 @@ vStudio.services.factory('VqlService', function($http, $q, Constants) {
 		, selectNodeById: selectNodeById
 		, getSelectionData: getSelectionData
 		, getParams: getParams
+		, trackChanges: trackChanges
+		, getChanges: getChanges
 	}
 });

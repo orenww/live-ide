@@ -84,6 +84,21 @@ div[angular-treeview] {
 			line-height: 20px;
 		}
 
+		.node-changed {
+			position: absolute;
+			width: 5px;
+			height: 5px;
+			display: none;
+			background-color: tomato;
+			top: 20px;
+			margin-left: 10px;
+			border-radius: 3px;
+		}
+
+		.changed .node-changed {
+			display: block;
+		}
+
 		.attr-toggle {
 			padding: 0px 2px;
 		}

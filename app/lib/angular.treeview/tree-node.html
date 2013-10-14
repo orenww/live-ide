@@ -1,4 +1,5 @@
-<div class="tree-node-label node-level-{{ level }} {{ selected }}" XXXXng-class="selected">
+<div class="tree-node-label node-level-{{ level }} {{ selected }} {{ changed }}">
+	<i class="node-changed" title="this vql has been changed and not deployed yet"></i>
 	<i title="expand component" class="collapsed icon-folder-close" ng-show="isFolderCollapsed(uiAttrs)" ng-click="onIconClick(uiAttrs)"></i> 
 	<i title="collapse component" class="expanded icon-folder-open" ng-show="isFolderExpanded(uiAttrs)" ng-click="onIconClick(uiAttrs)"></i> 
 	<i class="normal icon-file" ng-hide="node.children.length"></i>
