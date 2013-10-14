@@ -6,12 +6,17 @@ vStudio.services.factory('AutoCompleteService', function($http, $q, Constants) {
 
 	var snippets;
 
+	var url = Constants.SCHEMA_URL;
+
 	var getData = function() {
 		if (!jQuery.isEmptyObject(promise)){
 			return promise;
 		}
 		// $http returns a promise, which has a then function, which also returns a promise
-		promise = $http.get('mock/intellisense.rules.json').then(parseIntelliData);
+		//promise = $http.get('mock/intellisense.rules.json').then(parseIntelliData);
+		//promise = $http.get('http://localhost:8080/DbSchemeServlet').then(parseIntelliData);
+		promise = $http.get(url).then(parseIntelliData);
+		
 		// Return the promise to the controller
 		return promise;
 	};

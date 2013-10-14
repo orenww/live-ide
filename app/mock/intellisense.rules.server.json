@@ -1,0 +1,771 @@
+{   
+    "Tables": {
+        "AGG_X_ORDERS_PHY_NEW": [
+            {
+                "name": "C7W_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C13W_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C9W_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C4W_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "AREA_DESC",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C6M_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C10M_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C7M_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C3M_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C10W_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "AREA_CODE",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C6W_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "REGION_CODE",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "CM_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C10W_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C4W_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C4M_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C5M_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "CM_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C12W_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C11W_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C6M_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C5M_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "PM_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C9M_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "CW4_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C12M_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "TERRITORY_CODE",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "PW4_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "PM_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "PROVIDER_ID",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C3W_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "PRODUCT",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C6W_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C10M_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C5W_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C8W_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C12W_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C7W_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "SF_DESC",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C11M_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "CW_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C7M_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C3W_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "PW_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C11W_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C8M_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C9M_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C13W_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C8W_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "PW_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C4M_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C12M_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "TERRITORY_DESC",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "REGION_DESC",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C11M_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C9W_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "CW_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C8M_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "SF_CODE",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "TERRITORY_ID",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C3M_TOTAL",
+                "type": "NUMBER"
+            },
+            {
+                "name": "CQ_NEW",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C5W_NEW",
+                "type": "NUMBER"
+            }
+        ],
+        "NDATE_MAPPING_TYPE": [{
+            "name": "MAPPING_ID",
+            "type": "NUMBER"
+        }],
+        "FCT_CALLS": [
+            {
+                "name": "CALL_D",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "HCP_NUM",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "CUST_TITLE",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "FULL_NAME",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "SOURCE",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "AREA_DESC",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "SF_DESC",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "PHY_MASTER_ID",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "CALL_DATE",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "CALLS",
+                "type": "NUMBER"
+            },
+            {
+                "name": "PHY_ID",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "CREDENTIALS",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "REGION_CODE",
+                "type": "NUMBER"
+            },
+            {
+                "name": "TERRITORY_CODE",
+                "type": "NUMBER"
+            },
+            {
+                "name": "TERRITORY_DESC",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "WEEK_DATE",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "REGION_DESC",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "AREA_CODE",
+                "type": "NUMBER"
+            },
+            {
+                "name": "TERRITORY_ID",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "MONTH_DATE",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "CALL_TYPE",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "TYPE_IND",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "PRODUCT",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "REGO_TARGET_DECILE",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "SF_CODE",
+                "type": "NUMBER"
+            }
+        ],
+        "DIM_X_MISSING_INFO": [
+            {
+                "name": "PATIENT_ID",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "DATE_MISSING",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "DATE_RECEIVED",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "MISSING_INFORMATION_ID",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "PAT_RANK",
+                "type": "NUMBER"
+            },
+            {
+                "name": "PROGRAM_NAME",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "MISSING_INFORMATION",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "PRODUCT_NAME",
+                "type": "VARCHAR2"
+            }
+        ],
+        "AGG_CALL_PLAN": [
+            {
+                "name": "C10W_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C11M_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "TARGET_FLAG",
+                "type": "CHAR"
+            },
+            {
+                "name": "MODELED_MCRC_PATIENT_VOLUME",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "CW_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "CM_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "AREA_DESC",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "CQ_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C13W_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C4W_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C4W_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C9M_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "ZIP",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C12M_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "ST",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "CM_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C8M_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "PM_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C7W_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "GIST_TARGET",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "PM_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "CW_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C8W_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "PQTR_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "PW_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C13W_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "MD_CALL_CLASS",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C6M_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C12M_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C7M_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "GIST_KOL",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "TERRITORY_NAME",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "PW_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C7W_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "ANNUAL_CALL_FREQ",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C10W_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C12W_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "CITY",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "HCC_RCC_DECILE",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "CALL_POSITION",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C11W_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "SPEC",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C5W_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C8M_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C4M_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "COMPANY",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C5W_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "ACCOUNT_NAME",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "SF_DESC",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C4M_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C5M_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C11M_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "CRC_DECILE",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "HCC_RCC_KOL",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "FIRST_NAME",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C10M_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C6W_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "PQTR_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "PM_ACCOUNT_ID",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C3W_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C9W_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C8W_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "REGION_CODE",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C3M_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C9M_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "ADDRESS",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C3W_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "TERRITORY_CODE",
+                "type": "NUMBER"
+            },
+            {
+                "name": "TERRITORY_DESC",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "REGION_DESC",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "CRC_KOL",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C5M_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "CQ_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C6W_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C9W_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "ACCOUNT_CLASS",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "AREA_CODE",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C7M_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "TERRITORY_ID",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C12W_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "LTD_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C11W_STIVARGA",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C6M_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "SF_CODE",
+                "type": "NUMBER"
+            },
+            {
+                "name": "C10M_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "HMS_CUST_ID",
+                "type": "VARCHAR2"
+            },
+            {
+                "name": "C3M_NEXAVAR",
+                "type": "NUMBER"
+            },
+            {
+                "name": "LAST_NAME",
+                "type": "VARCHAR2"
+            }
+        ],
+        "CHART_WATERFALL_SQL": [
+            {
+                "name": "DEPTH",
+                "type": "NUMBER"
+            },
+            {
+                "name": "SQL",
+                "type": "CLOB"
+            },
+            {
+                "name": "CHART_COMPONENT_ID",
+                "type": "NUMBER"
+            }
+        ]
+        
+    }
+}

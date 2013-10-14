@@ -1,4 +1,4 @@
-vStudio.services.factory('VqlService', function($http, $q, ChangesTracker) {
+vStudio.services.factory('VqlService', function($http, $q, Constants, ChangesTracker) {
 	
 	// the app descriptor json fetched from the server
 	var data = {};
@@ -9,10 +9,11 @@ vStudio.services.factory('VqlService', function($http, $q, ChangesTracker) {
 	// this is a copy of the map 
 	var nodesMapCopy = {};
 
+	//var url = 'mock/app.descriptor.json';
+	//var url = 'http://localhost:8080/AppDescriptorServlet?appId=app-1'; 
+	var url = Constants.APP_URL;
 	// a map of which nodes have been changed
 	var changedNodes = {};
-
-	var url = 'mock/app.descriptor.json';
 
 	var param;
 	var promise = {};

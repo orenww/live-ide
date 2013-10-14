@@ -10,15 +10,13 @@
 	        replace: true,
 	        scope: {
 	            data: '=item'
-
 	        },
 	        
 			templateUrl:'js/directives/snippets/snippetTemplate.html',
 	   
 	        link: function ( scope, element, attrs ) {	       		
-	       	}
-	    };
-	    
+	       	}	     
+	    };	    
 	});
 
 
@@ -28,7 +26,8 @@
 	        restrict: 'E',
 	        replace: true,
 	        scope: {
-	            snippets: '=items'
+	            snippets: '=items',
+				search: '='
 	        },
 	        
 	        templateUrl:'js/directives/snippets/snippetsTemplate.html',

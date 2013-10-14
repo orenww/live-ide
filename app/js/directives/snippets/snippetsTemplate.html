@@ -1,3 +1,5 @@
-<ul class="unstyled padBottom">  
-		<snippet ng-repeat="snippet in snippets" item="snippet" text="{{snippet.text}}" display="display()"/>  
- </ul>
+<div>
+	<ul class="unstyled padBottom"> 
+		<snippet ng-repeat="(key, value) in snippets|filter:{name:search}" item="value" />  
+	</ul>
+</div>

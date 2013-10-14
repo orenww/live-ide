@@ -1,15 +1,19 @@
-vStudio.controllers.controller('SchemaCtrl', function ($scope, AceSnippetsExtensionService, AutoCompleteService) {
+vStudio.controllers.controller('SchemaCtrl', function ($scope, AutoCompleteService) {
 
-  $scope.getSchema = function() {
+  $scope.schemaObject = {};
 
-    var schemaObject = {};
+  $scope.getSchema = function() {    
 
-    var schemaObject = AutoCompleteService.getSchema();
+    var serverSchemaObj = AutoCompleteService.getSchema();
+    if(serverSchemaObj){
 
-    return schemaObject;    
+    	angular.forEach(serverSchemaObj, function(value, key){
+      		serverSchemaObj[key]["id"] = key;
+    	}); 
+
+    	$scope.schemaObject = serverSchemaObj;    	
+    }
+
+    return $scope.schemaObject;    
   };
-
-  $scope.expandTable = function(){
-  	console.log("expandTable");
-  } 
 });

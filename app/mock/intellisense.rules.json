@@ -25,18 +25,18 @@
       "keyword2":"keywords2"      
    },  
 
-   "snippets":{      
-      "snippet1":{
+   "snippets":[ 
+     {
          "name":"snippet1",
          "content": "snippet verixSnippetSelect*\n\tselect * from ${1:table}\n",
          "description":"description1"
          },
-      "snippet2":{
+     {
          "name":"snippet2",
          "content": "snippet verixSnippetSelect*\n\tselect * from ${1:table}\n",
          "description":"description2"
       }
-   }
+   ]
 }
 
   

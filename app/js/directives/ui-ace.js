@@ -58,7 +58,7 @@ vStudio.directives
 					acee.setTheme("ace/theme/" + options.theme);
 				}
 				if (angular.isString(options.mode)) {
-					session.setMode("ace/mode/" + options.mode);
+					session.setMode("ace/mode/" + options.mode, onModeLoaded);
 				}
 				if (angular.isString(options.fontSize)){
 					acee.setFontSize(options.fontSize);
@@ -118,14 +118,15 @@ vStudio.directives
 				// EVENTS
 				acee.session.on('change', onChange);
 
-				//acee.onCursorChange()
 
+				// Called when mode is loaded, there is a problem with the snippetManager load therefore using timeout
+				function onModeLoaded(){					
 				$timeout(function(){
 					if(scope.loaded){
 						scope.loaded(requires.editor);
 					}
 				}, 1000);		
-		
+				}		
 			},
 
 			controller: function ($scope) {

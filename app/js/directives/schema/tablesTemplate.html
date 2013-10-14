@@ -1,5 +1,11 @@
 <div class="padBottom">	
-	<ul class="unstyled" ng-repeat="table in tables">  
-		<table item="table" text="{{table.text}}"/>  
+	<!-- <ul class="unstyled" ng-repeat="table in tables" on-show="expandTable(table)"
+				 ng-click="showTable(table)" tb="{{table.id}}"
+	> -->
+	<ul class="unstyled" ng-repeat="table in tables"
+				 ng-click="expandTable(table)" tb="{{table.id}}"
+	>
+
+		<table item="table"/>  
 	</ul>
 </div>
