@@ -1,5 +1,7 @@
 vStudio.controllers.controller('SnippetsCtrl', function ($scope, AceSnippetsExtensionService, AutoCompleteService) {
   
+  var editor = {};
+
   $scope.search = "";
 
   $scope.array = [];
@@ -39,10 +41,6 @@ vStudio.controllers.controller('SnippetsCtrl', function ($scope, AceSnippetsExte
     }
   };
 
-  $scope.saveSnippets = function(){
-    var snippetsContext = $scope.getContent();
-  };
-
   $scope.templates =
     [ { name: 'template1.html', url: 'js/directives/snippets/readModeTemplate.html'}
     , { name: 'template2.html', url: 'js/directives/snippets/editModeTemplate.html'} ];
@@ -62,5 +60,14 @@ vStudio.controllers.controller('SnippetsCtrl', function ($scope, AceSnippetsExte
       mode: 'vql',
       fontSize: "14px"
     };
+  }
+
+  $scope.onEditorLoaded = function(editorInstance){
+    editor = editorInstance;
   } 
+
+  $scope.saveSnippets = function(){
+    var snippetContext = editor.getValue();
+    AceSnippetsExtensionService.setSnippetManagerText(snippetContext);    
+  };
 });

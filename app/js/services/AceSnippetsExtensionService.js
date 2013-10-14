@@ -62,7 +62,7 @@ vStudio.services.service('AceSnippetsExtensionService', function($http,$q, AutoC
 			if (id) {
 				var m = snippetManager.files[id];
 			
-				m.snippetText = newSnippetText;
+				m.snippetText = snippetText;
 				snippetManager.unregister(m.snippets);
 				m.snippets = snippetManager.parseSnippetFile(m.snippetText);
 				var a = snippetManager.register(m.snippets);
