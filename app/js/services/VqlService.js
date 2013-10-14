@@ -6,14 +6,10 @@ vStudio.services.factory('VqlService', function($http, $q, Constants, ChangesTra
 	var treeData = [];
 	// tree map of the (vql) leaf nodes
 	var map = {};
-	// this is a copy of the map 
-	var nodesMapCopy = {};
 
 	//var url = 'mock/app.descriptor.json';
 	//var url = 'http://localhost:8080/AppDescriptorServlet?appId=app-1'; 
 	var url = Constants.APP_URL;
-	// a map of which nodes have been changed
-	var changedNodes = {};
 
 	var param;
 	var promise = {};
@@ -183,41 +179,6 @@ vStudio.services.factory('VqlService', function($http, $q, Constants, ChangesTra
 		});
 		return Object.keys(params);
 	};
-	// return the pointer to the correct object to change the value 
-	var getValueOfNode = function(node, isAttr, attrKey) {
-		if (isAttr) {
-			return node.vqls[attrKey];
-		} else {
-			return node.vqls.dataSelection;
-		}
-	};
-
-	var trackChanges = function(currentNode, newValue) {
-		var nodeId = currentNode.node.id;
-		var isAttr = currentNode.isAttr;
-		// if a copy of the map hasn't been created
-		// it will create it only once
-		if (jQuery.isEmptyObject(nodesMapCopy)){
-			angular.copy(map, nodesMapCopy);
-		}
-
-		if (!nodesMapCopy[currentNode.node.id]) {
-			nodesMapCopy[currentNode.node.id] = {}
-		}
-
-		// if the vql has changed - mark as true
-		var hasChanged = newValue !== getValueOfNode(nodesMapCopy[nodeId], isAttr, currentNode.attrKey)
-
-		if (!changedNodes[nodeId]) {
-			changedNodes[nodeId] = {};
-		}
-		changedNodes[nodeId].changed = hasChanged;
-		changedNodes[nodeId].attr = isAttr;
-	};
-
-	var getChanges = function () {
-		return changedNodes;
-	}
 
 	getData();
 
@@ -234,7 +195,5 @@ vStudio.services.factory('VqlService', function($http, $q, Constants, ChangesTra
 		, selectNodeById: selectNodeById
 		, getSelectionData: getSelectionData
 		, getParams: getParams
-		, trackChanges: trackChanges
-		, getChanges: getChanges
 	}
 });
