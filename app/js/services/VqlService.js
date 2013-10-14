@@ -31,6 +31,9 @@ vStudio.services.factory('VqlService', function($http, $q, Constants, ChangesTra
 				treeData.push(data);
 			}
 
+			// build the initial map
+			getMap(treeData);
+
 			return treeData;
 		});
 		// Return the promise to the controller
