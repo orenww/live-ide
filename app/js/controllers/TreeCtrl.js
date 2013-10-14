@@ -1,9 +1,19 @@
-vStudio.controllers.controller('TreeCtrl', function($scope, $location, $route, $routeParams ,VqlService){
+vStudio.controllers.controller('TreeCtrl', function($scope, $location, $route, $routeParams ,VqlService, ChangesTracker){
 
 	//Treedata hold the data of the tree directive
 	$scope.treedata = VqlService.getTreeData();
 
 	$scope.nodeSelected = {};
+
+	$scope.changedNodes = ChangesTracker.all();
+
+	$scope.add = function (node) {
+		ChangesTracker.track(node, "new code " + new Date())
+	}
+
+	$scope.update = function (node) {
+		ChangesTracker.update(node)
+	}
 
 	$scope.onNodeSelection = function (node, key) {
 		VqlService.setSelectedNode(node, key);
