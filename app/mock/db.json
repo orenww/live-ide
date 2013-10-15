@@ -1,0 +1,24 @@
+{
+   "Tables": {
+      "table1":{
+         "id": "tables-1",
+         "cols": {
+            "col1": "name",
+            "col2": "age",
+            "col3": "address",
+            "col4": "phone"
+         } 
+      },
+      "table2":{
+         "id": "tables-2",
+         "cols": {
+            "col1": "name2",
+            "col2": "age2",
+            "col3": "address2",
+            "col4": "phone2"
+         }      
+      }
+   }
+}
+
+  

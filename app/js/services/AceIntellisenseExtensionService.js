@@ -31,7 +31,7 @@ vStudio.services.service('AceIntellisenseExtensionService', function($http,$q, A
 		
 
 		var getAutoCompleteData = function(){
-            return AutoCompleteService.getData();            
+            return AutoCompleteService.getSchemaData();            
 		}
 
 		var getIntellisnseData = function(){
@@ -40,8 +40,8 @@ vStudio.services.service('AceIntellisenseExtensionService', function($http,$q, A
 						console.log("Save the schema");
 						
 						// Save the schema
-						tablesObj 	= AutoCompleteService.getInteliData()[Constants.TABLES];
-						colsObj 	= AutoCompleteService.getInteliData()[Constants.COLUMNS];
+						tablesObj 	= AutoCompleteService.getDBData()[Constants.TABLES];
+						colsObj 	= AutoCompleteService.getDBData()[Constants.COLUMNS];
 
 		        	});
 				}
@@ -88,9 +88,13 @@ vStudio.services.service('AceIntellisenseExtensionService', function($http,$q, A
 			                    	keywords = tablesObj;			                    		                		
 			                	}
 
-								keywords = keywords.filter(function(w) {
-		                    		return w.lastIndexOf(prefix, 0) == 0;
-		                		});
+			                	if(keywords && keywords[0] != undefined){
+									keywords = keywords.filter(function(w) {
+			                    		return w.lastIndexOf(prefix, 0) == 0;
+			                		});
+			                	}else{
+			                		return [];
+			                	}
 			                	// filter the tables according the prefix
 
 				                break;
@@ -139,58 +143,6 @@ vStudio.services.service('AceIntellisenseExtensionService', function($http,$q, A
 				                keywords = [];
 				                break;
 				        }
-
-
-	// 	                if( lastWord == "from"){
-	// 	                	if(lineArray[0] == "select"){
-	// 	                		var cols = lineArray[1];
-	// 							var selectArray = cols.split(",");
-
-	// 							var tables = [];
-	// 							angular.forEach(selectArray, function(value){
-									
-	// 								tables = tables.concat(colsObj[value].ColList);
-	// 								//jQuery.extend( tables,)
-	// 								// var obj = colsObj[value];
-	// 								// tables = obj.ColList;
-	// 							});
-
- //                                // keywords = jQuery.extend({},tables);
- //                                keywords = tables;
-
-
-	// 	                	}else{
-	// 	                    	keywords = tablesObj;
-		                    		                		
-	// 	                	}
-	// 	                }else if(lastWord == "select"){
-	// 	                    keywords = colsObj;      
-
-	// 	                    var array = [];
-
-	// 		                keywords = angular.forEach(keywords , function(value, key){
-	// //		                	return key.lastIndexOf(prefix, 0) == 0;
-	//                             if(key.lastIndexOf(prefix, 0) == 0){
-	//                                 array.push(key);
-	//                             }
-	// 		                });
-
-	//                         keywords = array;              
-	// 	                }               
-
-//                         var array = [];
-
-// 		                keywords = angular.forEach(keywords , function(value, key){
-// //		                	return key.lastIndexOf(prefix, 0) == 0;
-//                             if(key.lastIndexOf(prefix, 0) == 0){
-//                                 array.push(key);
-//                             }
-// 		                });
-
-                        //keywords = array;
-		                // keywords = keywords.filter(function(w) {
-		                //     return w.lastIndexOf(prefix, 0) == 0;
-		                // });
 
 		            }else{
 		                keywords = [];

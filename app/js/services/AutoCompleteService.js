@@ -1,51 +1,69 @@
 vStudio.services.factory('AutoCompleteService', function($http, $q, Constants) {	
 	//console.log("AutoCompleteService LOADED!!!!!")
-	var data = {};	
+	var dbData = {};
+	var snippetsData = {};
 	
-	var promise;
+	var dbPromise;
+	var snippetsPromise;	
 
-	var snippets;
+	var dbUrl = Constants.DB_STRUCTURE_URL;
+	var snippetsUrl = Constants.SNIPPETS_URL;
 
-	var url = Constants.SCHEMA_URL;
-
-	var getData = function() {
-		if (!jQuery.isEmptyObject(promise)){
-			return promise;
+	var getSchemaData = function() {
+		if (!jQuery.isEmptyObject(dbPromise)){
+			return dbPromise;
 		}
-		// $http returns a promise, which has a then function, which also returns a promise
-		//promise = $http.get('mock/intellisense.rules.json').then(parseIntelliData);
-		//promise = $http.get('http://localhost:8080/DbSchemeServlet').then(parseIntelliData);
-		promise = $http.get(url).then(parseIntelliData);
+
+		dbPromise = $http.get(dbUrl).then(parseDBData);
 		
-		// Return the promise to the controller
-		return promise;
+		// Return the dbPromise to the controller
+		return dbPromise;
 	};
 
-	var parseIntelliData = function(response) {
-		// The then function here is an opportunity to modify the response
-		data = response.data;		
+	var getSnippetsData = function() {
+		if (!jQuery.isEmptyObject(snippetsPromise)){
+			return snippetsPromise;
+		}
 
-		return data;
+		snippetsPromise = $http.get(snippetsUrl).then(parseSnippetsData);
+		
+		// Return the schemaPromise to the controller
+		return snippetsPromise;
+	};
+
+
+	var parseDBData = function(response) {
+		// The then function here is an opportunity to modify the response
+		dbData = response.data;		
+		return dbData;
 	}
 
-	var getInteliData = function(){
-		return data;
+	var parseSnippetsData = function(response) {
+		// The then function here is an opportunity to modify the response
+		snippetsData = response.data;		
+		return snippetsData;
+	}
+
+	var getDBData = function(){
+		return dbData;
 	}
 
 	var getSnippets = function () {
-		return data.snippets;
+		return snippetsData.snippets;
 	}
 
 	var getSchema = function () {
-		return data[Constants.TABLES];
+		return dbData[Constants.TABLES];
 	}
 	
-	getData();
+	getSchemaData();
+	getSnippetsData();
 
 	// expose the service
 	return {
-		getData: getData,
-		getInteliData: getInteliData,
+		getSchemaData: getSchemaData,
+		getSnippetsData:getSnippetsData,
+		getDBData: getDBData,
 		getSnippets: getSnippets,
 		getSchema: getSchema
 	}

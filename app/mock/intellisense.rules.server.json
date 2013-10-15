@@ -1,4 +1,139 @@
-{   
+{  
+    "Columns": {
+        "LEVEL_3_SQL": {
+            "ColType": "CLOB",
+            "TablesList": ["SQL_HIERARCHY_COMPONENT"]
+        },
+        "MS2__EVENT_VOLUME": {
+            "ColType": "FLOAT",
+            "TablesList": ["B_EVENTS"]
+        },
+        "PCT_OF_TOTAL": {
+            "ColType": "NUMBER",
+            "TablesList": ["OLAPTABLEVELTUPLES"]
+        },
+        "INSTANCE_PK": {
+            "ColType": "NUMBER",
+            "TablesList": [
+                "JBP_INSTANCE_PER_USER",
+                "JBP_PORTAL_OBJECT_DNAMES",
+                "JBP_INSTANCE_SECURITY",
+                "JBP_INSTANCE_DISPLAY_NAMES"
+            ]
+        },
+        "COORD_AXIS_ABBREVIATION": {
+            "ColType": "VARCHAR2",
+            "TablesList": ["SDO_COORD_AXES"]
+        },
+        "UN27__PREDICTED_GAP": {
+            "ColType": "FLOAT",
+            "TablesList": ["B_EVENTS"]
+        },
+        "NUM_OF_PERSONNEL": {
+            "ColType": "VARCHAR2",
+            "TablesList": [
+                "FCT_ACCOUNT",
+                "DIM_ACCOUNT"
+            ]
+        },
+        "SEMI_MAJOR_AXIS": {
+            "ColType": "NUMBER",
+            "TablesList": [
+                "SDO_ELLIPSOIDS",
+                "SDO_ELLIPSOIDS_OLD_SNAPSHOT"
+            ]
+        },
+        "ROLE_": {
+            "ColType": "VARCHAR2",
+            "TablesList": ["JBPM_ID_MEMBERSHIP"]
+        },
+        "QTD_COM_ALL_UNITS": {
+            "ColType": "NUMBER",
+            "TablesList": [
+                "AGG_BUDGET_GEO",
+                "AGG_FORECAST_GEO",
+                "AGG_FORECAST",
+                "AGG_BUDGET"
+            ]
+        },
+        "DIFF_PERC_11": {
+            "ColType": "NUMBER",
+            "TablesList": [
+                "AGG_SALES_GEO_RANK_HO",
+                "AGG_SALES_GEO_RANK_HO_NEX"
+            ]
+        },
+        "DIFF_PERC_10": {
+            "ColType": "NUMBER",
+            "TablesList": [
+                "AGG_SALES_GEO_RANK_HO",
+                "AGG_SALES_GEO_RANK_HO_NEX"
+            ]
+        },
+        "TREATING_FACILITY_TYPE": {
+            "ColType": "VARCHAR2",
+            "TablesList": [
+                "FCT_X_ORDERS",
+                "AGG_X_ORDERS_TREND",
+                "AGG_X_ORDERS_ALL"
+            ]
+        },
+        "SEGTYPE": {
+            "ColType": "VARCHAR2",
+            "TablesList": ["WRI$_ADV_ASA_RECO_DATA"]
+        },
+        "C10M_UNITS_CONFIRMED": {
+            "ColType": "NUMBER",
+            "TablesList": [
+                "AGG_X_ORDERS_GEO",
+                "AGG_X_ORDERS_ALL"
+            ]
+        },
+        "C10W_UNITS_MDS": {
+            "ColType": "NUMBER",
+            "TablesList": [
+                "AGG_SALES_ALL",
+                "AGG_SALES_GEO_MDS"
+            ]
+        },
+        "CM3_TOTAL": {
+            "ColType": "NUMBER",
+            "TablesList": [
+                "AGG_SALES_ACC_NEW",
+                "AGG_SALES_PHY_NEW_NATION",
+                "AGG_SALES_PHY_NEW"
+            ]
+        },
+        "DIFF_PERC_16": {
+            "ColType": "NUMBER",
+            "TablesList": [
+                "AGG_SALES_GEO_RANK_NEX",
+                "AGG_SALES_GEO_RANK",
+                "AGG_SALES_GEO_RANK_HO",
+                "AGG_SALES_GEO_RANK_HO_NEX"
+            ]
+        },
+        "BASE_OBJECT_NAME": {
+            "ColType": "VARCHAR2",
+            "TablesList": [
+                "KU$_DATAPUMP_MASTER_10_1",
+                "KU$_DATAPUMP_MASTER_11_1_0_7",
+                "KU$_DATAPUMP_MASTER_11_2",
+                "KU$_DATAPUMP_MASTER_11_1"
+            ]
+        },
+        "BOOKMARKS_ORDER": {
+            "ColType": "NUMBER",
+            "TablesList": ["BOOKMARKS"]
+        },
+        "POTENTIAL": {
+            "ColType": "VARCHAR2",
+            "TablesList": [
+                "FCT_PHYSICIAN",
+                "DIM_PHYSICIAN"
+            ]
+        }
+    },
     "Tables": {
         "AGG_X_ORDERS_PHY_NEW": [
             {

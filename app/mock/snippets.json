@@ -1,0 +1,16 @@
+{
+   "snippets":[ 
+      {
+         "name":"verixSnippetSelect1",
+         "content": "snippet verixSnippetSelect1*\n\tselect * from ${1:table}\n",
+         "description":"description1"
+      },
+      {
+         "name":"verixSnippetSelect2",
+         "content": "snippet verixSnippetSelect2*\n\tselect * from ${1:table}\n",
+         "description":"description2"
+      }
+   ]
+}
+
+  
