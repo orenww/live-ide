@@ -93,9 +93,11 @@ vStudio.services.service('AceSnippetsExtensionService', function($http,$q, AutoC
 					.then(function(){
 						var snippets = AutoCompleteService.getSnippets();
                         if(snippets != null){
-                            $.each( snippets, function( key, value ) {
-                                newSnippetText += value.content;
-                            });
+                        
+                        	angular.forEach(snippets, function(value, key){
+                        		newSnippetText += value.content;
+                        	});
+
                         }
 			        })
 			        .then(function(){
@@ -111,7 +113,7 @@ vStudio.services.service('AceSnippetsExtensionService', function($http,$q, AutoC
 		}
 
 		var getAutoCompleteData = function(){
-            return AutoCompleteService.getData();            
+            return AutoCompleteService.getSnippetsData();            
 		}
 
 
