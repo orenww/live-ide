@@ -156,28 +156,28 @@ vStudio.services.factory('VqlService', function($http, $q, Constants, ChangesTra
 	var getParams = function() {
 		var tree = getTreeData();
 		var params = {}
+		
 		// creates a copy of the main app params
 		angular.copy(tree[0] ? tree[0].defaultParams : {} , params);
-
+		
+		// copies the value of inParams, outParams to the params
+		// should not copy the key since all ia array and key is index
+		function copy(val, key) {
+			params[val] = "";
+		};
 		// params should be used as a context
 		function extractParams(node) {
 			// go over inParams
-			angular.forEach(node.inParams, function(val, key){
-				params[val] = val;
-			});
+			angular.forEach(node.inParams, copy);
 
 			// iterate on each node
 			if (node.children) {
-				angular.forEach(node.children, function(node){
-					extractParams(node);
-				});
+				angular.forEach(node.children, extractParams);
 			}
 		}
 
-		angular.forEach(tree, function(val, key){
-			extractParams(val);
-		});
-		return Object.keys(params);
+		angular.forEach(tree, extractParams);
+		return params;
 	};
 
 	getData();
