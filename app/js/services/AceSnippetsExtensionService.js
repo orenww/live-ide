@@ -111,6 +111,56 @@ vStudio.services.service('AceSnippetsExtensionService', function($http,$q, AutoC
 					});
 			}			
 		}
+		
+		this.editSnippet = function(snippetName,snippetDesc,snippetText){
+            var snippetManager = this.snippetManager;
+
+			var mode = this.editor.session.$mode;
+			var id = this.editor.session.$modeId
+			if (id) {
+				var m = snippetManager.files[id];
+				var newSnippetValue = m;
+
+				angular.forEach(m.snippets, function(value, key){
+					console.log(value.name);
+					if(value.name == snippetName){						
+						newSnippetValue.snippets[key].content = snippetText;						
+						//break;
+					}
+				});
+
+				snippetManager.unregister(m.snippets);				
+				snippetManager.register(newSnippetValue.snippets);
+
+				console.log("a");
+			}
+		}
+
+		this.deleteSnippet = function(snippetName){
+            var snippetManager = this.snippetManager;
+
+			var mode = this.editor.session.$mode;
+			var id = this.editor.session.$modeId
+			if (id) {
+				var m = snippetManager.files[id];
+				var newSnippetValue = m;
+
+				angular.forEach(m.snippets, function(value, key){
+					console.log(value.name);
+					if(value.name == snippetName){												
+						newSnippetValue.snippets.splice(key,1);
+						//break;
+					}
+				});
+
+				snippetManager.unregister(m.snippets);				
+				snippetManager.register(newSnippetValue.snippets);
+
+				var aaa = snippetManager.files[id];
+
+				console.log("a");
+			}
+		}
 
 		var getAutoCompleteData = function(){
             return AutoCompleteService.getSnippetsData();            
