@@ -1,8 +1,60 @@
 <li>
-	<dl class="frame">
-		<dt class="name">{{data.name}}</dt>
-		<dd>{{data.description}}</dd>
-		<div>{{data.content}}</div>
-	</dl>
-	<!-- <button class="btn btn-small btn-primary">Edit</button> -->
+	<div class="snippet {{mode}}" ng-class="snippetExpandClass">
+		<div class="read" ng-show="isReadMode">
+			<i class="icon-edit snippet-crud-button" 
+				ng-click="changeMode()" 
+				ng-show="isDescription">
+			</i> 
+			<div ng-click="expandCollapseSnippet()">
+				<i class="icon-caret-right" ng-class="iconExpandClass"></i> 
+				
+				<div class="snippet-inner">
+					<!-- name -->
+					<div class="snippet-label">Name</div>
+					<div>{{data.name}}</div>
+					
+					<!-- description -->
+					<div class="snippet-label" ng-show="isDescription">Description</div>
+					<div>{{data.description}}</div>				
+					
+					<!-- content -->
+					<div class="snippet-content">
+						<div class="snippet-label">Content</div>
+						<div>{{data.content}}</div>				
+					</div>				
+				</div>
+			</div>			
+		</div>
+		<div class="edit" ng-show="!isReadMode">
+			<i class="icon-remove-sign snippet-crud-button" 
+				ng-click="changeMode()" 
+				ng-show="isDescription">					
+			</i> 
+
+			<form>
+			  <fieldset>			    
+			    <label>Name</label>
+			    <input type="text" value="{{data.name}}" ng-model="data.name" readonly>
+
+				<label>Description</label>
+			    <input type="text" value="{{data.description}}" ng-model="data.description">
+
+			    <label>Content</label>
+			    <textarea class="textarea" ng-model="data.content">"{{data.content}}"</textarea>
+
+			    
+			    <div>
+			    	<button class="btn btn-danger" ng-click="delete()">
+			    		<i class="icon-remove-sign"></i>
+			    		Delete
+			    	</button>
+			    	<button class="btn btn-success" ng-click="save()">
+			    		<i class="icon-ok"></i>
+			    		Save
+			    	</button>
+			    </div>
+			  </fieldset>
+			</form>
+		</div>
+	</div>
 </li>

@@ -30,7 +30,11 @@
   </section>
 
   
-  <section ui-divider resize-end="onResize" class="fluid-height span7 ui-editor ui-layout-center ui-layout-container" ng-controller="EditorCtrl">
+  <section 
+    ui-divider 
+    resize-end="onResize" 
+    class="fluid-height span7 ui-editor ui-layout-center ui-layout-container" 
+    ng-controller="EditorCtrl">
 
       <!-- EDITOR -->
       <ui-ace 
@@ -53,13 +57,9 @@
     <tabset class="fluid-height">
 
       <tab class="fluid-height" heading="snippets" active="debugState.active"> 
-        <div ng-controller="SnippetsCtrl">
-          <!-- title -->
-          <h2>Snippets</h2>
-<!--           <button class="btn btn-primary" ng-click="changeMode()">Edit</button>
-          <button class="btn btn-primary" ng-show="isEditMode" ng-click="save()">Save</button> -->
+        <div class="snippets-primary" ng-controller="SnippetsCtrl">
          
-
+          <h2>Snippets</h2>
           <div class="flip-container {{currentMode}}">
             <div class="flipper">
               <div class="front">
