@@ -58,11 +58,19 @@ vStudio.directives
 					acee.setTheme("ace/theme/" + options.theme);
 				}
 				if (angular.isString(options.mode)) {
-					session.setMode("ace/mode/" + options.mode, onModeLoaded);
+					session.setMode("ace/mode/" + options.mode);
 				}
 				if (angular.isString(options.fontSize)){
 					acee.setFontSize(options.fontSize);
 				}
+
+				 // onLoad callback
+		        if (angular.isFunction(scope.loaded)) {
+
+					$timeout(function(){
+						scope.loaded(requires.editor);						
+					}, 1000);		          	
+		        }
 
 				// plugins
 				if(scope.extensions){					
@@ -119,14 +127,14 @@ vStudio.directives
 				acee.session.on('change', onChange);
 				
 
-				// Called when mode is loaded, there is a problem with the snippetManager load therefore using timeout
-				function onModeLoaded(){					
-					$timeout(function(){
-						if(scope.loaded){
-						scope.loaded(requires.editor);
-						}
-					}, 1000);		
-				}		
+				// // Called when mode is loaded, there is a problem with the snippetManager load therefore using timeout
+				// function onModeLoaded(){					
+				// 	$timeout(function(){
+				// 		if(scope.loaded){
+				// 		scope.loaded(requires.editor);
+				// 		}
+				// 	}, 1000);		
+				// }		
 			},
 
 			controller: function ($scope) {
