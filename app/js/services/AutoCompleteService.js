@@ -54,9 +54,9 @@ vStudio.services.factory('AutoCompleteService', function($http, $q, Constants) {
 
 	var updateSnippets = function(snippetName,snippetDesc,snippetContent) {		
 		
-		$http.post(snippetsUrl, snippetsData).success(function(data, status){
-           alert("Status:" + status + " Data:" + data.message);
-		});
+		// $http.post(snippetsUrl, snippetsData).success(function(data, status){
+  //          alert("Status:" + status + " Data:" + data.message);
+		// });
 		
 	}
 
@@ -78,6 +78,13 @@ vStudio.services.factory('AutoCompleteService', function($http, $q, Constants) {
 		
 	}
 
+	var addSnippet = function(snippetObj) {
+		snippetsData.snippets.unshift(snippetObj);
+
+		updateSnippets();
+		
+	}
+
 	var getSchema = function () {
 		return dbData[Constants.TABLES];
 	}
@@ -93,6 +100,7 @@ vStudio.services.factory('AutoCompleteService', function($http, $q, Constants) {
 		getSnippets: getSnippets,
 		getSchema: getSchema,
 		updateSnippets:updateSnippets,
-		deleteSnippet:deleteSnippet
+		deleteSnippet:deleteSnippet,
+		addSnippet:addSnippet
 	}
 });

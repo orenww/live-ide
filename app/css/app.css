@@ -7801,6 +7801,29 @@ div[angular-treeview] .tree-node-attr.selected .prop-label {
 .snippets-primary .edit .textarea {
   height: 90px;
 }
+.snippets-primary .add-button {
+  position: absolute;
+  right: 25px;
+  vertical-align: middle;
+}
+.snippets-primary .add-snippet {
+  position: absolute;
+  background-color: white;
+  width: 100%;
+  z-index: 1000;
+  padding: 10px;
+  -webkit-transform: translateY(-550px);
+  -webkit-transition: -webkit-transform 1s ease-out;
+}
+.snippets-primary .add-snippet-show {
+  -webkit-transform: translateY(0px);
+  box-shadow: 2px 2px 10px -1px rgba(0, 0, 0, 0.5);
+}
+.snippets-primary .snippet-filter {
+  z-index: 1001;
+  position: relative;
+  width: 100%;
+}
 .snippet {
   height: 80px;
   transition: height 1s;

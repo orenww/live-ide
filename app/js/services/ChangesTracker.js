@@ -15,7 +15,10 @@ vStudio.services.service('ChangesTracker', function($http, $q) {
 		if (isAttr) {
 			return node.vqls[attrKey];
 		} else {
-			return node.vqls.dataSelection;
+			//OWOW
+			if(node.vqls){
+				return node.vqls.dataSelection;				
+			}
 		}
 	};
 
