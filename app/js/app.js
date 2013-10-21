@@ -10,7 +10,9 @@ var vStudio = angular.module('vStudio', [
 	'ui.bootstrap',	
 	'ngGrid',
 	'snippets',
-	'schema'
+	'schema',
+	// modules
+	'params'
 ]);
 vStudio.filters = angular.module('vStudio.filters', []);
 vStudio.services = angular.module('vStudio.services', []);
