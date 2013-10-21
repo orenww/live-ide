@@ -170,6 +170,32 @@ vStudio.services.service('AceSnippetsExtensionService', function($http,$q, AutoC
 			AutoCompleteService.deleteSnippet(snippetName);
 		}
 
+
+		this.addSnippet = function(snippetName,snippetDesc,snippetText){
+			
+			var snippetManager = this.snippetManager;
+
+			var mode = this.editor.session.$mode;
+			var id = this.editor.session.$modeId
+			if (id) {
+				var m = snippetManager.files[id];
+				var newSnippetValue = m;
+
+				var currentSnippetText = m.snippetText;
+				var newSnippetText = currentSnippetText + snippetText;
+
+				m.snippetText = newSnippetText;
+				snippetManager.unregister(m.snippets);
+				m.snippets = snippetManager.parseSnippetFile(m.snippetText);
+				snippetManager.register(m.snippets);				
+			}
+
+			//2. update the server
+			//AutoCompleteService.addSnippet(snippetName,snippetDesc,snippetText);
+				
+		}
+
+
 		var getAutoCompleteData = function(){
             return AutoCompleteService.getSnippetsData();            
 		}

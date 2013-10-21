@@ -25,7 +25,7 @@
 				</div>
 			</div>			
 		</div>
-		<div class="edit" ng-show="!isReadMode">
+		<div class="edit" ng-show="!isReadMode && !isAddMode">
 			<i class="icon-remove-sign snippet-crud-button" 
 				ng-click="changeMode()" 
 				ng-show="isDescription">					
@@ -48,7 +48,7 @@
 			    		<i class="icon-remove-sign"></i>
 			    		Delete
 			    	</button>
-			    	<button class="btn btn-success" ng-click="save()">
+			    	<button class="btn btn-success" ng-click="update()">
 			    		<i class="icon-ok"></i>
 			    		Save
 			    	</button>
@@ -56,5 +56,31 @@
 			  </fieldset>
 			</form>
 		</div>
+		<!-- <div class="add" ng-show="isAddMode">
+			<form>
+			  <fieldset>			    
+			    <label>Name</label>
+			    <input type="text" value="{{data.name}}" ng-model="data.name">
+
+				<label>Description</label>
+			    <input type="text" value="{{data.description}}" ng-model="data.description">
+
+			    <label>Content</label>
+			    <textarea class="textarea" ng-model="data.content">"{{data.content}}"</textarea>
+
+			    
+			    <div>
+			    	<button class="btn btn-danger" ng-click="cancel()">
+			    		<i class="icon-remove-sign"></i>
+			    		Cancel
+			    	</button>
+			    	<button class="btn btn-success" ng-click="add()">
+			    		<i class="icon-ok"></i>
+			    		Save
+			    	</button>
+			    </div>
+			  </fieldset>
+			</form>
+		</div> -->
 	</div>
 </li>

@@ -1,9 +1,55 @@
 <div>
-  <button class="btn btn-primary btn-mini" ng-click="changeMode()">Edit</button>  
+  <button class="btn btn-primary btn-mini" ng-click="changeMode()">
+    <i class="icon-repeat"></i> 
+  </button>
   <!-- filter -->
-  <div class="tree-filter container">
+  <div class="tree-filter container snippet-filter">
     <input type="text" ng-model="search" placeholder="find snippet">
+
+    <button class="btn btn-primary add-button" ng-click="toggleMode()" ng-class="buttonMode">        
+        <div ng-show="!isAddMode">
+            <i class="icon-plus"></i> 
+            Add
+        </div>
+       
+       <div ng-show="isAddMode">
+          <i class="icon-remove-sign"></i>
+            Cancel
+        </div>
+    </button>
+    <!-- <button class="btn btn-primary btn-danger cancel-button" ng-click="cancel()" ng-class="cancelButtonMode">
+    </button> -->
   </div>
+
+
+  <div class="add-snippet" ng-class="mode">
+    <h3>Add Snippet</h3>
+    <form ng-submit="add()">
+      <fieldset>          
+        <label>Name</label>
+        <input type="text" value="" ng-model="newSnippet.name" required>
+
+      <label>Description</label>
+        <input type="text" value="" ng-model="newSnippet.description">
+
+        <label>Content</label>
+        <textarea class="textarea" ng-model="newSnippet.content" required></textarea>
+
+        
+        <div>
+          <!-- <button type="button" class="btn btn-danger" ng-click="cancel()">
+            <i class="icon-remove-sign"></i>
+            Cancel
+          </button> -->
+          <button type="submit" class="btn btn-success">
+            <i class="icon-ok"></i>
+            Save
+          </button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
   <!-- content -->          
   <div class="snippets fluid-height">
     <snippets-list 

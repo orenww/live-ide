@@ -19,7 +19,7 @@
 
 	       	controller: function($scope) {
 	       		$scope.data.orgContent = $scope.data.content;
-
+	   		
 	       		var content = $scope.data.content;
 	       		var contentArray = content.split("\n\t");
 	       		$scope.data.content = contentArray[1];
@@ -31,6 +31,8 @@
 	       			$scope.isDescription = false;	       			
 	       		}
 
+
+	       		//Read write mode
 	       		$scope.mode = "read";
 	       		$scope.isReadMode = true;
 	       		$scope.changeMode = function(){
@@ -43,9 +45,9 @@
                 	}
   				}
 
+  				//Expand Collapse Snippet
 	       		$scope.snippetExpandClass = "";
 	       		$scope.iconExpandClass = "";
-
                 $scope.expandCollapseSnippet = function(){
                 	if($scope.iconExpandClass == ""){
 						$scope.iconExpandClass = "icon-rotate-90";
@@ -56,14 +58,18 @@
                 	}
   				}
 
-  				$scope.save = function(){  					
+  				//Update
+  				$scope.update = function(){  					
+  					$scope.changeMode();
   					AceSnippetsExtensionService.editSnippet($scope.data.name,$scope.data.description,$scope.data.content);
-  				}
+  				}  				
 
-  				$scope.delete = function(){  					
+  				//Delete
+  				$scope.delete = function(){
+  					$scope.changeMode();
   					AceSnippetsExtensionService.deleteSnippet($scope.data.name);
   				}
-
+  				
 	       		return $scope;
 	       	}     
 	    };	    

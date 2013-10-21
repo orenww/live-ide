@@ -60,7 +60,10 @@ vStudio.controllers.controller('EditorCtrl', function($scope, $rootScope, $route
 			// }
 			node.vqls[currentNode.attrKey] = newValue;
 		} else {
-			node.vqls.dataSelection = newValue;
+			//OWOW
+			if(node.vqls){
+				node.vqls.dataSelection = newValue;				
+			}
 		}
 		// VqlService.trackChanges(currentNode, newValue);
 		ChangesTracker.track(currentNode, newValue);
